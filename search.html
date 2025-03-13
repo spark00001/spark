@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+background-image:url("/images/hero-bg.jpg");
+}
+#srout{
+position:fixed;
+left:100px;
+top:200px;
+color:gold;
+font-size:21px;
+}
+#sr{
+position:fixed; 
+left:100px;
+border:1px solid gold;
+color:gold;
+padding:10px 100px;
+border-radius:20px;
+background-color:transparent;
+font-size:21px;
+
+}
+</style>
+</head>
+<body>
+<input type="search" placeholder="Search.." id="sr" onkeyup="srch();">
+<br>
+<p id="srout"><marquee>SEARCH FOR MOVIES,SERIES...</marquee></p>
+</body>
+<script>
+
+function srch(){
+var  inpt = document.getElementById("sr").value;
+if(inpt.toLowerCase() == "sonic 2"){
+document.getElementById("srout").innerHTML="<table><tr><td><embed src='/images/movie-1.png' width='150'height='200' onclick='sonic2();'></embed></td></tr><tr><td>SONIC 2</td></tr></table>";
+}
+if(inpt.toLowerCase() == "sonic"){
+document.getElementById("srout").innerHTML="<table><tr><td><embed src='/images/movie-1.png' width='150'height='200' onclick='sonic2();'></embed></td></tr><tr><td>SONIC 2</td></tr></table>";
+}
+if(inpt.toLowerCase() == "free guy"){
+document.getElementById("srout").innerHTML="<table><tr><td><embed src='/images/movie-4.png' width='150'height='200'></embed></td></tr><tr><td>SONIC 2</td></tr></table>";
+}
+}
+function sonic2(){
+location.assign("/spark/sonic2.html");
+}
+</script>
+
+</html>
