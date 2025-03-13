@@ -3,20 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SPARK</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmLane - Movie Streaming Website</title>
+    <link rel="stylesheet" href="css/style.css" />
 
     <!--- google font link-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"   />
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Fontawesome Link for Icons -->
     <link
-      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
   </head>
   <body>
@@ -24,15 +26,16 @@
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href=""><img src="/images/logo.png" alt="" height="150" width="200"/></a>
+          <a href=""><img src="/images/logo.png" alt="" /></a>
         </div>
         <ul class="nav-list">
           <div class="logo">
-            <a href=""><img src="/images/" alt=""></a>
+            <a href=""><img src="" alt=""></a>
             <button class="close"><i class="fa-solid fa-xmark"></i></button>
           </div>
-          <li class="home"><a href="/spark/index.html" onclick="home();">home</a></li>
-          <li><a href="/spark/movie.html" onclick="mov();">movie</a></li>
+ <li><a href="/search.html">SEARCH</a></li>
+          <li class="home"><a href="" onclick="home();">home</a></li>
+          <li><a href="" onclick="mov();">movie</a></li>
           <li><a href="">tv show</a></li>
           <li><a href="">web series</a></li>
           <li><a href="">pricing</a></li>
@@ -44,19 +47,18 @@
         </div>
       </nav>
     </header>
-
     <!-- hero section starts  -->
     <section class="hero">
       <div class="main">
         <div class="content">
           <p>Spark</p>
           <h1>Unlimited <strong>Movie</strong>, TVs Shows, & More.</h1>
-         <!-- <div class="meta-wrapper">
+          <div class="meta-wrapper">
             <div class="badge">
               <span>PG 18</span>
               <span>HD</span>
-            </div>-->
-          <!--  <div class="genre">
+            </div>
+            <div class="genre">
               <span><a href="">Romance,</a> <a href="">Drama</a></span>
             </div>
             <div class="date-time">
@@ -65,7 +67,7 @@
             </div>
           </div>
           <div class="watch-btn">
-            <button><i class="fa-solid fa-play"></i> Watch Now</button>-->
+            <button><i class="fa-solid fa-play"></i> Watch Now</button>
           </div>
         </div>
       </div>
@@ -475,7 +477,7 @@
         <div class="footer-top">
           <nav>
             <div class="logo">
-              <img src="/images/logo.png" alt="" height="150"width="200">
+              <img src="/images/logo.png" alt="">
             </div>
             <ul class="list">
               <li><a href="">home</a></li>
@@ -512,19 +514,19 @@
       </div>
     </footer>
 
-   <!-- <button class="back-to-top"><i class="fa-solid fa-chevron-up"></i></button>-->
+    <button class="back-to-top"><i class="fa-solid fa-chevron-up"></i></button>
 
-    <script src="/js/script.js"></script>
-    <script src="/js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/navbar.js"></script>
 <script>
 function log(){
-location.assign("/spark/login.html");
+location.assign("/login.html");
 }
 function home(){
-location.assign("/spark/index.html");
+location.assign("/index.html");
 }
 function mov(){
-location.assign("/spark/movie.html");
+location.assign("/movie.html");
 }
 
 </script>
