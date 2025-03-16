@@ -54,7 +54,7 @@
     <section class="movie-detail">
         <div class="main">
             <div class="img">
-                <a href="https://drive.google.com/file/d/1sfqQRtybH7qeaZxsPvBo62rIHNx7y2Wn/preview"><img src="/images/movie-4.png" alt=""></a>
+           <p id="freeguy"><img src="/images/movie-4.png" alt=""></p>
                 <i class="fa-regular fa-circle-play"></i>
             </div>
             <div class="content">
@@ -219,7 +219,7 @@
     <script src="/js/navbar.js"></script>
 <script>
 function freeguy(){
-location.assign("https://drive.google.com/file/d/1sfqQRtybH7qeaZxsPvBo62rIHNx7y2Wn/preview");
+document.getElementById("freeguy").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/tptrYVjg?download' type='video/mp4'></video>";
 }
 function log(){
 location.assign("/spark/login.html");
