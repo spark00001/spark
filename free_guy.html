@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FREE GUY</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/movie.css">
+    <link rel="stylesheet" href="https://spark0001.github.io/css/style.css" />
+    <link rel="stylesheet" href="https://spark0001.github.io/css/movie.css">
 
     <!--- google font link-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,7 +29,7 @@
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href="/spark/index.html"><img src="/images/logo.png" alt="" width="100" height="50"/></a>
+          <a href="https://spark0001.github.io/spark/index.html"><img src="https://spark0001.github.io/images/logo.png" alt="" width="100" height="50"/></a>
         </div>
         <ul class="nav-list">
           <div class="logo">
@@ -37,7 +37,7 @@
             <button class="close"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <li class="home"><a href="" onclick="home();">home</a></li>
-          <li><a href="/movie.html" onclick="mov();">movie</a></li>
+          <li><a href="https://spark0001.github.io/movie.html" onclick="mov();">movie</a></li>
           <li><a href="">tv show</a></li>
           <li><a href="">web series</a></li>
           <li><a href="">pricing</a></li>
@@ -54,7 +54,7 @@
     <section class="movie-detail">
         <div class="main">
             <div class="img">
-                <a href="https://drive.google.com/file/d/1sfqQRtybH7qeaZxsPvBo62rIHNx7y2Wn/preview"><img src="/images/movie-4.png" alt=""></a>
+                <p id="vid"><img src="https://spark0001.github.io/images/movie-4.png" alt=""></p>
                 <i class="fa-regular fa-circle-play"></i>
             </div>
             <div class="content">
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="download-btn">
-            <a href="https://sharedby.blomp.com/tZALfv?email=s20512165%40gmail.com" download>download <i class="fa-solid fa-download"></i></a>
+            <a href="https://pixeldrain.net/api/file/tptrYVjg?download" download>download <i class="fa-solid fa-download"></i></a>
         </div>
     </section>
 
@@ -219,7 +219,7 @@
     <script src="/js/navbar.js"></script>
 <script>
 function freeguy(){
-location.assign("https://drive.google.com/file/d/1sfqQRtybH7qeaZxsPvBo62rIHNx7y2Wn/preview");
+document.getElementById("vid").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/tptrYVjg?download' type='video/mp4'></video>";
 }
 function log(){
 location.assign("/spark/login.html");
