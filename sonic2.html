@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FREE GUY</title>
+    <title>SONIC 2</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/movie.css">
 
@@ -51,15 +51,25 @@
     </header>
 
     <!-- movie-detail section start  -->
-    <section class="movie-detail">
+   <section class="movie-detail">
         <div class="main">
             <div class="img">
-                <a href=""><img src="/images/movie-1.png" alt=""></a>
-                <i class="fa-regular fa-circle-play"></i>
+           <p id="freeguy" onclick="sonic2();"><img src="/images/movie-1.png" alt=""></p>
+                <!--<i class="fa-regular fa-circle-play"></i>-->
             </div>
-            <div class="content">
-                <strong>PAID</strong>
-                <h4>SONIC <span>2</span></h4>
+  <!-- <div class="btn">
+                
+                    <i class="bi bi-share-fill"></i>
+                    <span>Share</span>
+                  </button>
+                  <div class="prime">
+                    <h5>Prime Video</h5>
+                    <small>Streaming Channels</small>
+                  </div>-->
+
+            <!--<div class="content">
+                <strong>FREE</strong>
+                <h4>Free <span>Guy</span></h4>
                 <div class="badge-genre">
                     <div class="badge">
                         <span>PG 13</span>
@@ -76,29 +86,30 @@
                     <span><i class="fa-solid fa-calendar-days"></i> 2021</span>
                     <span><i class="fa-regular fa-clock"></i> 115 min</span>
                 </div>
-                <p>                <p>After settling in Green Hills, Sonic is eager to prove that he has what it takes to be a true hero. His test comes when Dr. Robotnik returns with a new partner, Knuckles, in search of a mystical emerald that has the power to destroy civilizations. Sonic teams up with his own sidekick, Tails, and together they embark on a globe-trotting journey to find the emerald before it falls into the wrong hands.</p></p>
-                <div class="detail-actions">
+                <p>A bank teller called Guy realizes he is a background character in an open world video game called Free City that will soon go offline.</p>-->
+                
+              <div class="detail-actions">
                   <button>
-                    <i class="bi bi-share-fill"></i>
+                   <!-- <i class="bi bi-share-fill"></i>
                     <span>Share</span>
                   </button>
                   <div class="prime">
                     <h5>Prime Video</h5>
-                    <small>Streaming Channels</small>
+                    <small>Streaming Channels</small>-->
                   </div>
                   <div class="btn">
-                    <button onclick="sonic2();" ><i class="fa-solid fa-play"></i>Watch Now</button>
+                    <button style="padding:10px;width:200px;height:50px;border-radius:20px;border:2px solid gold;background-color: transparent;color:gold;"onclick="sonic3();" ><i class="fa-solid fa-play"></i>Watch Now</button>
                   </div>
                 </div>
             </div>
         </div>
         <div class="download-btn">
-            <a href="" download>download <i class="fa-solid fa-download"></i></a>
+            <a href="https://pixeldrain.net/api/file/CTnGehoi?download" download>download <i class="fa-solid fa-download"></i></a>
         </div>
     </section>
 
     <!-- tvs series section starts  -->
-    <section class="tv-series same">
+  <!--  <section class="tv-series same">
       <div class="header">
         <small>best tv series</small>
         <h4>World Best TV Series</h4>
@@ -171,7 +182,7 @@
           </li>
         </ul>
       </div>
-    </section>
+    </section>-->
 
     <!-- footer section start -->
     <footer>
@@ -219,7 +230,7 @@
     <script src="/js/navbar.js"></script>
 <script>
 function sonic2(){
-location.assign("/spark/pay.html");
+document.getElementById("freeguy").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/CTnGehoi?download' type='video/mp4'></video>";
 }
 function log(){
 location.assign("/spark/login.html");
