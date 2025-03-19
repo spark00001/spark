@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>THE ADAM PROJECT</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/movie.css">
+    <title>FREE GUY</title>
+    <link rel="stylesheet" href="https://spark00001.github.io/css/style.css" />
+    <link rel="stylesheet" href="https://spark00001.github.io/css/movie.css">
 
     <!--- google font link-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,13 +23,61 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
+    <style>
+           body {
+    font-family: Arial, sans-serif;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+   top:100px;
+}
+
+.dropbtn {
+    background-color:black; /* Green */
+    color: gold;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: flex;
+    position: absolute;
+    background-color: transparent;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color:gold
+}
+
+.dropdown-content a {
+    color: gold;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    background-color: transparent;
+}
+
+.dropdown-content a:hover {
+    background-color:black;
+}
+
+.show {
+    display:flex;
+}
+    </style>
   </head>
   <body>
+    
+
     <!-- navbar starts -->
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href="/spark/index.html"><img src="/images/logo.png" alt="" width="100" height="50"/></a>
+          <a href="/spark/index.html"><img src="https://spark00001.github.io/images/logo.png" alt="" width="100" height="50"/></a>
         </div>
         <ul class="nav-list">
           <div class="logo">
@@ -51,10 +99,11 @@
     </header>
 
     <!-- movie-detail section start  -->
+    
    <section class="movie-detail">
         <div class="main">
             <div class="img">
-           <p id="adamproject" onclick="adamproject();"><img src="/images/movie-3.png" alt=""></p>
+           <p id="adamproject" onclick="adamproject();"><img src="https://spark00001.github.io/images/movie-3.png" alt=""></p>
                 <!--<i class="fa-regular fa-circle-play"></i>-->
             </div>
   <!-- <div class="btn">
@@ -92,19 +141,28 @@
                   <button>
                    <!-- <i class="bi bi-share-fill"></i>
                     <span>Share</span>
-                  </button>
+                  </button
                   <div class="prime">
                     <h5>Prime Video</h5>
                     <small>Streaming Channels</small>-->
+                    
                   </div>
-                  <div class="btn">
+                <tr><td><div class="btn">
                     <button style="padding:10px;width:200px;height:50px;border-radius:20px;border:2px solid gold;background-color: transparent;color:gold;"onclick="adamproject();" ><i class="fa-solid fa-play"></i>Watch Now</button>
                   </div>
                 </div>
             </div>
-        </div>
+        </div>  </div>
+     
         <div class="download-btn">
-            <a href="https://pixeldrain.net/api/file/54YWyWkb?download" download>download <i class="fa-solid fa-download"></i></a>
+            <!-- download -->
+              <div class="dropdown" style="top:90px; left:50px;">
+       <!--<button class="dropbtn">DOWNLOAD</button> -->
+        <div class="dropdown-content">
+            <a href="https://video-downloads.googleusercontent.com/ADGPM2nixcJe6iKsYyN7SgEYOlUk984dNxyN7uduNE76In-mTMxMhiD96uAjqTk3hf6aP3xIrBKER_f1KMJmRf1m82gJ251UyTuYUPeFKZGQvOrGyeob92fFJVELxVeeteXywywtb6lBkTtYUBA95ArZYtM1DOAiH3utcsL-vpbFPKPlGVUg_cypreKH5tFnc-FLYp6_BlJvU06k3nCf_QJy34YGw65VJnbBO0xZs9bmIiHtS" download><i class="fa-solid fa-download"></i>1080p</a>
+            <a href="https://pixeldrain.net/api/file/54YWyWkb?download" download><i class="fa-solid fa-download"></i>720p</a>
+            <a href="https://pixeldrain.net/api/file/o52VF4Wm?download" download><i class="fa-solid fa-download"></i>480p</a>
+        </div></div>
         </div>
     </section>
 
@@ -226,11 +284,11 @@
         </div>
       </div>
     </footer>
-    <script src="/js/script.js"></script>
-    <script src="/js/navbar.js"></script>
+    <script src="https://spark00001.github.io/js/script.js"></script>
+    <script src="https://spark00001.github.io/js/navbar.js"></script>
 <script>
 function adamproject(){
-document.getElementById("adamproject").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/54YWyWkb?download' type='video/mp4'></video>";
+document.getElementById("adamproject").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/o52VF4Wm?download' type='video/mp4'></video> <div class='dropdown'style='top:150px;left:50px;'>    <!-- <button class='dropbtn'>Quality</button>-->  <div class='dropdown-content'>           <a onclick='high();'>1080p</a>            <a onclick='medium();'>720p</a>            <a onclick='low();'>480p</a>        </div></div>";
 }
 function log(){
 location.assign("/spark/login.html");
@@ -241,7 +299,31 @@ location.assign("/spark/index.html");
 function mov(){
 location.assign("/spark/movie.html");
 }
+document.querySelector('.dropbtn').addEventListener('click', function() {
+            document.querySelector('.dropdown-content').classList.toggle('show');
+        });
 
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function high(){
+           document.getElementById("adamproject").innerHTML="<video style='width:99%;'height='' controls> <source src='https://video-downloads.googleusercontent.com/ADGPM2nixcJe6iKsYyN7SgEYOlUk984dNxyN7uduNE76In-mTMxMhiD96uAjqTk3hf6aP3xIrBKER_f1KMJmRf1m82gJ251UyTuYUPeFKZGQvOrGyeob92fFJVELxVeeteXywywtb6lBkTtYUBA95ArZYtM1DOAiH3utcsL-vpbFPKPlGVUg_cypreKH5tFnc-FLYp6_BlJvU06k3nCf_QJy34YGw65VJnbBO0xZs9bmIiHtSP5mbwznoa7z1Np9m5NMKI92k3hU' type='video/mp4'></video>";
+        }
+        function medium(){
+           document.getElementById("adamproject").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/54YWyWkb?download' type='video/mp4'></video>";
+        }
+        function low(){
+           document.getElementById("adamproject").innerHTML="<video style='width:99%;'height='' controls> <source src='https://pixeldrain.net/api/file/o52VF4Wm?download' type='video/mp4'></video>";
+        }
 </script>
   </body>
 </html>
