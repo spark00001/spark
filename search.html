@@ -1,36 +1,248 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{
-background-image:url("/images/hero-bg.jpg");
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Search Filter with Images</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image:url("https://spark00001.github.io/images/hero-bg.jpg");
+background-attachment: fixed;
+cursor:pointer;
 }
-#srout{
-position:fixed;
-left:100px;
-top:100px;
-color:gold;
-font-size:21px;
-}
-#sr{
-position:fixed; 
-left:0px;
-border:1px solid gold;
-color:gold;
-padding:10px 75px;
-border-radius:20px;
-background-color:transparent;
-font-size:21px;
 
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: transparent;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+color:gold;
 }
-</style>
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 590px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+position:fixed;
+top:0px;
+background-color:white;
+color:black;
+}
+
+#itemList {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.item img {
+    width: 100px;
+    height: 150px;
+    margin-right: 10px;
+}
+
+.item.hidden {
+    display: none;
+}
+    </style>
 </head>
 <body>
-<input type="search" placeholder="Search.." id="sr" onkeyup="srch();">
-<br>
-<p id="srout"><marquee>SEARCH FOR MOVIES,SERIES...</marquee></p>
-</body>
-<script src="/js/search.js"></script>
+    <div class="container">
+       
+        <input type="text" id="searchInput" placeholder="Search for items..." />
+        <div id="itemList">
+             <div class="item" onclick="mocn_knight();">
+                <img src="https://spark00001.github.io/images/series-1.png" alt="MOCN KNIGHT(2022)">
+                <span>MOCN KNIGHT<br>(2022)</span></a>
+            </div>
+            <div class="item" onclick="halo();">
+                <img src="https://spark00001.github.io/images/series-2.png" alt="HALO(2022)">
+                <span>HALO<br>(2022)</span>
+            </div>
+            <div class="item" onclick="vikings_valhalla();">
+                <img src="https://spark00001.github.io/images/series-3.png" alt="VIKINGS VALHALLA(2022)">
+                <span>VIKINGS VALHALLA<br>(2022)</span>
+            </div>
+            
+            <div class="item" onclick="the_northman();">
+                <img src="https://spark00001.github.io/images/upcoming-1.png" alt="">
+                <span>THE NORTHMAN<br>(2022)</span>
+            </div>
+            <div class="item" onclick="doctor_strange();">
+                <img src="https://spark00001.github.io/images/upcoming-2.png" alt="Fig">
+                <span>DOCTOR STRANGE<br>(2022)</span>
+            </div>
+            <div class="item" onclick="memmory();">
+                <img src="https://spark00001.github.io/images/upcoming-3.png" alt="Grape">
+                <span>MEMMORY<br>(2022)</span>
+            </div>
+            <div class="item" onclick="the_unbearable_weight_of_massive_talent():">
+                <img src="https://spark00001.github.io/images/upcoming-4.png" alt="Honeydew">
+                <span>THE UNBEARABLE WEIGHT OF MASSIVE TALENT<br>(2022)</span>
+            </div>
+            
+            <div class="item" onclick="sonic_2();">
+                <img src="https://spark00001.github.io/images/movie-1.png" alt="">
+                <span>SONIC 2<br>(2022)
+</span>
+            </div>
+            <div class="item" onclick="morbius();">
+                <img src="https://spark00001.github.io/images/movie-2.png" alt="Banana">
+                <span> MORBIUS<br>(2022)</span>
+            </div>
+            <div class="item" onclick="adam_project();">
+                <img src="https://spark00001.github.io/images/movie-3.png" alt="Cherry">
+                <span>ADAM PROJECT<br>(2022)
+</span>
+            </div>
+           
+            <div class="item" onclick="batman();">
+                <img src="https://spark00001.github.io/images/movie-5.png" alt="Elderberry">
+                <span> BATMAN<br>(2022)
+</span>
+            </div>
+            <div class="item" onclick="uncharted();">
+                <img src="https://spark00001.github.io/images/movie-6.png" alt="Fig">
+                <span>UNCHARTED<br>(2022)
+</span>
+            </div>
+            <div class="item" onclick="death_on_the_nile();">
+                <img src="https://spark00001.github.io/images/movie-7.png" alt="Grape">
+                <span>DEATH ON THE NILE<br>(2022)
+</span>
+            </div>
+            
 
+
+
+				<!-- 2021 -->
+
+
+
+<div class="item"  onclick="kings_man();">
+                <img src="https://spark00001.github.io/images/movie-8.png" alt="Honeydew">
+                <span>KING'S MAN<br>(2021)</span>
+            </div>
+
+		<div class="item" onclick="money_heist_sfive();">
+                <img src="https://spark00001.github.io/images/series-4.png" alt="Date">
+                <span>MONEY HEIST(SEASON 5)<br>(2021)</span>
+            </div>
+       
+ <div class="item" onclick="free_guy();">
+                <img src="https://spark00001.github.io/images/movie-4.png" alt="Date">
+                <span> FREE GUY <br>(2021)</span>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase();
+    const items = document.querySelectorAll('#itemList .item');
+
+    items.forEach(item => {
+        const text = item.querySelector('span').textContent.toLowerCase();
+        if (text.includes(filter)) {
+            item.classList.remove('hidden');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+});
+
+
+
+
+<!-- url -->
+
+
+
+		<!-- url:2025 -->
+
+
+
+
+
+		<!--url:2022-->
+
+
+function mocn_knight(){
+location.assign("mocn_knight.html");
+}
+function halo(){
+location.assign("halo.html");
+}
+function vikings_valhalla(){
+location.assign("vikings_valhalla.html");
+}
+function the_northman(){
+location.assign("the_northman.html");
+}
+function doctor_strange(){
+location.assign("doctor_strange.html");
+}
+function memmory(){
+location.assign("memmory.html");
+}
+function the_unbearable_weight_of_massive_talent(){
+location.assign("the_unbearable_weight_of massive_talent.html");
+}
+function sonic_2(){
+location.assign("sonic_2.html");
+}
+function morbius(){
+location.assign("morbius.html");
+}
+function adam_project(){
+location.assign("adam_project.html");
+}
+function batman(){
+location.assign("batman.html");
+}
+function uncharted(){
+location.assign("uncharted.html");
+}
+function death_on_the_nile(){
+location.assign("death_on_the_nile.html");
+}
+
+
+
+		<!-- url:2021 -->
+
+
+
+function kings_man(){
+location.assign("kings_man.html");
+}
+function money_heist_sfive(){
+location.assign("money_heist_s5.html");
+}
+function free_guy(){
+location.assign("free_guy.html");
+}
+
+
+
+    </script>
+</body>
 </html>
