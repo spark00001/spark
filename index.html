@@ -114,6 +114,23 @@ background-color:black;
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
+<!--page-->
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-item {
+    border: 1px solid transparent;
+    padding: 10px;
+    text-align: center;
+}
+
+.image-item {
+    max-width: 150px;
+    height: 200px;
+}
 
 </style>
   </head>
@@ -185,29 +202,115 @@ background-color:black;
 </div>
 
 
-    <!-- top movie section start  -->
+    <!-- movie  --><br><br>
 
 
-<table>
-<tr>
-<td><embed src="/images/movie-1.png" id="allmov" style="width:200px;height:250px;"></embed></td>
-<td><embed src="/images/movie-2.png" id="allmov" style="width:200px;height:250px;"></embed></td>
-</tr>
-<tr  style="color:gold;">
-<td>SONIC 2</td>
-<td>MORBIUS</td>
-</tr>
-<tr>
-<td><embed src="/images/movie-3.png" id="allmov" style="width:200px;height:250px;"></embed></td>
-<td><embed src="/images/movie-4.png" id="allmov" style="width:200px;height:250px;"></embed></td>
-</tr>
-<tr  style="color:gold;">
-<td>SONIC 2</td>
-<td>MORBIUS</td>
-</tr>
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort by Year</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
 
-</table>
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+color:gold;
+}
 
+.image-item {
+    border: 1px solid transparent;
+    padding: 20px;
+    text-align: center;
+}
+
+.image-item img {
+    max-width: 150px;
+    height: 200px;
+}
+    </style>
+</head>
+<body>
+   
+    <div id="gallery" class="gallery">
+        <!-- Images will be displayed here based on the selected year -->
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/series-1.png" alt="Image from 2021">
+            <p>MOCN<br>KNIGHT(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/series-2.png"  >
+            <p>HALO (2022</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/series-3.png"  >
+            <p>VIKING<br>VALHALLA (2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/upcoming-1.png"  >
+            <p> THE NORTHMAN<br>(2022)</p>
+        </div>
+ <div class="image-item">
+            <img src="https://spark00001.github.io/images/upcoming-2.png"  >
+            <p>DOCTOR STRANGE<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/upcoming-3.png"  >
+            <p>MEMMORY<br>(2022)/p>
+        </div>
+<div class="image-item">
+            <img src="https://spark00001.github.io/images/upcoming-4.png"  >
+            <p>THE UNBEARABLE<br>WEIGHT OF<br>MASSIVE TALENT<br>(2022)</p>
+        </div>
+
+
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-1.png" alt="Image from 2021">
+            <p>SONIC 2<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-2.png"  >
+            <p>MORBIUS<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-3.png"  >
+            <p>ADAM PROJECT<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-5.png"  >
+            <p> BATMAN<br>(2022)</p>
+        </div>
+<div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-6.png" alt="Image from 2021">
+            <p>UNCHARTED<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-7.png"  >
+            <p>DEATH ON THE NILE<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-8.png"  >
+            <p>KING'S MAN<br>(2021)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/series-4.png"  >
+            <p>MONEY HEIST(SEASON 5)<br>(2021)</p>
+        </div>
+ <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-4.png"  >
+            <p>FREE GUY <br>(2021)</p>
+        </div>
+
+
+    </div>
+</body>
+</html>
 
     <!-- tvs series section starts  -->
         <!-- footer section start -->
@@ -258,10 +361,6 @@ background-color:black;
     <script src="/js/script.js"></script>
     <script src="/js/navbar.js"></script>
 <script>
-const re = setTimeout(r,100000);
-function r(){
-location.reload();
-}
 function log(){
 location.assign("/spark/login.html");
 }
