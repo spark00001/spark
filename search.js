@@ -1,15 +1,88 @@
-function srch(){
-var  inpt = document.getElementById("sr").value;
-if(inpt.toLowerCase() == "sonic 2"){
-document.getElementById("srout").innerHTML="<table><tr><td><embed src='/images/movie-1.png' width='150'height='200' onclick='sonic2();'></embed></td></tr><tr><td>SONIC 2</td></tr></table>";
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase();
+    const items = document.querySelectorAll('#itemList .item');
+
+    items.forEach(item => {
+        const text = item.querySelector('span').textContent.toLowerCase();
+        if (text.includes(filter)) {
+            item.classList.remove('hidden');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+});
+
+
+
+
+<!-- url -->
+
+
+
+		<!-- url:2025 -->
+
+
+
+
+
+		<!--url:2022-->
+
+
+function mocn_knight(){
+location.assign("mocn_knight.html");
 }
-if(inpt.toLowerCase() == "sonic"){
-document.getElementById("srout").innerHTML="<table><tr><td><embed src='/images/movie-1.png' width='150'height='200' onclick='sonic2();'></embed></td></tr><tr><td>SONIC 2</td></tr></table>";
+function halo(){
+location.assign("halo.html");
 }
-if(inpt.toLowerCase() == "free guy"){
-document.getElementById("srout").innerHTML="<table><tr><td><embed src='/images/movie-4.png' width='150'height='200'></embed></td></tr><tr><td>SONIC 2</td></tr></table>";
+function vikings_valhalla(){
+location.assign("vikings_valhalla.html");
 }
+function the_northman(){
+location.assign("the_northman.html");
 }
-function sonic2(){
-location.assign("/spark/sonic2.html");
+function doctor_strange(){
+location.assign("doctor_strange.html");
 }
+function memmory(){
+location.assign("memmory.html");
+}
+function the_unbearable_weight_of_massive_talent(){
+location.assign("the_unbearable_weight_of massive_talent.html");
+}
+function sonic_2(){
+location.assign("sonic_2.html");
+}
+function morbius(){
+location.assign("morbius.html");
+}
+function adam_project(){
+location.assign("adam_project.html");
+}
+function batman(){
+location.assign("batman.html");
+}
+function uncharted(){
+location.assign("uncharted.html");
+}
+function death_on_the_nile(){
+location.assign("death_on_the_nile.html");
+}
+
+
+
+		<!-- url:2021 -->
+
+
+
+function kings_man(){
+location.assign("kings_man.html");
+}
+function money_heist_sfive(){
+location.assign("money_heist_s5.html");
+}
+function free_guy(){
+location.assign("free_guy.html");
+}
+
+
+
