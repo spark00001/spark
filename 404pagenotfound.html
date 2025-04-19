@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Unavailable</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f0f0f0, #d9d9d9);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    perspective: 1000px;
+}
+
+.message {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: rotateY(10deg);
+    transition: transform 0.3s;
+}
+
+.message:hover {
+    transform: rotateY(0deg);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message">
+            <h1>Page Unavailable</h1>
+            <p>We're sorry, but the page you are looking for is currently unavailable.</p>
+            <a href="index.html" class="home-button">Go to Home</a>
+        </div>
+    </div>
+</body>
+</html>
