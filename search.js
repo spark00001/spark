@@ -20,23 +20,37 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 		<!-- url:2025 -->
+<!--unavail-->
 
+function jaat(){
+location.assign("404pagenotfound.html");
+}
+function sikandar(){
+location.assign("404pagenotfound.html");
+}
+function minecraft(){
+location.assign("404pagenotfound.html");
+}
 
 
 
 
 		<!--url:2022-->
 
+<!--unavail-->
 
 function mocn_knight(){
-location.assign("mocn_knight.html");
+location.assign("404pagenotfound.html");
 }
 function halo(){
-location.assign("halo.html");
+location.assign("404pagenotfound.html");
 }
 function vikings_valhalla(){
-location.assign("vikings_valhalla.html");
+location.assign("404pagenotfound.html");
 }
+
+<!--avail-->
+
 function the_northman(){
 location.assign("the_northman.html");
 }
@@ -70,7 +84,7 @@ location.assign("death_on_the_nile.html");
 
 
 
-		<!-- url:2021 -->
+		<!-- url:2021 --><!--avail-->
 
 
 
@@ -83,6 +97,5 @@ location.assign("money_heist_s5.html");
 function free_guy(){
 location.assign("free_guy.html");
 }
-
 
 
