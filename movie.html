@@ -1,21 +1,84 @@
-<html>
-    <head>
-        <style>
-            body{
-                background-color:black;
-                color:gold;
-            }
-          #mv{
-              width:200px;
-              height:250px;
-          }  
-        </style>
-    </head>
-    <body>
-    |MOVIES 
-    <p id="mvo"></p>
-   </body>
-   <script src="https://spark00001.github.io/js/movie.js">
- 
-   </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort by Year</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+ background-color: #0a0f0f;}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+color:gold;
+}
+
+.image-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.image-item img {
+    max-width: 150px;
+    height: 200px;
+}
+    </style>
+</head>
+<body>
+   
+    <div id="gallery" class="gallery">
+        <!-- Images will be displayed here based on the selected year -->
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/jaat_poster.png" alt="jaat" onclick="jaat();">
+            <p>JAAT(2025)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/sikandar_poster.png" onclick="sikandar();" >
+            <p>SIKANDAR(2025)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/minecraft_poster.png"  onclick="minecraft();">
+            <p>MINECRAFT(2025)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-1.png" onclick="sonic_2();" >
+            <p>SONIC&nbsp;2(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-2.png" alt="" onclick="morbius();">
+            <p>MORBIUS&nbsp;(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-3.png" onclick="adam_project();" >
+            <p>ADAM&nbsp;PROJECT<br>(2022)</p>
+        </div>
+       <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-5.png" onclick="batman();" >
+            <p> BATMAN<br>(2022)</p>
+        </div>
+<div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-6.png" alt="Image from 2021" onclick="uncharted();">
+            <p>UNCHARTED<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-7.png"  onclick="death_on_the_nile();">
+            <p>DEATH ON<br>THE NILE<br>(2022)</p>
+        </div>
+        <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-8.png" onclick="kings_man();" >
+            <p>KING'S MAN<br>(2021)</p>
+        </div>
+         <div class="image-item">
+            <img src="https://spark00001.github.io/images/movie-4.png" onclick="free_guy();" >
+            <p>FREE GUY <br>(2021)</p>
+        </div>
+
+    </div>
+</body>
+    <script src="/spark/search.js"></script>
 </html>
