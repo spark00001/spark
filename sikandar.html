@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIKANDAR</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image:url("https://spark00001.github.io/images/hero-bg.jpg");
+}
+
+.video-container {
+    background: #000;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+    margin-top: 10px;
+}
+
+button, select {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+    color: white;
+}
+
+select{
+    background-color: gold;
+    color:black;
+}
+.title-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div class="video-container">
+    <div class="title-bar">
+            <marquee>SIKANDAR</marquee>
+        </div>   
+        <video id="videoPlayer" style="height:;width:99%;" poster="/images/sikandar.png" controls>
+            <source id="videoSource" src="https://pub-ae4961d7376541d7ac8c9c9f32eed981.r2.dev/Sikandar.2025.480p.Hindi.DS4K.WEB-DL.HC-ESub.x264-HDHub4u.Ms.mkv" type="video/mp4">
+        </video>
+        <div class="controls">
+            <button id="playPauseBtn">Play</button>
+            <button id="skipBtn">Skip 10s</button>
+            <select id="qualitySelect">
+                <option value="https://pub-ae4961d7376541d7ac8c9c9f32eed981.r2.dev/Sikandar.2025.480p.Hindi.DS4K.WEB-DL.HC-ESub.x264-HDHub4u.Ms.mkv">480p</option>
+                <option value="https://pixeldrain.net/api/file/r6adUcbK?download">720p</option>
+                <option value="https://pixeldrain.net/api/file/qxY1Gtam?download">1080p</option>
+            </select>
+         <!--<button onclick="download()" style="background-color:gold;color:black;" >DOWNLOAD</button>-->
+        </div>
+    </div>
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const skipBtn = document.getElementById('skipBtn');
+const qualitySelect = document.getElementById('qualitySelect');
+
+playPauseBtn.addEventListener('click', () => {
+    if (videoPlayer.paused) {
+        videoPlayer.play();
+        playPauseBtn.textContent = 'Pause';
+    } else {
+        videoPlayer.pause();
+        playPauseBtn.textContent = 'Play';
+    }
+});
+
+skipBtn.addEventListener('click', () => {
+    videoPlayer.currentTime += 10; // Skip forward 10 seconds
+});
+
+qualitySelect.addEventListener('change', () => {
+    const selectedQuality = qualitySelect.value;
+    const videoSource = document.getElementById('videoSource');
+    videoSource.src = selectedQuality;
+    videoPlayer.load(); // Load the new video source
+    videoPlayer.play(); // Optionally play the video after changing quality
+});
+    </script>
+</body>
+</html>
