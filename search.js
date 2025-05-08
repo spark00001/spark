@@ -26,14 +26,11 @@ function jaat(){
 location.assign("404pagenotfound.html");
 }
 function sikandar(){
-location.assign("404pagenotfound.html");
+location.assign("sikandar.html");
 }
 function minecraft(){
 location.assign("404pagenotfound.html");
 }
-
-
-
 
 		<!--url:2022-->
 
