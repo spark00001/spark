@@ -23,7 +23,7 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 <!--unavail-->
 
 function jaat(){
-location.assign("404pagenotfound.html");
+location.assign("jaat.html");
 }
 function sikandar(){
 location.assign("sikandar.html");
