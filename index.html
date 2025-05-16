@@ -1,3 +1,261 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPARK</title>
+    <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+<style>
+body {font-family: Verdana, sans-serif; margin:0; background-color: #0a0f0f;
+}
+.mySlides {display: none}
+img {vertical-align: middle;width:99%;height:;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 500px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+color:gold;
+background-color:black;
+
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+color:gold;
+background-color:black;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+<!--page-->
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-item {
+    border: 1px solid transparent;
+    padding: 10px;
+    text-align: center;
+}
+
+.image-item {
+    max-width: 150px;
+    height: 200px;
+}
+
+</style>
+  </head>
+  <body>
+
+
+			    <!-- navbar starts -->
+
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href=""><img src="/images/logo.png" alt="" height="50" width="150"/></a>
+        </div>
+        <ul class="nav-list">
+          <div class="logo">
+            <a href=""><img src="/images/" alt=""></a>
+            <button class="close"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+           <li><a href="/spark/search.html">SEARCH</a></li>
+          <li class="home"><a href="/spark/index.html" onclick="home();">home</a></li>
+          <li><a href="/spark/movie.html" onclick="mov();">movie</a></li>
+          <li><a href="">tv show</a></li>
+          <li><a href="">web series</a></li>
+          <li><a href="">pricing</a></li>
+          <button class="btn" onclick="log();">SIGN IN</button>
+        </ul>
+        <div class="hamburger">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </nav>
+    </header>
+
+
+
+    <!-- upcoming movie section starts  -->
+
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="/images/jatt.png" style="width:100%" onclick="jaat();">
+  <div class="text">JAAT (2025)</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="/images/sikandar.png" style="width:100%" onclick="sikandar();">
+  <div class="text">SIKANDAR (2025)</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="/images/a_minecraft_movie.png" style="width:100%" onclick="minecraft();">
+  <div class="text">A MINECRAFT MOVIE (2025)</div>
+</div>
+
+<a class="prev" onclick="plusSlides(-1)">❮</a>
+<a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+
+	  <!--actor-->
+
+	  <!DOCTYPEhtml>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+div.actor{
+padding:10px;
+white-space:nowrap;
+overflow:auto;
+}
+div.actor embed{
+padding:10px;
+width:100px;
+height:100px;
+border:1px solid orange;
+}
+</style>
+</head>
+<body>
+<div class="actor">
+<embed src="/actor/punjabi.jpg" style="border-radius:50%;" onclick="punjabi();"></embed>
+<embed src="/actor/south.jpg" style="border-radius:50%;" onclick="srk();"></embed>
+<embed src="/actor/bollywood.jpg" style="border-radius:50%;" onclick="amir_khan();"></embed>
+<embed src="/actor/bengali.jpg" style="border-radius:50%;" onclick="susant_singh_rajput();"></embed>
+<embed src="/actor/gujarati.jpg" style="border-radius:50%;" onclick="aa();"></embed>
+<embed src="/actor/marathi.jpg" style="border-radius:50%;" onclick="ntr();"></embed>
+</div>
+</body>
+</html>
+	  
+
+    <!--movie--><br>
+
+
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort by Year</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+color:gold;
+}
+
 .image-item {
     border: 1px solid transparent;
     padding: 20px;
@@ -108,12 +366,6 @@
 
     </div>
 </body>
-</script src="/js/2025.js"></script>
-</script src="/js/2024.js"></script>
-</script src="/js/2023.js"></script>
-</script src="/js/2022.js"></script>
-</script src="/js/2021.js"></script>
-
 </html>
 
 
@@ -163,7 +415,13 @@
     </footer>
 
    <!-- <button class="back-to-top"><i class="fa-solid fa-chevron-up"></i></button>-->
+</script src="/js/2025.js"></script>
+</script src="/js/2024.js"></script>
+</script src="/js/2023.js"></script>
+</script src="/js/2022.js"></script>
+</script src="/js/2021.js"></script>
 
+<script src="/js/language.js"></script>
 	  <script src="/spark/search.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/navbar.js"></script>
