@@ -26,7 +26,7 @@ function illti(){
 location.assign("/spark/404pagenotfound.html");
 }
 function lekh(){
-location.assign("/spark/404pagenotfound.html");
+location.assign("/spark/lekh.html");
 }
 function sufna(){
 location.assign("/spark/404pagenotfound.html");
