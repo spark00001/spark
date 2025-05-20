@@ -22,61 +22,81 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 		<!-- url:2025 -->
 <!--unavail-->
 
+function illti(){
+location.assign("/spark/404pagenotfound.html");
+}
+function lekh(){
+location.assign("/spark/404pagenotfound.html");
+}
+function sufna(){
+location.assign("/spark/404pagenotfound.html");
+}
+function oye_makhna(){
+location.assign("/spark/404pagenotfound.html");
+}
+function guddyan_patola(){
+location.assign("/spark/404pagenotfound.html");
+}
+function mitran_da_nss_chalda(){
+location.assign("/spark/404pagenotfound.html");
+}
+function qismat(){
+location.assign("/spark/404pagenotfound.html");
+}
+function qismat2(){
+location.assign("/spark/404pagenotfound.html");
+}
+<!--avail-->
 function jaat(){
-location.assign("jaat.html");
+location.assign("/spark/jaat.html");
 }
 function sikandar(){
-location.assign("sikandar.html");
+location.assign("/spark/sikandar.html");
 }
 function minecraft(){
-location.assign("404pagenotfound.html");
+location.assign("/spark/404pagenotfound.html");
 }
-
-		<!--url:2022-->
-
-<!--unavail-->
-
 function mocn_knight(){
-location.assign("404pagenotfound.html");
+location.assign("/spark/404pagenotfound.html");
 }
 function halo(){
-location.assign("404pagenotfound.html");
+location.assign("/spark/404pagenotfound.html");
 }
 function vikings_valhalla(){
-location.assign("404pagenotfound.html");
+location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
 
 function the_northman(){
-location.assign("the_northman.html");
+location.assign("/spark/the_northman.html");
 }
 function doctor_strange(){
-location.assign("doctor_strange.html");
+location.assign("/spark/doctor_strange.html");
 }
 function memmory(){
-location.assign("memmory.html");
+location.assign("/spark/memmory.html");
 }
 function the_unbearable_weight_of_massive_talent(){
-location.assign("the_unbearable_weight_of massive_talent.html");
+location.assign("/spark/the_unbearable_weight_of_massive_talent.html");
 }
 function sonic_2(){
-location.assign("sonic_2.html");
+location.assign("/spark/sonic_2.html");
 }
 function morbius(){
-location.assign("morbius.html");
+location.assign("/spark/morbius.html");
 }
 function adam_project(){
-location.assign("adam_project.html");
+location.assign("/spark/adam_project.html");
 }
 function batman(){
-location.assign("batman.html");
+location.assign("/spark/batman.html");
 }
 function uncharted(){
-location.assign("uncharted.html");
+location.assign("/spark/uncharted.html");
 }
 function death_on_the_nile(){
-location.assign("death_on_the_nile.html");
+location.assign("/spark/death_on_the_nile.html");
 }
 
 
@@ -86,13 +106,13 @@ location.assign("death_on_the_nile.html");
 
 
 function kings_man(){
-location.assign("kings_man.html");
+location.assign("/spark/kings_man.html");
 }
 function money_heist_sfive(){
-location.assign("money_heist_s5.html");
+location.assign("/spark/money_heist_s5.html");
 }
 function free_guy(){
-location.assign("free_guy.html");
+location.assign("/spark/free_guy.html");
 }
 
 
