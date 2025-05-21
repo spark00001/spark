@@ -54,7 +54,7 @@ location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
-function qismat2(){
+function qismattwo(){
 location.assign("/spark/qismat2.html");
 	}
 	function lekh(){
