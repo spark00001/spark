@@ -38,16 +38,8 @@ location.assign("/spark/404pagenotfound.html");
 function qismat(){
 location.assign("/spark/404pagenotfound.html");
 }
-function qismat2(){
-location.assign("/spark/404pagenotfound.html");
-}
-<!--avail-->
-function jaat(){
-location.assign("/spark/jaat.html");
-}
-function sikandar(){
-location.assign("/spark/sikandar.html");
-}
+	
+
 function minecraft(){
 location.assign("/spark/404pagenotfound.html");
 }
@@ -62,12 +54,20 @@ location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
-
+function qismat2(){
+location.assign("/spark/qismat2.html");
+	}
 	function lekh(){
 location.assign("/spark/lekh.html");
 }
 function sufna(){
 location.assign("/spark/sufna.html");
+}
+function jaat(){
+location.assign("/spark/jaat.html");
+}
+function sikandar(){
+location.assign("/spark/sikandar.html");
 }
 function the_northman(){
 location.assign("/spark/the_northman.html");
