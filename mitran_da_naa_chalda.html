@@ -1,0 +1,108 @@
+<html lang="en">
+     <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+           <title>MITRAN DA NA CHALDA</title>
+           <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+            <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet" />
+            <style>
+                body{
+                    background-color:black;
+                    color:gold;
+                }
+                .gallery{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+color:gold;
+}
+.image-item{
+border:1px solid red;
+padding:10px;
+text-allign:center;
+}
+.image-item img{
+max-width:150px;
+height:200px;
+}
+  .downloads {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .download-btn {
+    background: #111;
+    border: 1px solid #ff9f00;
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: #ff9f00;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    min-width: 90px;
+    text-align: center;
+  }
+  .download-btn:hover, .download-btn:focus {
+    background: #ff9f0044;
+    outline: none;
+  }
+   
+     </style>
+           </head> 
+           <body> <!-- CSS --> <!-- file source is from: https://gist.github.com/Fazzani/8f89546e188f8086a46073dc5d4e2928 --> <!-- this html page is from: https://stackoverflow.com/questions/19782389/playing-m3u8-files-with-html-video-tag --> <!-- sample page: https://jlypnc.csb.app/ --> 
+         
+           <!-- HTML --> 
+           <video id="hls-example" class="video-js vjs-default-skin" width="400" height="300" controls style="width:100%;" poster="https://spark00001.github.io/punjabi/mitran_da_naa_chalda.png"> <source style="width:100%;" src="https://video-downloads.googleusercontent.com/ADGPM2krOsEOJJ2qLfmlPECyBexteIOAv8R58S5mgN8MdHe5RnOVU0yQ4WIkhBwiiS-YLEFwDZKyfxxOOfEdF0cmH0ok_pmSkvq4EPvDEmx9jBEP7HSeKwK0fthnKPeJMdtXIalhT60NXBZHkgS8p7LGQDZEzFppl3SCUj3-whpbr3aaHFheg_cGSVPTIrMNf8GU_hxylWwVLzS8eKtKcxt3KYaAHgIw50wHJrzeyGGDFwLyk6ZxWd1AIk4uDx_2yFNd_crRL3kPRgzUjT0SuZI_JjOxh0jlGKdN8MFcwWRf3pV5RapyyoSUacIYFv28Y0IppegDwzuC1rgVJPgmLRjNEIwkHv3wwVY0yhQbpMUlEfsy24wm3daUOpV_Hmx0baU_ZhxDGop83ZgVy05GYGhnTZF_iPArFdAPpUvuPwW_AzQrRgxVfI2ck_WdmIsAkRcXxfR29WsWTnS2bVXO2ZwRgWDSPC0pOtQLIOmbOFM73Fuqh-Jbizr1gT9DACtwpvtMQz3aWTHlfIRLnSLeXGdxBZcuOaAsloyAw-Uk476kAhOVGiNuJYoI_Ashwt2eJgydFTxOUo1fSitM-RaBWYKXmXmzMchGE3TAuuoigyknEV17bfC66sGq9Wt0_I5KyFSk-oFHr5CqpZqOhk9bMQCPPH4KqfqdAwlD1Y59A5ozLs9ONiRq_Q-7fj7OMqnHaASVL24aXSqIcSrQPv5cWzlxPQLPpIqx4U5oPX0YYHY8Li-Q1FcPcsQEKEbCdZaa0G3MGuYw-E81oVu-FyJU1TRHpwZOfvShu8IdxIzlI9Ul-9Ge1qmk9rwrpJb3yJQI2lFk9o16FsBUrwBt2AMzKqa6Fr7k0FoBtR8UmkQznwVWVawZkYOhSeQUe9V0a9iykL8lzJaW1NjLU-9Bdoh_UTZtdB5H10omqOyBynbfjfHHUvKB58I3Y5GOtB_V4yPW1UXeoAU4QrfnfsVTOhzvPF7dFZZsSO0d16bcGTkS8G5K1h-WWrWEsZ-jMoAioN4WUm2SmxVNFphyzu9gbAbR-EaY-42Ae37U1BT6TODLOi385F6_RQCig3EvtM55DXIZQAUuEvZt-B6w5YKVt9IXskd-ysjpxVjtmA" type="video/mp4"/> </video> 
+            <section class="dropdown-section" id="dropdownQualityDownload" aria-expanded="false">
+   <!--   <button class="dropdown-header" aria-controls="downloadButtons" aria-expanded="false" id="downloadsToggle">
+        Download Quality
+        <span class="dropdown-arrow">▼</span>
+      </button>-->
+      <div class="dropdown-content" id="downloadButtons" role="region" aria-labelledby="downloadsToggle">
+        <div class="downloads" tabindex="0">
+          <a href="https://video-downloads.googleusercontent.com/ADGPM2kll2Ov47-KRG97iW9BZlT3-erE2T0-_B08rbApkrHI-w8wnv1klp0wP9fY4Ch5dVXMI6w863pA52CeKOW2o66xW5a36Z7g_OWNMi07-lJtgCWUaW92-wmfNcczCP6LJnJgyLE_pgA0xaO_Ap032JDKGNbT-_u-xIjiW6aPHR1HITH8vgzFodjygybd5CN-xC-2lmSv1tJsUpet85Ugj2G2vbnXIO13RUiWkQfGbXjXcul5uzSl1nZA436_B7Xu7Ab5n3Cm" class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br>1080p</a>
+          <br><br>
+          <a href="https://video-downloads.googleusercontent.com/ADGPM2nSyvkF2RbC7CodAonfRzS-JK5pDuHF92d577qFHi45XYuFyoY6YREQMvSVlylX5iRKJ18Hpze1EQ1F_GVSmlbXLcX5O_LntlhoQ-iggkRc--okJxH4_Tfmo-3Ll6Ysk97p6R2qp-tOr_lx0UcvK2reWcleF4Gy-duo5uJsXWPK-Lc4jC2S0Gcs9qJAkTQcGpL7xf-lu0ArVoJ0AshJm0sN1iNHn9Ab_fGH6Dyku58vbp2T_s-OI_hCa6ubjpcuw_IZnb8-GA0ft4mcDzx9vblTXu-evQ-37h695PwTvSIEkWzKvQEFpblJDyG35Qlg6lylcU6_Z6HfVISOXeQeGw-amnQl45BFI2xaz7pk4u2MbkkjMvikqBKsmRQRlbEPdzc8Ev4fDrhE9xRGQBni49R1_9w1tX6b1fpk2HH-5Cu_PRZqEUdZAtZjpbwODQEVpLx3UXXUPv4Esoybr7idiU01rtuYW3JpszNm5JKFVwz72y9aKccMpUr1W35Zo4Rx04uYyOQrP6W6Q2ab0BFEtU5ElqwOqALMvSr2-Xz1kqLjCLWbbQZ-6wl9qVaZeiuNgdO6UiIDKSVnMQFyggIwjzRIK6tcV82mJlGXQS110frnaDJQwvHCnqTubyXQvNgNKSTnoQ1nXqyUxId4wG55ufoNlhB1KoBqFHs83IvqWUSRCSutfn6-UyPfIXagTVD1-p0CxOfpbubzERwTia61FLpVHl9O7jPArxS5MP_O3SdfYW_E9H3pS8mZXNt4hwpp1mVxrp0UTSktfHLGoW-BzOO7PhgnKlCMmQscU0PAer1QIm_0YEwbP1AL4sEc7OLU-PR02E_Jz-_4Bp76tY3d8otUu5YJoFthWFjuI9ycmJE28moOpXV2wJ32mvZ7QnJG3C99Si3-_zIcoYzne83BmAmbuoStpb9uYqx6rXRsVB1grN-HGMwjU-GD6VeIZcUh8BYdEFJLWAxg8eoO88a6x5e-83XM6iFEhd1xqqYWtghpyDK5tbvNhkE_OxGXduensHDwSg4QHr3l9e4Ws-cAAj4YmAjsBCI4GaERAdeD4bcDz61zgCMukye6H0xIJw6UKHPsyutsNvwA-H71xKBQ2Rt5G6Hbqg" download class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br> (720p)</a>
+          <br><br>
+        <a href="https://video-downloads.googleusercontent.com/ADGPM2krOsEOJJ2qLfmlPECyBexteIOAv8R58S5mgN8MdHe5RnOVU0yQ4WIkhBwiiS-YLEFwDZKyfxxOOfEdF0cmH0ok_pmSkvq4EPvDEmx9jBEP7HSeKwK0fthnKPeJMdtXIalhT60NXBZHkgS8p7LGQDZEzFppl3SCUj3-whpbr3aaHFheg_cGSVPTIrMNf8GU_hxylWwVLzS8eKtKcxt3KYaAHgIw50wHJrzeyGGDFwLyk6ZxWd1AIk4uDx_2yFNd_crRL3kPRgzUjT0SuZI_JjOxh0jlGKdN8MFcwWRf3pV5RapyyoSUacIYFv28Y0IppegDwzuC1rgVJPgmLRjNEIwkHv3wwVY0yhQbpMUlEfsy24wm3daUOpV_Hmx0baU_ZhxDGop83ZgVy05GYGhnTZF_iPArFdAPpUvuPwW_AzQrRgxVfI2ck_WdmIsAkRcXxfR29WsWTnS2bVXO2ZwRgWDSPC0pOtQLIOmbOFM73Fuqh-Jbizr1gT9DACtwpvtMQz3aWTHlfIRLnSLeXGdxBZcuOaAsloyAw-Uk476kAhOVGiNuJYoI_Ashwt2eJgydFTxOUo1fSitM-RaBWYKXmXmzMchGE3TAuuoigyknEV17bfC66sGq9Wt0_I5KyFSk-oFHr5CqpZqOhk9bMQCPPH4KqfqdAwlD1Y59A5ozLs9ONiRq_Q-7fj7OMqnHaASVL24aXSqIcSrQPv5cWzlxPQLPpIqx4U5oPX0YYHY8Li-Q1FcPcsQEKEbCdZaa0G3MGuYw-E81oVu-FyJU1TRHpwZOfvShu8IdxIzlI9Ul-9Ge1qmk9rwrpJb3yJQI2lFk9o16FsBUrwBt2AMzKqa6Fr7k0FoBtR8UmkQznwVWVawZkYOhSeQUe9V0a9iykL8lzJaW1NjLU-9Bdoh_UTZtdB5H10omqOyBynbfjfHHUvKB58I3Y5GOtB_V4yPW1UXeoAU4QrfnfsVTOhzvPF7dFZZsSO0d16bcGTkS8G5K1h-WWrWEsZ-jMoAioN4WUm2SmxVNFphyzu9gbAbR-EaY-42Ae37U1BT6TODLOi385F6_RQCig3EvtM55DXIZQAUuEvZt-B6w5YKVt9IXskd-ysjpxVjtmA" download class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br>480p</a>
+        </div>
+      </div>
+    </section>
+           
+              <div style="border:1px solid orange;border-radius:20px;color:gold;height:90px;width:99%;padding:;">
+         <img src="https://spark00001.github.io/actor/punjabi.jpg" style="border:1px solid white; border-radius:50%;height:90px;width:90px;" onclick="punjabi()"><b style="position:relative;top:-40px;left:50px;outline:1px solid red;border-radius:20px;border:1px solid gold;padding:10px;" onclick="punjabi()">PUNJABI</b>
+         <img style="position:relative;top:-20px;left:150px;outline:1px solid red;border-radius:50%;border:1px solid gold;padding:px;width:50px;height:50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvU1a509pduQk_sWPAkkryIsQS7TAHc5kdxQ&usqp=CAU" onclick="srch()">
+        <p id="home"></p>
+        <br>
+        <p id="foot"></p>
+<!-- JS code --> <!-- If you'd like to support IE8 (for Video.js versions prior to v7) --> 
+<script src="/js/footer.js"></script>
+<script src="/js/punjabi.js"></script>
+<script src="/spark/search.js"></script>
+<script>
+    function punjabi(){
+        location.assign("/spark/punjab.html");
+    }
+    function srch(){
+        location.assign("/spark/search.html");
+    }
+</script>
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script> <script src="https://vjs.zencdn.net/7.2.3/video.js"></script> <script> var player = videojs("hls-example"); player.play(); 
+</script> 
+</body>
+</html>
