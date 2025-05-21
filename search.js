@@ -23,7 +23,7 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 <!--unavail-->
 
 function illti(){
-location.assign("/spark/404pagenotfound.html");
+location.assign("/spark/notavail.html");
 }
 
 function oye_makhna(){
