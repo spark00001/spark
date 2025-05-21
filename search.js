@@ -25,12 +25,7 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 function illti(){
 location.assign("/spark/404pagenotfound.html");
 }
-function lekh(){
-location.assign("/spark/lekh.html");
-}
-function sufna(){
-location.assign("/spark/404pagenotfound.html");
-}
+
 function oye_makhna(){
 location.assign("/spark/404pagenotfound.html");
 }
@@ -68,6 +63,12 @@ location.assign("/spark/404pagenotfound.html");
 
 <!--avail-->
 
+	function lekh(){
+location.assign("/spark/lekh.html");
+}
+function sufna(){
+location.assign("/spark/sufna.html");
+}
 function the_northman(){
 location.assign("/spark/the_northman.html");
 }
