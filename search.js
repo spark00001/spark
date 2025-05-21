@@ -32,12 +32,7 @@ location.assign("/spark/404pagenotfound.html");
 function guddyan_patola(){
 location.assign("/spark/404pagenotfound.html");
 }
-function mitran_da_nss_chalda(){
-location.assign("/spark/404pagenotfound.html");
-}
-function qismat(){
-location.assign("/spark/404pagenotfound.html");
-}
+
 	
 
 function minecraft(){
@@ -54,6 +49,13 @@ location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
+
+	function qismat(){
+location.assign("/spark/qismat.html");
+}
+function mitran_da_nss_chalda(){
+location.assign("/spark/mitran_da_naa_chalda.html");
+}	
 function qismattwo(){
 location.assign("/spark/qismat2.html");
 	}
