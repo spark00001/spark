@@ -46,7 +46,9 @@ location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
-	
+function lover(){
+location.assign("/spark/lover.html");
+}	
 function vikings_valhalla(){
 location.assign("/spark/vikings_valhalla.html");
 }
