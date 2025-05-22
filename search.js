@@ -44,11 +44,12 @@ location.assign("/spark/404pagenotfound.html");
 function halo(){
 location.assign("/spark/404pagenotfound.html");
 }
-function vikings_valhalla(){
-location.assign("/spark/404pagenotfound.html");
-}
 
 <!--avail-->
+	
+function vikings_valhalla(){
+location.assign("/spark/vikings_valhalla.html");
+}
 
 	function qismat(){
 location.assign("/spark/qismat.html");
