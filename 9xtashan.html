@@ -1,0 +1,95 @@
+<html lang="en">
+     <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+           <title>9X TASHAN</title>
+           <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+            <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet" />
+            <style>
+                body{
+                    background-color:black;
+                    color:gold;
+                }
+                .gallery{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+color:gold;
+}
+.image-item{
+border:1px solid red;
+padding:10px;
+text-allign:center;
+}
+.image-item img{
+max-width:150px;
+height:200px;
+}
+  .downloads {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .download-btn {
+    background: #111;
+    border: 1px solid #ff9f00;
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: #ff9f00;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    min-width: 90px;
+    text-align: center;
+  }
+  .download-btn:hover, .download-btn:focus {
+    background: #ff9f0044;
+    outline: none;
+  }
+   
+     </style>
+           </head> 
+           <body> <!-- CSS --> <!-- file source is from: https://gist.github.com/Fazzani/8f89546e188f8086a46073dc5d4e2928 --> <!-- this html page is from: https://stackoverflow.com/questions/19782389/playing-m3u8-files-with-html-video-tag --> <!-- sample page: https://jlypnc.csb.app/ --> 
+         
+           <!-- HTML --> 
+           <video id="hls-example" class="video-js vjs-default-skin" width="400" height="300" controls style="width:100%;" poster="https://spark00001.github.io/images/.png"> <source style="width:100%;" src="https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/cb563817657667909bcd3678d9f562ffa65928d80b6c852a6ab454876da64607d1e3b680fd358b785d9f01de6a1a0a080361cf12ce3407c3c76ad91174204213cfcac9229d86170ab5c60c2c3aab016635837209c0790a79dca93d0d8636ba304530e01b615b37c2ec5aab6852db80148b6f4adafb8c2360625f5c98435ee3b24aa4f8e709138b64f4ac1f4f962658e68314c9c94dbb85d6469d16837ea4129d91f5dad216e0fdab5c91913d19733a0b53dbe5509dcd54b7a8f5035bbd42588d9ac884d9f7df5d35873d231698ad88d7ed9862531f30019c56ef20e1851582a7698a3a87ab2281beb2de0d6a36a8cf5a75269a28c1e0f4183ca76ff7aee8922632c9b65c4f4ec769d7353878bec98b45d48d45cdf6148cba3f4963808913cfd4f2a2ffa0814fab20c8ecfd8c72171d344a51d01deab145ef04f134e8c21a2a590d63a8995ecbcf997d3870408b851185404df78bc5d3915e7bf9611d5bfa69960e563b82673a0e904793ad35628d291d96756cab2a52ae76bce97cbbf7a1a66c5d92d1c845f36a95c529dae40da4687c144284fb225b4a5b6e928942082372d74af4d9a9b02350188d17ac66758e99617588ff4cc6d1897f582d24e53409c6ca/149/1920x1080_4716800/index.m3u8" /> </video> 
+        
+       
+           
+              <div style="border:1px solid orange;border-radius:20px;color:gold;height:90px;width:99%;padding:;">
+         <img src="https://spark00001.github.io/actor/indianlivetv.png" style="border:1px solid white; border-radius:50%;height:90px;width:90px;" onclick="punjabi()"><b style="position:relative;top:-40px;left:50px;outline:1px solid red;border-radius:20px;border:1px solid gold;padding:10px;" onclick="indian()">INDIAN LIVE TV</b>
+         <img style="position:relative;top:-20px;left:150px;outline:1px solid red;border-radius:50%;border:1px solid gold;padding:px;width:50px;height:50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvU1a509pduQk_sWPAkkryIsQS7TAHc5kdxQ&usqp=CAU" onclick="srch()">
+        <p id="indian"></p>
+        <br>
+        <p id="foot"></p>
+<!-- JS code --> <!-- If you'd like to support IE8 (for Video.js versions prior to v7) --> 
+<script src="/js/footer.js"></script>
+<script src="/js/indian.js"></script>
+<script src="/spark/search.js"></script>
+<script>
+    function punjabi(){
+        location.assign("/spark/punjab.html");
+    }
+    function srch(){
+        location.assign("/spark/search.html");
+    }
+</script>
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script> <script src="https://vjs.zencdn.net/7.2.3/video.js"></script> <script> var player = videojs("hls-example"); player.play(); 
+</script> 
+</body>
+</html>
