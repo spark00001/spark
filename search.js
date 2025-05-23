@@ -18,6 +18,9 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 <!-- url -->
 
 
+function livetv(){
+location.assign("/spark/indianlivetv.html");
+}
 
 		<!-- url:2025 -->
 <!--unavail-->
