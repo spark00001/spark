@@ -1,0 +1,95 @@
+<html lang="en">
+     <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+           <title>AYUSH TV</title>
+           <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+            <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet" />
+            <style>
+                body{
+                    background-color:black;
+                    color:gold;
+                }
+                .gallery{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+color:gold;
+}
+.image-item{
+border:1px solid red;
+padding:10px;
+text-allign:center;
+}
+.image-item img{
+max-width:150px;
+height:200px;
+}
+  .downloads {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .download-btn {
+    background: #111;
+    border: 1px solid #ff9f00;
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: #ff9f00;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    min-width: 90px;
+    text-align: center;
+  }
+  .download-btn:hover, .download-btn:focus {
+    background: #ff9f0044;
+    outline: none;
+  }
+   
+     </style>
+           </head> 
+           <body> <!-- CSS --> <!-- file source is from: https://gist.github.com/Fazzani/8f89546e188f8086a46073dc5d4e2928 --> <!-- this html page is from: https://stackoverflow.com/questions/19782389/playing-m3u8-files-with-html-video-tag --> <!-- sample page: https://jlypnc.csb.app/ --> 
+         
+           <!-- HTML --> 
+           <video id="hls-example" class="video-js vjs-default-skin" width="400" height="300" controls style="width:100%;" poster="/channel/ayushtv.png"> <source style="width:100%;" src="https://95eryw39dwn4-hls-live.wmncdn.net/Ayushu/271ddf829afeece44d8732757fba1a66.sdp/index.m3u8" /> </video> 
+        
+       
+           
+              <div style="border:1px solid orange;border-radius:20px;color:gold;height:90px;width:99%;padding:;">
+         <img src="/actor/indianlivetv.png" style="border:1px solid white; border-radius:50%;height:90px;width:90px;" onclick="indian()"><b style="position:relative;top:-40px;left:50px;outline:1px solid red;border-radius:20px;border:1px solid gold;padding:10px;" onclick="indian()">INDIAN TV</b>
+         <img style="position:relative;top:-20px;left:150px;outline:1px solid red;border-radius:50%;border:1px solid gold;padding:px;width:50px;height:50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvU1a509pduQk_sWPAkkryIsQS7TAHc5kdxQ&usqp=CAU" onclick="srch()">
+        <p id="indian"></p>
+        <br>
+        <p id="foot"></p>
+<!-- JS code --> <!-- If you'd like to support IE8 (for Video.js versions prior to v7) --> 
+<script src="/js/footer.js"></script>
+<script src="/js/indian.js"></script>
+<script src="/js/livetv.js"></script>
+<script>
+    function indian(){
+        location.assign("/spark/livetv.html");
+    }
+    function srch(){
+        location.assign("/spark/search.html");
+    }
+</script>
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script> <script src="https://vjs.zencdn.net/7.2.3/video.js"></script> <script> var player = videojs("hls-example"); player.play(); 
+</script> 
+</body>
+</html>
