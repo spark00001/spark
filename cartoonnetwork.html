@@ -1,47 +1,21 @@
 <!DOCTYPE html>
- <html lang="en">
-      <head>
-           <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>CARTOON NETWORK</title> <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script> 
-            <link rel="stylesheet" href="style.css">
-            <style>
-            * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
+<html>
+<head>
+<meta charset=utf-8 />
+<title>24 TV CANLI YAYIN</title>
+  
 
-body {
-    background: #222;
-    display:block ;
-    justify-content: center;
-    align-items: center;
-    min-height: ;
-}
-
-body #video {
-    width: 99%;;
-    height: auto;
-    border-radius: 10px;
-    box-shadow:
-        0px 0px 10.4px rgba(0, 0, 0, 0.045),
-        0px 0px 25.1px rgba(0, 0, 0, 0.065),
-        0px 0px 47.2px rgba(0, 0, 0, 0.08),
-        0px 0px 84.2px rgba(0, 0, 0, 0.095),
-        0px 0px 157.5px rgba(0, 0, 0, 0.115),
-        0px 0px 377px rgba(0, 0, 0, 0.16);
-}
-</style>
-
-             </head> 
-            <body>
-                 <!-- Include the hls.js library --> <!-- Create a video element --> <video id="video" controls></video> <!-- Use hls.js to create a player and load the .m3u8 file --> 
-                     <div style="border:1px solid orange;border-radius:20px;color:gold;height:90px;width:99%;padding:;">
-         <img src="https://spark00001.github.io/actor/indianlivetv.png" style="border:1px solid white; border-radius:50%;height:90px;width:90px;" onclick="punjabi()"><b style="position:relative;top:-40px;left:50px;outline:1px solid red;border-radius:20px;border:1px solid gold;padding:10px;" onclick="indian()">INDIAN TV</b>
-         <img style="position:relative;top:-20px;left:150px;outline:1px solid red;border-radius:50%;border:1px solid gold;padding:px;width:50px;height:50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvU1a509pduQk_sWPAkkryIsQS7TAHc5kdxQ&usqp=CAU" onclick="srch()">
-        <p id="indian"></p>
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+     <link href="/css/flex.css" rel="stylesheet">
+</head>
+<body>
+  <video id="my_video_1" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
+  data-setup='{}'>
+    <source src="http://38.96.178.201/live/CartoonNetwork/index.m3u8" type="application/x-mpegURL">
+  </video>
+   <p id="indian"></p>
         <br>
         <p id="foot"></p>
 <!-- JS code --> <!-- If you'd like to support IE8 (for Video.js versions prior to v7) --> 
@@ -56,6 +30,10 @@ body #video {
         location.assign("/spark/search.html");
     }
 </script>
-                 <script> var video = document.getElementById('video'); if(Hls.isSupported()) { var hls = new Hls(); hls.loadSource('http://38.96.178.201/live/CartoonNetwork/index.m3u8'); hls.attachMedia(video); video.play(); } else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = 'https://arydigital.aryzap.com/ff5f087d60a78eea3940b58f17985e49/63b2655f/v1/0183ea2408f90b8ed5941a38bc72/0183ea24302d0b8ed5941a38bc75/ARYDigitalHDh264_1080p.m3u8'; video.addEventListener('loadedmetadata',function() { video.play(); }); } </script> 
-            </body>
- </html>
+<script>
+var player = videojs('my_video_1');
+player.play();
+</script>
+  
+</body>
+</html>
