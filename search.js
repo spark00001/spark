@@ -25,9 +25,7 @@ location.assign("/spark/indianlivetv.html");
 		<!-- url:2025 -->
 <!--unavail-->
 
-function illti(){
-location.assign("/spark/notavail.html");
-}
+
 
 function oye_makhna(){
 location.assign("/spark/404pagenotfound.html");
@@ -49,6 +47,9 @@ location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
+function illti(){
+location.assign("/spark/illti.html");
+}
 function lover(){
 location.assign("/spark/lover.html");
 }	
