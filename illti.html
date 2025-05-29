@@ -1,0 +1,102 @@
+<html lang="en">
+     <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+           <title>ILLTI</title>
+           <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+            <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet" />
+            <style>
+                body{
+                    background-color:black;
+                    color:gold;
+                }
+                .gallery{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+color:gold;
+}
+.image-item{
+border:1px solid red;
+padding:10px;
+text-allign:center;
+}
+.image-item img{
+max-width:150px;
+height:200px;
+}
+  .downloads {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .download-btn {
+    background: #111;
+    border: 1px solid #ff9f00;
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: #ff9f00;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    min-width: 90px;
+    text-align: center;
+  }
+  .download-btn:hover, .download-btn:focus {
+    background: #ff9f0044;
+    outline: none;
+  }
+   
+     </style>
+           </head> 
+           <body> <!-- CSS --> <!-- file source is from: https://gist.github.com/Fazzani/8f89546e188f8086a46073dc5d4e2928 --> <!-- this html page is from: https://stackoverflow.com/questions/19782389/playing-m3u8-files-with-html-video-tag --> <!-- sample page: https://jlypnc.csb.app/ --> 
+         
+           <!-- HTML --> 
+           <video id="hls-example" class="video-js vjs-default-skin" width="400" height="300" controls style="width:100%;" poster="https://spark00001.github.io/punjabi/illti.png"> <source style="width:100%;" src="https://pub-ae4961d7376541d7ac8c9c9f32eed981.r2.dev/ILLTI.2025.480p.Punjabi.WEB-DL.ESub.x264-HDHub4u.Ms.mkv" type="application/x-mpegURL"/></video> 
+            <section class="dropdown-section" id="dropdownQualityDownload" aria-expanded="false">
+   <!--   <button class="dropdown-header" aria-controls="downloadButtons" aria-expanded="false" id="downloadsToggle">
+        Download Quality
+        <span class="dropdown-arrow">▼</span>
+      </button>-->
+      <div class="dropdown-content" id="downloadButtons" role="region" aria-labelledby="downloadsToggle">
+        <div class="downloads" tabindex="0">
+          <a href="https://s3.eu-central-2.wasabisys.com/thala7v/ILLTI_2025_1080p_HEVC_Punjabi_WEB_DL_5_1_ESub_x265_HDHub4u_Ms.mkv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=LB9DHZHG6VJ05QN54MJ0%2F20250529%2Feu-central-2%2Fs3%2Faws4_request&X-Amz-Date=20250529T151106Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&response-content-disposition=ILLTI_2025_1080p_HEVC_Punjabi_WEB_DL_5_1_ESub_x265_HDHub4u_Ms.mkv&X-Amz-Signature=b967efd2ae296a837203aaf1cddc661e4ae07a1d3584dbd419f67de464b40458" class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br>1080p</a>
+          
+         <a href="https://s3.eu-central-2.wasabisys.com/francecdn/ILLTI_2025_720p_HEVC_Punjabi_WEB_DL_5_1_ESub_x265_HDHub4u_Ms.mkv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=R28W6SARFLQK6GOCVVOF%2F20250529%2Feu-central-2%2Fs3%2Faws4_request&X-Amz-Date=20250529T163207Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&response-content-disposition=ILLTI_2025_720p_HEVC_Punjabi_WEB_DL_5_1_ESub_x265_HDHub4u_Ms.mkv&X-Amz-Signature=6a551878690595649401e0fa00eb23c394d4407bd7e845a1d2498dfedb9f4fea" download class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br> (720p)</a>
+         
+        <a href="https://pub-ae4961d7376541d7ac8c9c9f32eed981.r2.dev/ILLTI.2025.480p.Punjabi.WEB-DL.ESub.x264-HDHub4u.Ms.mkv" download class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br>480p</a>
+        </div>
+      </div>
+    </section>
+           
+         <p id="pnjb"></p>
+        <p id="home"></>
+        <br>
+        <p id="foot"></p>
+<!-- JS code --> <!-- If you'd like to support IE8 (for Video.js versions prior to v7) --> 
+<script src="/js/footer.js"></script>
+<script src="/js/punjabi.js"></script>
+<script src="/spark/search.js"></script>
+<script src="https://spark00001.github.io/js/pnjb.js"></script>
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script> 
+<script src="https://vjs.zencdn.net/7.2.3/video.js"></script> 
+<script> 
+    var player = videojs("hls-example"); player.play(); 
+</script> 
+</body>
+</html>
