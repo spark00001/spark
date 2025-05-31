@@ -27,12 +27,7 @@ location.assign("/spark/indianlivetv.html");
 
 
 
-function oye_makhna(){
-location.assign("/spark/404pagenotfound.html");
-}
-function guddyan_patola(){
-location.assign("/spark/404pagenotfound.html");
-}
+
 
 	
 
@@ -47,6 +42,13 @@ location.assign("/spark/404pagenotfound.html");
 }
 
 <!--avail-->
+	
+function oye_makhna(){
+location.assign("/spark/oye_makhna.html");
+}
+function guddyan_patola(){
+location.assign("/spark/guddyan_patola.html");
+}
 function illti(){
 location.assign("/spark/illti.html");
 }
