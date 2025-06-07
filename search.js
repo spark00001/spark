@@ -29,8 +29,15 @@ location.assign("/spark/indianlivetv.html");
 
 
 
-	
-
+	function single(){
+location.assign("/spark/single.html");
+}
+function kgf1(){
+location.assign("/spark/kgf1.html");
+}
+function kgf2(){
+location.assign("/spark/kgf2.html");
+}
 function minecraft(){
 location.assign("/spark/404pagenotfound.html");
 }
