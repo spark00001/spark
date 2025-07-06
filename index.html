@@ -244,24 +244,17 @@ border:1px solid orange;
 
     </head>
 <body>
-   <b style="color:gold;width:99%;height:60px;border:1px solid gold;padding:10px;">PUNJABI</b>
+ <select id="genere" onchange="language()" style="padding:10px; border:5px solid gold; outline:5px solid red;background-color:black; color:gold;">
+<option value="all" style="background-color:transparent; color:gold;">ALL</option>
+<option value="punjabi">PUNJABI</option>
+<option value="south">SOUTH</option>
+<option value="bollywood">BOLLYWOOD</option>
+<option value="hollywood">HOLLYWOOD</option>
+</select>
 <br><br>
-<p id="home"></p>
-<br>
-       <b style="color:gold;width:99%;height:60px;border:1px solid gold;padding:10px;">SOUTH</b>
-<br><br>
-<p id="south"></p>
-<br>
-<b style="color:gold;width:99%;height:60px;border:1px solid gold;padding:10px;">BOLLYWOOD</b>
-<br><br>
-<p id='bollywood'></p>
-<br>
-<br>
-<b style="color:gold;width:99%;height:60px;border:1px solid gold;padding:10px;">HOLLYWOOD</b> 
-<br><br>       <!--2022-->
-<p id='hollywood'></p>
-<br>
+<p id="all"></p>
 </body>
+<script src="/js/genere.js"></script>
 <script src="/js/south.js"></script>
 <script src="/js/punjabi.js"></script>
 <script src="/js/bollywood.js"></script>
