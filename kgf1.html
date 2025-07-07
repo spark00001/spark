@@ -1,1 +1,104 @@
-<h1>COMING SOON...</h1>
+<html lang="en">
+     <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+           <title>KGF CHAPTER 1</title>
+           <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+            <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet" />
+            <style>
+                body{
+                    background-color:black;
+                    color:gold;
+                }
+                .gallery{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+color:gold;
+}
+.image-item{
+border:1px solid red;
+padding:10px;
+text-allign:center;
+}
+.image-item img{
+max-width:150px;
+height:200px;
+}
+  .downloads {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .download-btn {
+    background: #111;
+    border: 1px solid #ff9f00;
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: #ff9f00;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    min-width: 90px;
+    text-align: center;
+  }
+  .download-btn:hover, .download-btn:focus {
+    background: #ff9f0044;
+    outline: none;
+  }
+   
+     </style>
+           </head> 
+           <body> <!-- CSS --> <!-- file source is from: https://gist.github.com/Fazzani/8f89546e188f8086a46073dc5d4e2928 --> <!-- this html page is from: https://stackoverflow.com/questions/19782389/playing-m3u8-files-with-html-video-tag --> <!-- sample page: https://jlypnc.csb.app/ --> 
+         
+           <!-- HTML --> 
+           <video id="hls-example" class="video-js vjs-default-skin" width="400" height="300" controls style="width:100%;" poster="https://spark00001.github.io/south/kgf1.png"> <source style="width:100%;" src="https://pixeldrain.dev/api/file/VR6U68gS?download" type="application/x-mpegURL"/></video> 
+           <br>
+           <b style="color:white;">KGF CHAPTER 1(2018) 480p</b><hr>
+            <section class="dropdown-section" id="dropdownQualityDownload" aria-expanded="false">
+   <!--   <button class="dropdown-header" aria-controls="downloadButtons" aria-expanded="false" id="downloadsToggle">
+        Download Quality
+        <span class="dropdown-arrow">▼</span>
+      </button>-->
+      <div class="dropdown-content" id="downloadButtons" role="region" aria-labelledby="downloadsToggle">
+        <div class="downloads" tabindex="0">
+          <a href="https://pub-6cc33e2a5495415fbc7ee6a4c8ab7cee.r2.dev/2_K.G.F-Chapter.1.2018.Hindi.1080p.WEB-DL.DD5.1.ESub.x264-HDHub4u.Uno.mkv" class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br>1080p</a>
+          
+         <a href="https://pixeldrain.dev/api/file/QMeTp816?download" download class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br> (720p)</a>
+         
+       <a href="https://pixeldrain.dev/api/file/VR6U68gS?download" download class="download-btn" rel="noopener" target="_blank">DOWNLOAD<br>480p</a>
+        </div>
+      </div>
+    </section>
+           
+         <p id="telgu"></p>
+        <p id="south"></>
+        <br>
+        <p id="foot"></p>
+<!-- JS code --> <!-- If you'd like to support IE8 (for Video.js versions prior to v7) --> 
+<script src="/js/footer.js"></script>
+<script src="/js/south.js"></script>
+<script src="/spark/search.js"></script>
+<script src="/js/telgu.js"></script>
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script> 
+<script src="https://vjs.zencdn.net/7.2.3/video.js"></script> 
+<script> 
+    var player = videojs("hls-example"); player.play(); 
+</script> 
+</body>
+</html>
