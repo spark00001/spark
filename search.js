@@ -16,19 +16,12 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
-
-
+function m_s1(){
+location.assign("/spark/mirzapur_s1.html");
+}
 function livetv(){
 location.assign("/spark/indianlivetv.html");
 }
-
-		<!-- url:2025 -->
-<!--unavail-->
-
-
-
-
-
 	function single(){
 location.assign("/spark/single.html");
 }
