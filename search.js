@@ -16,6 +16,9 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+function campus_diaries(){
+location.assign("/spark/campus_diaries_s1.html");
+}
 function m_s1(){
 location.assign("/spark/mirzapur_s1.html");
 }
