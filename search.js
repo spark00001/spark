@@ -16,6 +16,18 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+function head_over_heels(){
+location.assign("/spark/head_over_heels.html");
+}
+function good_boy(){
+location.assign("/spark/good_boy.html");
+}
+function live_telecast(){
+location.assign("/spark/live_telecast.html");
+}
+function she(){
+location.assign("/spark/she.html");
+}
 function campus_diaries(){
 location.assign("/spark/campus_diaries_s1.html");
 }
