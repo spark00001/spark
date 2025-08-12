@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <meta name="viewport" content="width=device-width, initial-scale=-1" />
     <title>SPARK</title>
     <link rel="stylesheet" href="/css/style.css" />
 <link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
@@ -131,136 +131,24 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+<input id="takeinpr" type="text" onkeyup="searches()">
 
-			    <!-- navbar starts -->
-
-
-    <header>
-      <nav class="navbar">
-        <div class="logo">
-          <a href=""><img src="/images/logo.png" alt="" height="50" width="150"/></a>
-        </div>
-        <ul class="nav-list">
-          <div class="logo">
-            <a href=""><img src="/images/" alt=""></a>
-            <button class="close"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-           <li><a href="/spark/search.html">SEARCH</a></li>
-          <li class="home"><a href="/spark/index.html" onclick="home();">home</a></li>
-          <li><a href="/spark/movie.html" onclick="mov();">movie</a></li>
-          <li><a href="">tv show</a></li>
-          <li><a href="">web series</a></li>
-          <li><a href="">pricing</a></li>
-          <button class="btn" onclick="log();">SIGN IN</button>
-        </ul>
-        <div class="hamburger">
-          <div class="line"></div>
-          <div class="line"></div>
-        </div>
-      </nav>
-    </header>
-
-<br>
-<p id="message"></p>
-<p id="noti"></p>
-<script src="/js/notification.js"></script>  
+    <p id="srchs"></p>
+    <p id='mainhub'></p>
+		<script src="/js/indexview.js"></script>
+		<script src="/js/search.js"></script>
+		<script src="/js/reset.js"></script>
+	<script src="/js/series.js"></script>
+	     <script src="/js/loading.js"></script>
+      <script src="/js/navbars.js"></script>
+ 
+   <script src="/js/notification.js"></script>  
 <script src="/js/search_retrieve.js"></script>
 <script src="/spark/search.js"></script>
-<br>
-
-
-    <!-- upcoming movie section starts  -->
-
-<div class="slideshow-container">
-
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="/images/jatt.png" style="width:100%" onclick="jaat();">
-  <div class="text">JAAT (2025)</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="/images/sikandar.png" style="width:100%" onclick="sikandar();">
-  <div class="text">SIKANDAR (2025)</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="/images/a_minecraft_movie.png" style="width:100%" onclick="minecraft();">
-  <div class="text">A MINECRAFT MOVIE (2025)</div>
-</div>
-
-<a class="prev" onclick="plusSlides(-1)">❮</a>
-<a class="next" onclick="plusSlides(1)">❯</a>
-
-</div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-</div>
-
-	  <!--actor-->
-
-	  <!DOCTYPEhtml>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-div.actor{
-padding:10px;
-white-space:nowrap;
-overflow:auto;
-}
-div.actor embed{
-padding:10px;
-width:100px;
-height:100px;
-border:1px solid orange;
-}
-</style>
-</head>
-<body>
-<div class="actor">
-<embed src="/actor/livetv.png" style="border-radius:50%;" onclick="livetv();"></embed>
-<embed src="/actor/punjabi.jpg" style="border-radius:50%;" onclick="punjabi();"></embed>
-<embed src="/actor/south.jpg" style="border-radius:50%;" onclick="south();"></embed>
-<embed src="/actor/bollywood.jpg" style="border-radius:50%;" onclick="bollywood();"></embed>
-<!--<embed src="/actor/bengali.jpg" style="border-radius:50%;" onclick="s();"></embed>
-<embed src="/actor/gujarati.jpg" style="border-radius:50%;" onclick="aa();"></embed>
-<embed src="/actor/marathi.jpg" style="border-radius:50%;" onclick="ntr();"></embed>-->
-</div>
-</body>
-</html>
-	  
-
-    <!--movie--><br>
-
-
-   <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sort by Year</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="/css/flex.css">
-
-    </head>
-<body>
- <select id="genere" onchange="language()" style="padding:10px; border:5px solid gold; outline:5px solid red;background-color:black; color:gold;">
-<option value="all" style="background-color:transparent; color:gold;">ALL</option>
-<option value="webseries">WEBSERIES</option>
-<option value="punjabi">PUNJABI</option>
-<option value="south">SOUTH</option>
-<option value="bollywood">BOLLYWOOD</option>
-<option value="hollywood">HOLLYWOOD</option>
-</select>
-<br><br>
-<p id="all"></p>
+   <script src="/js/upcoming.js"></script>      
+   </script>
+      <script src="/js/actors.js"></script>
+    <script src="/js/movies.js"></script>
 </body>
 <script src="/js/genere.js"></script>
 <script src="/js/punjabi.js"></script>
@@ -322,6 +210,6 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 </script>
-
   </body>
 </html>
+</script>
