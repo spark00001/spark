@@ -115,6 +115,87 @@ background-color:black;
   .prev, .next,.text {font-size: 11px}
 }
 <!--page-->
+<!--audio-->
+ body{
+                cursor:pointer;
+                background-image:url("https://spark00001.github.io/images/top-rated-bg.jpg");
+                background-repeat:no-repeat;
+                background-size:100% 100%;
+            }
+            #song{
+                border:2px solid gold;
+                border-radius:20px;
+                height:75px;
+                width:auto;
+            }
+            #mtitle{
+                color:white;
+                text-align:center;
+            }
+            .music{
+                width:70px;
+                height:70px;
+                border-radius:50%;
+            }
+            #music-circle{
+              width:70px;
+              height:70px;
+              border-radius:50%;
+              animation:rotates 2s linear infinite;
+}
+            @keyframes rotates{
+            from{transform:rotate(0deg);}
+             to{transform:rotate(360deg);}
+            }
+                        #terimeripremkahani-circle{
+              width:70px;
+              height:70px;
+              border-radius:50%;
+              animation:terimeripremkahani 2s linear infinite;
+}
+            @keyframes terimeripremkahani{
+            from{transform:rotate(0deg);}
+             to{transform:rotate(360deg);}
+            }
+            .button-container{
+padding:30px;
+display:;
+}
+.play-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.play-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.pause-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.pause-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#inputaudio{
+    height:40px;
+    background-color:transparent;
+    color:gold;
+    width:100%;
+}
 </style>
   </head>
   <body>
@@ -133,9 +214,44 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
 	  
     <p id="srchs"></p>
+        <p id='spark'></p>
+        <p id="songsrch"></p>
+    <p id="audio"></p>
     <p id='mainhub'></p>
-	
-		<script src="/js/indexview.js"></script>
+	<script>
+    document.getElementById("spark").innerHTML="<table style=' width:100%;padding: 10px 120px;border:1px solid gold;'><tr><td style='width:auto;padding:10px;' onclick='spark()'>HOME</td><td></td><td style='width:auto;padding:10px;' onclick='music()'>AUDIO</td></tr></table>";
+     function music(){
+      document.getElementById("songsrch").innerHTML="<br><input id='inputaudio' onkeyup='songs()'' type='text' placeholder='Search songs...'><hr><br>";
+     document.getElementById("audio").innerHTML="<div id='song' id='play1'><table onclick='ayekhuda()'><tr><td><p id='titleimg'><img src='https://i.ytimg.com/vi/v0biEkJ9Uv8/sddefault.jpg' class='music'></p></td><td><p id='mtitle'>AYE KHUDA</p></td><td><p id='ayekhuda_button'></p></td></tr></table></div><br><div id='song' id='terimeripremkahani'><table onclick='terimeripremkahani()'><tr><td><p id='titleimg'><img src='https://i1.sndcdn.com/artworks-000105449528-hgc39r-t500x500.jpg' class='music'></p></td><td><p id='mtitle'>TERI MERI PREM KAHANI</p></td><td><p id='terimeripremkahani_button'></p></td></tr></table></div>";
+     document.getElementById("mainhub").style.display="none";
+    }
+    function spark(){
+      location.reload();
+    }
+        function songs(){
+        var takesong = document.getElementById("inputaudio").value;
+        if(takesong.toLowerCase() == "aye khuda"){
+            document.getElementById("audio").innerHTML="<div id='song' id='play1'><table onclick='ayekhuda()'><tr><td><p id='titleimg'><img src='https://i.ytimg.com/vi/v0biEkJ9Uv8/sddefault.jpg' class='music'></p></td><td><p id='mtitle'>AYE KHUDA</p></td><td><p id='ayekhuda_button'></p></td></tr></table></div>";
+        }
+        if(takesong.toLowerCase() == "murder2"){
+            document.getElementById("audio").innerHTML="<div id='song' id='play1'><table onclick='ayekhuda()'><tr><td><p id='titleimg'><img src='https://i.ytimg.com/vi/v0biEkJ9Uv8/sddefault.jpg' class='music'></p></td><td><p id='mtitle'>AYE KHUDA</p></td><td><p id='ayekhuda_button'></p></td></tr></table></div>";
+        }
+        if(takesong.toLowerCase() == "teri meri prem kahani"){
+            document.getElementById("audio").innerHTML="<div id='song' id='terimeripremkahani'><table onclick='terimeripremkahani()'><tr><td><p id='titleimg'><img src='https://i1.sndcdn.com/artworks-000105449528-hgc39r-t500x500.jpg' class='music'></p></td><td><p id='mtitle'>TERI MERI PREM KAHANI</p></td><td><p id='terimeripremkahani_button'></p></td></tr></table></div>";
+        }
+        if(takesong.toLowerCase() == "bodyguard"){
+            document.getElementById("audio").innerHTML="<div id='song' id='terimeripremkahani'><table onclick='terimeripremkahani()'><tr><td><p id='titleimg'><img src='https://i1.sndcdn.com/artworks-000105449528-hgc39r-t500x500.jpg' class='music'></p></td><td><p id='mtitle'>TERI MERI PREM KAHANI</p></td><td><p id='terimeripremkahani_button'></p></td></tr></table></div>";
+        }
+        document.getElementById("mainhub").style.display="none";
+        }
+        function ayekhuda(){
+            location.assign("/audio/ayekhuda.html");
+        }
+        function terimeripremkahani(){
+            location.assign("/audio/terimeripremkahani.html");
+        }
+    </script>
+		<script src="https://spark00001.github.io/js/indexview.js"></script>
 		<script src="/js/search.js"></script>
 		<script src="/js/reset.js"></script>
 	<script src="/js/series.js"></script>
@@ -148,10 +264,10 @@ s0.parentNode.insertBefore(s1,s0);
    <script src="/js/upcoming.js"></script>      
    </script>
       <script src="/js/actors.js"></script>
-    <script src="/js/movies.js"></script>
+    <script src="https://spark00001.github.io/js/movies.js"></script>
 </body>
-<script src="/js/genere.js"></script>
-<script src="/js/shortfilms.js"></script>
+<script src="https://spark00001.github.io/js/genere.js"></script>
+<script src="https://spark00001.github.io/js/shortfilms.js"></script>
 <script src="/js/punjabi.js"></script>
 <script src="/js/webseries.js"></script>
 <script src="/js/bollywood.js"></script>
