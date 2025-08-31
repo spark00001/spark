@@ -16,6 +16,9 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+	function aaina(){
+location.assign("/spark/aaina.html");
+}
 function head_over_heels(){
 location.assign("/spark/head_over_heels.html");
 }
