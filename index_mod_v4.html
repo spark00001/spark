@@ -1,0 +1,518 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <meta name="viewport" content="width=device-width, initial-scale=-1" />
+    <title>SPARK</title>
+    <link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16">
+    <!--- google font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"   />
+
+    <!-- Fontawesome Link for Icons -->
+    <link
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+<style>
+body {font-family: Verdana, sans-serif; margin:0; background-color: #0a0f0f;
+}
+.mySlides {display: none}
+img {vertical-align: middle;width:99%;height:;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 500px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 35%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+color:gold;
+background-color:black;
+
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+color:gold;
+background-color:black;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 450px;
+  width: 92%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+<!--page-->
+<!--audio-->
+ body {font-family: Verdana, sans-serif; margin:0; background-color: #0a0f0f;
+}
+.mySlides {display: none}
+img {vertical-align: middle;width:99%;height:;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 500px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+color:gold;
+background-color:black;
+
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+color:gold;
+background-color:black;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+body {font-family: Verdana, sans-serif; margin:0; background-color: #0a0f0f;
+}
+.mySlides {display: none}
+img {vertical-align: middle;width:99%;height:;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 500px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 35%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+color:gold;
+background-color:black;
+
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+color:gold;
+background-color:black;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 450px;
+  width: 92%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+<!--page-->
+<!--audio-->
+ body{
+                cursor:pointer;
+                background-image:url("https://spark00001.github.io/images/top-rated-bg.jpg");
+                background-repeat:no-repeat;
+                background-size:100% 100%;
+            }
+            #song{
+                border:2px solid gold;
+                border-radius:20px;
+                height:75px;
+                width:auto;
+            }
+            #mtitle{
+                color:white;
+                text-align:center;
+            }
+            .music{
+                width:70px;
+                height:70px;
+                border-radius:50%;
+            }
+            #music-circle{
+              width:70px;
+              height:70px;
+              border-radius:50%;
+              animation:rotates 2s linear infinite;
+}
+            @keyframes rotates{
+            from{transform:rotate(0deg);}
+             to{transform:rotate(360deg);}
+            }
+                        #terimeripremkahani-circle{
+              width:70px;
+              height:70px;
+              border-radius:50%;
+              animation:terimeripremkahani 2s linear infinite;
+}
+            @keyframes terimeripremkahani{
+            from{transform:rotate(0deg);}
+             to{transform:rotate(360deg);}
+            }
+            .button-container{
+padding:30px;
+display:;
+}
+.play-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.play-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.pause-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.pause-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#inputaudio{
+    height:40px;
+    background-color:transparent;
+    color:gold;
+    width:100%;
+}
+</style>
+	  <!--download link-->
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6867a04409adc5190b78731a/1ivack3s7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+	  
+    <p id="srchs"></p>
+        <p id='spark'></p>
+        <p id="songsrch"></p>
+    <p id="audio"></p>
+    <p id='mainhub'></p>
+	<script>
+    document.getElementById("spark").innerHTML="<table style=' width:100%;padding: 10px 120px;border:1px solid gold;'><tr><td style='width:auto;padding:10px;' onclick='spark()'>HOME</td><td></td><td style='width:auto;padding:10px;' onclick='music()'>AUDIO</td></tr></table>";
+     function music(){
+      document.getElementById("songsrch").innerHTML="<br><input id='inputaudio' onkeyup='songs()' type='text' placeholder='Search songs...'><hr><br>";
+     document.getElementById("audio").innerHTML="<div id='song' id='play1'><table><tr><td><p id='titleimg' onclick='ayekhuda()'><img src='https://i.ytimg.com/vi/v0biEkJ9Uv8/sddefault.jpg' class='music'></p></td><td><p id='mtitle' onclick='ayekhuda()'>AYE KHUDA</p></td><td><p id='ayekhuda_button'></p></td><td onclick='d_ayekhuda()'><i class='fa fa-download' style='font-size:px;background-color:gold;'></i>DOWNLOAD</td></tr></table></div><br><div id='song' id='terimeripremkahani'><table><tr><td><p id='titleimg'  onclick='terimeripremkahani()'><img src='https://i1.sndcdn.com/artworks-000105449528-hgc39r-t500x500.jpg' class='music'></p></td><td><p id='mtitle'  onclick='terimeripremkahani()'>TERI MERI PREM KAHANI</p></td><td><p id='terimeripremkahani_button'></p></td><td onclick='d_terimeripremkahani()'><i class='fa fa-download' style='font-size:px;background-color:gold;'></i>DOWNLOAD</td></tr></table></div>";
+     document.getElementById("mainhub").style.display="none";
+    }
+    function spark(){
+      location.reload();
+    }
+        function songs(){
+        var takesong = document.getElementById("inputaudio").value;
+        if(takesong.toLowerCase() == "aye khuda"){
+            document.getElementById("audio").innerHTML="<div id='song' id='play1'><table><tr><td><p id='titleimg' onclick='ayekhuda()'><img src='https://i.ytimg.com/vi/v0biEkJ9Uv8/sddefault.jpg' class='music'></p></td><td><p id='mtitle' onclick='ayekhuda()'>AYE KHUDA</p></td><td><p id='ayekhuda_button'></p></td><td onclick='d_ayekhuda()'><i class='fa fa-download' style='font-size:px;background-color:gold;'></i>DOWNLOAD</td></tr></table></div>";
+        }
+        if(takesong.toLowerCase() == "murder2"){
+            document.getElementById("audio").innerHTML="<div id='song' id='play1'><table><tr><td><p id='titleimg' onclick='ayekhuda()'><img src='https://i.ytimg.com/vi/v0biEkJ9Uv8/sddefault.jpg' class='music'></p></td><td><p id='mtitle' onclick='ayekhuda()'>AYE KHUDA</p></td><td><p id='ayekhuda_button'></p></td><td onclick='d_ayekhuda()'><i class='fa fa-download' style='font-size:px;background-color:gold;'></i>DOWNLOAD</td></tr></table></div>";
+        }
+        if(takesong.toLowerCase() == "teri meri prem kahani"){
+            document.getElementById("audio").innerHTML="<div id='song' id='terimeripremkahani'><table><tr><td><p id='titleimg' onclick='terimeripremkahani()'><img src='https://i1.sndcdn.com/artworks-000105449528-hgc39r-t500x500.jpg' class='music'></p></td><td><p id='mtitle' onclick='terimeripremkahani()'>TERI MERI PREM KAHANI</p></td><td><p id='terimeripremkahani_button'></p></td><td onclick='d_terimeripremkahani()'><i class='fa fa-download' style='font-size:px;background-color:gold;'></i>DOWNLOAD</td></tr></table></div>";
+        }
+        if(takesong.toLowerCase() == "bodyguard"){
+            document.getElementById("audio").innerHTML="<div id='song' id='terimeripremkahani'><table><tr><td><p id='titleimg' onclick='terimeripremkahani()'><img src='https://i1.sndcdn.com/artworks-000105449528-hgc39r-t500x500.jpg' class='music'></p></td><td><p id='mtitle' onclick='terimeripremkahani()'>TERI MERI PREM KAHANI</p></td><td><p id='terimeripremkahani_button'></p></td><td onclick='d_terimeripremkahani()'><i class='fa fa-download' style='font-size:px;background-color:gold;'></i>DOWNLOAD</td></tr></table></div>";
+        }
+        document.getElementById("mainhub").style.display="none";
+        }
+        function ayekhuda(){
+            location.assign("/audio/ayekhuda.html");
+        }
+        function terimeripremkahani(){
+            location.assign("/audio/terimeripremkahani.html");
+        }
+		function d_ayekhuda(){
+			location.assign("https://github.com/spark00001/spark/raw/refs/heads/main/Murder%202%20Aye%20Khuda%20Video%20With%20Lyrics%20Emraan%20Hashmi,%20Jacqueline%20Fernandez.mp3");
+		}
+		function d_terimeripremkahani(){
+			location.assign("https://github.com/spark00001/hindi-music/raw/refs/heads/main/Teri%20Meri.mp3");
+		}
+    </script>
+		<script src="https://spark00001.github.io/js/indexview.js"></script>
+		<script src="/js/search.js"></script>
+		<script src="/js/reset.js"></script>
+	<script src="/js/series.js"></script>
+	     <script src="/js/loading.js"></script>
+      <script src="/js/navbars.js"></script>
+ 
+   <script src="/js/notification.js"></script>  
+<script src="/js/search_retrieve.js"></script>
+<script src="/spark/search.js"></script>
+   <script src="/js/upcoming.js"></script>      
+   </script>
+      <script src="/js/actors.js"></script>
+    <script src="https://spark00001.github.io/js/movies.js"></script>
+</body>
+<script src="https://spark00001.github.io/js/genere.js"></script>
+<script src="https://spark00001.github.io/js/shortfilms.js"></script>
+<script src="/js/punjabi.js"></script>
+<script src="/js/webseries.js"></script>
+<script src="/js/bollywood.js"></script>
+<script src="/js/south.js"></script>
+<script src="/js/hollywood.js"></script>
+<script src="/spark/search.js"></script>
+</html>
+
+
+	  <BR><BR>
+    <!-- tvs series section starts  -->
+        <!-- footer section start -->
+<p id="foot"></p>
+       <!-- <button class="back-to-top"><i class="fa-solid fa-chevron-up"></i></button>-->
+<script src="/js/footer.js"></script>
+<script src="/js/language.js"></script>
+	  <script src="/spark/search.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/navbar.js"></script>
+<script>
+function log(){
+location.assign("/spark/login.html");
+}
+function home(){
+location.assign("/spark/index.html");
+}
+function mov(){
+location.assign("/spark/movie.html");
+}
+
+</script>
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+  </body>
+</html>
+</script>
