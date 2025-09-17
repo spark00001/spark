@@ -16,6 +16,12 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+function vyarth(){
+location.assign("/spark/vyarth.html");
+}
+	function thebrokentable(){
+location.assign("/spark/thebrokentable.html");
+}
 	function aaina(){
 location.assign("/spark/aaina.html");
 }
