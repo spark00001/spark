@@ -16,6 +16,9 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+	function thedaysoftafree(){
+location.assign("/spark/thedaysoftafree.html");
+}
 function vyarth(){
 location.assign("/spark/vyarth.html");
 }
