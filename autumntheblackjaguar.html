@@ -1,0 +1,151 @@
+ <html>
+<head>
+<title>AUTUMN THE BLACK JAGUAR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+*{
+margin:0px;
+box-sizing:border-box;
+cursor:pointer;
+}
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+}
+.movie-container{
+width:100%;
+max-width:800px;
+padding: 20px;
+text-align:center;
+}
+.poster{
+width:150px;
+height:200px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+position:relative;
+top:0px;
+}
+.poster:hover{
+width:190px;
+height:240px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow:box-shadow: 0 4px 10px gold;
+position:relative;
+top:0px;
+}
+.button-container{
+padding:30px;
+display:;
+}
+.watch-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.watch-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.trailer-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.trailer-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.story{
+justify-item:center;
+padding:10px;
+align-text:center;
+}
+.story:hover{
+justify-item:center;
+padding:10px;
+align-text:center;
+background-image: linear-gradient(to right, #434343 0%, black 100%);
+color:gold;
+}
+.story-title{
+align-text:center;
+display:block;
+padding:10px;
+}
+#campus_diaries_viewmore{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#campus_diaries_viewmore:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#campus_diaries_viewless{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#campus_diaries_viewless:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+</style>
+<link href="/css/flex.css" rel="stylesheet">
+</head>
+<body>
+<div class="movie-container">
+<p id="autumntheblackjaguar_main"></p>
+<div class="button-container">
+<button onclick="autumntheblackjaguar_watch()" 
+ class="watch-button">WATCH</button>
+<button onclick="autumntheblackjaguar_trailer()" 
+ class="trailer-button">TRAILER</button>
+<p id="autumntheblackjaguar_story"></p>
+</div>
+</div>
+<br>
+<p id="shortfilms"></p>
+</body>
+<script src="/js/hollywood.js"></script>
+<script>
+    document.getElementById("autumntheblackjaguar_main").innerHTML="<img class='poster' src='/images/autumntheblackjaguar.png' />"; document.getElementById("autumntheblackjaguar_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
+    function viewmore(){
+     document.getElementById("autumntheblackjaguar_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope. When a tragic event forces her to leave Hope for New York City, she dreams of going back to the rainforest and her friend. That opportunity soon comes when Autumn decides to return to the Amazon to save her beloved jaguar from animal traffickers who threaten her childhood village.</div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
+     function viewless(){
+     document.getElementById("autumntheblackjaguar_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
+    function autumntheblackjaguar_trailer(){
+     document.getElementById("autumntheblackjaguar_main").innerHTML="<!--<iframe class='player' src='https://www.youtube.com/embed/xstyrwcS3ys?rel=0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope.picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>-->"; }
+     function autumntheblackjaguar_watch(){ 
+ document.getElementById("autumntheblackjaguar_main").innerHTML="<!--<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>-->"; }
+</script>
+</html>
