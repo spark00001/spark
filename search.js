@@ -16,6 +16,9 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+	function autumntheblackjaguar(){
+location.assign("/spark/autumntheblackjaguar.html");
+}
 	function thedaysoftafree(){
 location.assign("/spark/thedaysoftafree.html");
 }
