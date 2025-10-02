@@ -1,0 +1,285 @@
+<html>
+<head>
+    <title>KABHI MAIN KABHI TUM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+*{
+margin:0px;
+box-sizing:border-box;
+cursor:pointer;
+}
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+}
+.movie-container{
+width:100%;
+max-width:800px;
+padding: 20px;
+text-align:center;
+}
+.poster{
+width:150px;
+height:200px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+position:relative;
+top:0px;
+}
+.poster:hover{
+width:190px;
+height:240px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow:box-shadow: 0 4px 10px gold;
+position:relative;
+top:0px;
+}
+.button-container{
+padding:30px;
+display:;
+}
+.watch-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.watch-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.trailer-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.trailer-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.story{
+justify-item:center;
+padding:10px;
+align-text:center;
+}
+.story:hover{
+justify-item:center;
+padding:10px;
+align-text:center;
+background-image: linear-gradient(to right, #434343 0%, black 100%);
+color:gold;
+}
+.story-title{
+align-text:center;
+display:block;
+padding:10px;
+}
+#campus_diaries_viewmore{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#campus_diaries_viewmore:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#campus_diaries_viewless{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#campus_diaries_viewless:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+    <br>
+<div class="movie-container">
+<p id="kabhimainkabhitum_main"></p>
+<br>
+<p id="title"></p>
+<br>
+<div class="button-container">
+<p id="episode"><button onclick="s1ep1()" 
+ class="watch-button">WATCH</button></p>
+<p id="prevepisode"><button onclick="kabhimainkabhitum_trailer()" 
+ class="trailer-button">TRAILER</button></p>
+<p id="kabhimainkabhitum_story"></p>
+  <p id="developer"></p>
+</div>
+</div>
+</body>
+<script>
+    document.getElementById("kabhimainkabhitum_main").innerHTML="<img class='poster' src='/pakdrama/kabhimainkabhitum.png' />"; document.getElementById("kabhimainkabhitum_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;The story begins with the imminent wedding of Sharjeena and Adeel. Adeel, a hardworking but materialistic man, is more interested in career advancement than love...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
+    function viewmore(){
+     document.getElementById("kabhimainkabhitum_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;The story begins with the imminent wedding of Sharjeena and Adeel. Adeel, a hardworking but materialistic man, is more interested in career advancement than love. His wealthy boss, Rubab, confesses her love for him, prompting Adeel to call off his wedding to Sharjeena to marry Rubab for her connections and wealth. <br>A Marriage of Convenience: Left heartbroken and determined not to be pitied, Sharjeena proposes to Mustafa, Adeel's younger brother. Mustafa is a laid-back, unemployed, but happy-go-lucky individual who is often overshadowed by Adeel.<br>Evolving Relationship: Their marriage, born out of necessity and social obligation, gradually blossoms into a real romance. They work through personality differences, financial struggles, and the pain of past heartbreaks to build a new life together, eventually developing deep feelings for each other. </div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
+     function viewless(){
+     document.getElementById("kabhimainkabhitum_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;The story begins with the imminent wedding of Sharjeena and Adeel. Adeel, a hardworking but materialistic man, is more interested in career advancement than love...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
+    function kabhimainkabhitum_trailer(){
+     document.getElementById("kabhimainkabhitum_main").innerHTML="<!--<iframe class='player' src='#' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>-->not found"; }
+     
+     <!-- episodes -->
+     
+     
+     function s1ep16(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep17()' class='watch-button'>WATCH EP17</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep15()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-16</p>";
+ }
+     
+     
+     
+     
+     function s1ep15(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep16()' class='watch-button'>WATCH EP16</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep14()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-15</p>";
+ }
+     
+     
+     
+     
+     
+     function s1ep14(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep15()' class='watch-button'>WATCH EP15</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep13()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-14</p>";
+ }
+     
+     
+     
+     
+     
+     function s1ep13(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep14()' class='watch-button'>WATCH EP14</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep12()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-13</p>";
+ }
+     
+     
+     
+     
+     function s1ep12(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep13()' class='watch-button'>WATCH EP13</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep11()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-12</p>";
+ }
+     
+     
+     
+     function s1ep11(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep12()' class='watch-button'>WATCH EP12</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep10()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-11</p>";
+ }
+     
+     
+     
+     function s1ep10(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep11()' class='watch-button'>WATCH EP11</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep9()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-10</p>";
+ }
+     
+     
+     function s1ep9(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep10()' class='watch-button'>WATCH EP10</button></p>";
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep8()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-9</p>";
+  }
+     
+     
+     function s1ep8(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep9()' class='watch-button'>WATCH EP9</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep7()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-8</p>";
+ }
+     
+     
+     function s1ep7(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep8()' class='watch-button'>WATCH EP8</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep6()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-7</p>";
+ }
+     
+     function s1ep6(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep7()' class='watch-button'>WATCH EP7</button></p>";
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep5()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-6</p>";
+  }
+     
+     function s1ep5(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/18Qh66GCX-bSZ-GXVb-8MXY6YSjUMVFXR/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep6()' class='watch-button'>WATCH EP6</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep4()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-5</p>";
+ }
+     
+     function s1ep4(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1_w7NJ3IaGMIgoDlgoyHn_POls8iQyoSD/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep5()' class='watch-button'>WATCH EP5</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep3()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-4</p>";
+ }
+     
+     function s1ep1(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1f18jzLa6_CufxQ1Vleg42wn5KCBX6XFA/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep2()' class='watch-button'>WATCH EP2</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep34()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-1</p>";
+ }
+ function s1ep2(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1rJdBlrA_kNWrLxOtSLP1xTEBJZk9io5J/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep3()' class='watch-button'>WATCH EP3</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep1()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-2</p>";
+ }
+ function s1ep3(){ 
+ document.getElementById("kabhimainkabhitum_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1GAwzBdWG0ERi9_t06uwZ6RImxYMj0WhR/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep4()' class='watch-button'>WATCH EP4</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep2()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-3</p>";
+ }
+</script>
+</html>
