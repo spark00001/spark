@@ -2,6 +2,7 @@
 <head>
     <title>KABHI MAIN KABHI TUM</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/flex.css">
 <style>
 *{
 margin:0px;
@@ -135,10 +136,11 @@ box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 <p id="prevepisode"><button onclick="kabhimainkabhitum_trailer()" 
  class="trailer-button">TRAILER</button></p>
 <p id="kabhimainkabhitum_story"></p>
-  <p id="developer"></p>
 </div>
 </div>
+    <p id="pakdrama"></p>
 </body>
+    <script src="/js/pakdrama.js"></script>
 <script>
     document.getElementById("kabhimainkabhitum_main").innerHTML="<img class='poster' src='/pakdrama/kabhimainkabhitum.png' />"; document.getElementById("kabhimainkabhitum_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;The story begins with the imminent wedding of Sharjeena and Adeel. Adeel, a hardworking but materialistic man, is more interested in career advancement than love...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
     function viewmore(){
