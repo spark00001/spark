@@ -1,12 +1,12 @@
 {
-  "name": "Spark streaming services",
+  "name": "Spark",
   "short_name": "Spark",
-  "description": "A simple and beautiful habit tracker to help you visualize progress and stay motivated.",
+  "description": "All the tools for managing your tasks, your way.",
   "start_url": "https://spark00001.github.io/spark",
   "display": "standalone",
-  "background_color": "#121212",
-  "theme_color": "#f59e0b",
-  "orientation": "portrait",
+  "background_color": "#111827",
+  "theme_color": "#080808",
+  "orientation": "any",
   "icons": [
     {
       "src": "/icon-192x192.png",
