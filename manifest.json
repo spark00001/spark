@@ -1,11 +1,11 @@
 {
   "name": "Spark",
-  "short_name": "Spark",
-  "description": "All the tools for managing your tasks, your way.",
+  "short_name": "SPARK",
+  "description": "An open-source initiative to help students with their projects and research work.",
   "start_url": "https://spark00001.github.io/spark",
   "display": "standalone",
-  "background_color": "#111827",
-  "theme_color": "#080808",
+  "background_color": "#1a1a1a",
+  "theme_color": "#ffaa00",
   "orientation": "any",
   "icons": [
     {
