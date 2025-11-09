@@ -1,0 +1,163 @@
+ <html>
+<head>
+<title>karma</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+ 
+*{
+margin:0px;
+box-sizing:border-box;
+cursor:pointer;
+}
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+}
+.movie-container{
+width:100%;
+max-width:800px;
+padding: 20px;
+text-align:center;
+}
+.poster{
+width:150px;
+height:200px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+position:relative;
+top:0px;
+}
+.poster:hover{
+width:190px;
+height:240px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow:box-shadow: 0 4px 10px gold;
+position:relative;
+top:0px;
+}
+.button-container{
+padding:30px;
+display:;
+}
+.watch-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.watch-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.trailer-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.trailer-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.story{
+justify-item:center;
+padding:10px;
+align-text:center;
+}
+.story:hover{
+justify-item:center;
+padding:10px;
+align-text:center;
+background-image: linear-gradient(to right, #434343 0%, black 100%);
+color:gold;
+}
+.story-title{
+align-text:center;
+display:block;
+padding:10px;
+}
+#karma_viewmore{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#karma_viewmore:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#karma_viewless{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#karma_viewless:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+</style>
+<link href="/css/flex.css" rel="stylesheet">
+</head>
+<body>
+<div class="movie-container">
+<p id="karma_main"></p>
+<div class="button-container">
+<button onclick="karma_watch()" 
+ class="watch-button">WATCH</button>
+<button onclick="karma_trailer()" 
+ class="trailer-button">TRAILER</button>
+<p id="karma_story"></p>
+</div>
+ <button onclick="karma_download()" 
+ class="trailer-button">DOWNLOAD</button>
+</div>
+<br>
+<p id="disclaimer"></p>
+<p id="ollywood"></p>
+</body>
+  <script src="/js/contact.js"></script>
+ <script src="/spark/search.js"></script>
+<script src="/js/ollywood.js"></script>
+<script src="/js/disclaimer.js"></script>
+
+<script>
+    document.getElementById("karma_main").innerHTML="<img class='poster' src='/ollywood/karma.png' />"; document.getElementById("karma_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp; a conspiracy thriller about Special Investigation Officer Amar Patnaik who gets stranded in a desolate graveyard, where he uncovers chilling secrets and finds himself caught in a story of fate and vengeance...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
+    function viewmore(){
+     document.getElementById("karma_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;a conspiracy thriller about Special Investigation Officer Amar Patnaik who gets stranded in a desolate graveyard, where he uncovers chilling secrets and finds himself caught in a story of fate and vengeance.</div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
+     function viewless(){
+     document.getElementById("karma_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;a conspiracy thriller about Special Investigation Officer Amar Patnaik who gets stranded in a desolate graveyard, where he uncovers chilling secrets and finds himself caught in a story of fate and vengeance...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
+    function karma_trailer(){
+     document.getElementById("karma_main").innerHTML="<iframe class='player' src='https://www.youtube.com/PUzMrb3aaPg?rel=0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope.picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
+     function karma_watch(){ 
+ document.getElementById("karma_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1UILEe0fFsJAHeuA-i_eN7S5LUw7gNyHi/preview' title='SPARK player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
+function karma_download(){
+ location.assign("https://drive.google.com/file/d/1ao45aAGoCRDrJgQnOSWMI4Olvv_Fb0H4/preview");
+}
+</script>
+</html>
