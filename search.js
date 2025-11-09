@@ -16,7 +16,7 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
-	function dhanak(){
+	function karma(){
 location.assign("/spark/karma.html");
 }
 	function dhanak(){
