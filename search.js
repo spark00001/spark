@@ -16,6 +16,12 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 
 <!-- url -->
+	unction suryathesoldier(){
+location.assign("/spark/suryathesoldier.html");
+}
+	function geetagovinda(){
+location.assign("/spark/geetagovinda.html");
+}
 	function kerek(){
 location.assign("/spark/kerek.html");
 }
