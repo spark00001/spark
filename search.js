@@ -12,6 +12,27 @@
     });
 });*/
 
+document.getElementById('searchInput').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const items = document.querySelectorAll('.item');
+            const noResults = document.getElementById('noResults');
+            let hasVisibleItems = false;
+
+            items.forEach(item => {
+                // Get text from the span
+                const text = item.querySelector('span').textContent.toLowerCase();
+                
+                if (text.includes(filter)) {
+                    item.classList.remove('hidden');
+                    hasVisibleItems = true;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            // Show "No Results" message if nothing matches
+            noResults.style.display = hasVisibleItems ? 'none' : 'block';
+        });
 
 
 
