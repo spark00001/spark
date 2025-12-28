@@ -1,4 +1,4 @@
-document.getElementById('searchInput').addEventListener('keyup', function() {
+/*document.getElementById('searchInput').addEventListener('keyup', function() {
     const filter = this.value.toLowerCase();
     const items = document.querySelectorAll('#itemList .item');
 
@@ -10,7 +10,7 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
             item.classList.add('hidden');
         }
     });
-});
+});*/
 
 
 
