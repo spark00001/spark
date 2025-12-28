@@ -37,7 +37,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
-	unction suryathesoldier(){
+	function suryathesoldier(){
 location.assign("/spark/suryathesoldier.html");
 }
 	function geetagovinda(){
