@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
+	function honeymoonsehatya(){
+location.assign("/spark/honeymoonsehatya.html");
+}
 	function boubutubhuta(){
 location.assign("/spark/boubutubhuta.html");
 }
