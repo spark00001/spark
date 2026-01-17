@@ -1,0 +1,189 @@
+<html>
+<head>
+    <title>HONEYMOON SE HATYA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/flex.css">
+<style>
+*{
+margin:0px;
+box-sizing:border-box;
+cursor:pointer;
+}
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+}
+.movie-container{
+width:100%;
+max-width:800px;
+padding: 20px;
+text-align:center;
+}
+.poster{
+width:150px;
+height:200px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+position:relative;
+top:0px;
+}
+.poster:hover{
+width:190px;
+height:240px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow:box-shadow: 0 4px 10px gold;
+position:relative;
+top:0px;
+}
+.button-container{
+padding:30px;
+display:;
+}
+.watch-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.watch-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.trailer-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.trailer-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.story{
+justify-item:center;
+padding:10px;
+align-text:center;
+}
+.story:hover{
+justify-item:center;
+padding:10px;
+align-text:center;
+background-image: linear-gradient(to right, #434343 0%, black 100%);
+color:gold;
+}
+.story-title{
+align-text:center;
+display:block;
+padding:10px;
+}
+#honeymoonsehatya_viewmore{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#honeymoonsehatya_viewmore:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#honeymoonsehatya_viewless{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#honeymoonsehatya_viewless:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+    <br>
+<div class="movie-container">
+<p id="honeymoonsehatya_main"></p>
+<br>
+<p id="title"></p>
+<br>
+<div class="button-container">
+<p id="episode"><button onclick="s1ep1()" 
+ class="watch-button">WATCH</button></p>
+<p id="prevepisode"><button onclick="honeymoonsehatya_trailer()" 
+ class="trailer-button">TRAILER</button></p>
+<p id="honeymoonsehatya_story"></p>
+</div>
+</div>
+    <p id="pakdrama"></p>
+</body>
+    <script src="/js/webseries.js"></script>
+    <script src="/spark/search.js"></script>
+<script>
+    document.getElementById("honeymoonsehatya_main").innerHTML="<img class='poster' src='/images/honeymoonsehatya.png' />"; document.getElementById("honeymoonsehatya_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;The story of Honeymoon Murder revolves around the mysterious murder of Raja Raghuvanshi and...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
+    function viewmore(){
+     document.getElementById("honeymoonsehatya_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;The story of Honeymoon Murder revolves around the mysterious murder of Raja Raghuvanshi and Sonam Raghuvanshi in Meghalaya, India, where the wife Sonam was accused of hiring a contract killer to kill her husband and the incident became the subject of a Zee5 documentary series, which shows how this incident, which took place on the honeymoon of a newly married couple, exposes the dark side of relationships. </div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
+     function viewless(){
+     document.getElementById("honeymoonsehatya_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;The story of Honeymoon Murder revolves around the mysterious murder of Raja Raghuvanshi and...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
+    function honeymoonsehatya_trailer(){
+     document.getElementById("honeymoonsehatya_main").innerHTML="<iframe class='player' src='https://www.youtube.com/embed/GK8U1HSyASQ?rel=0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
+     
+     <!-- episodes -->
+     
+     function s1ep5(){ 
+ document.getElementById("honeymoonsehatya_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1sjXZeaaV2gJOdQ5Pu1UOw8FVLXp1Cvj6/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep6()' class='watch-button'>WATCH EP6</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep4()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-5</p>";
+ }
+     
+     function s1ep4(){ 
+ document.getElementById("honeymoonsehatya_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1SjhC1ZYXUWG5t0UycwaEnuaYhBqxL5-V/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep5()' class='watch-button'>WATCH EP5</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep3()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-4</p>";
+ }
+     
+     function s1ep1(){ 
+ document.getElementById("honeymoonsehatya_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1DNJ1qSH4oMVpqLj_A5UJc6SUPCSA0HoM/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep2()' class='watch-button'>WATCH EP2</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep34()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-1</p>";
+ }
+ function s1ep2(){ 
+ document.getElementById("honeymoonsehatya_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1UbDBFAfhDJ759Z9nihYjTu_2RH8Nede0/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep3()' class='watch-button'>WATCH EP3</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep1()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-2</p>";
+ }
+ function s1ep3(){ 
+ document.getElementById("honeymoonsehatya_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/1wQIdVjLXesf-rFvbLBlCKQ2kRBR5rBk7/preview' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep4()' class='watch-button'>WATCH EP4</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep2()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-3</p>";
+ }
+</script>
+</html>
