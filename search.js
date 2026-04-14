@@ -37,7 +37,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
-	function honeymoonsehatya(){
+	function madeinkorea(){
 location.assign("/spark/madeinkorea.html");
 }
 	function honeymoonsehatya(){
