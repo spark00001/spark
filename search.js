@@ -38,6 +38,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 <!-- url -->
 	function honeymoonsehatya(){
+location.assign("/spark/madeinkorea.html");
+}
+	function honeymoonsehatya(){
 location.assign("/spark/honeymoonsehatya.html");
 }
 	function boubutubhuta(){
