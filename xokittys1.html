@@ -1,0 +1,220 @@
+<html>
+<head>
+    <title>XO KITTY SEASON 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/flex.css">
+<style>
+*{
+margin:0px;
+box-sizing:border-box;
+cursor:pointer;
+}
+body{
+display:flex;
+flex-direction:column;
+align-items:center;
+background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+}
+.movie-container{
+width:100%;
+max-width:800px;
+padding: 20px;
+text-align:center;
+}
+.poster{
+width:150px;
+height:200px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+position:relative;
+top:0px;
+}
+.poster:hover{
+width:190px;
+height:240px;
+object-fit:cover;
+margin: 0 auto;
+border-radius:8px;
+box-shadow:box-shadow: 0 4px 10px gold;
+position:relative;
+top:0px;
+}
+.button-container{
+padding:30px;
+display:;
+}
+.watch-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.watch-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.trailer-button{
+padding:10px;
+width:100%;
+max-width:200px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+}
+.trailer-button:hover{
+background-color:gold;
+border:2px solid red;
+color:black;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.story{
+justify-item:center;
+padding:10px;
+align-text:center;
+}
+.story:hover{
+justify-item:center;
+padding:10px;
+align-text:center;
+background-image: linear-gradient(to right, #434343 0%, black 100%);
+color:gold;
+}
+.story-title{
+align-text:center;
+display:block;
+padding:10px;
+}
+#xokittys1_viewmore{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#xokittys1_viewmore:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#xokittys1_viewless{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+}
+#xokittys1_viewless:hover{
+padding:10px;
+border:1px solid gold;
+border-radius:20px;
+border:2px solid gold;
+background-color:black;
+color:gold;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+    <br>
+<div class="movie-container">
+<p id="xokittys1_main"></p>
+<br>
+<p id="title"></p>
+<br>
+<div class="button-container">
+<p id="episode"><button onclick="s1ep1()" 
+ class="watch-button">WATCH</button></p>
+<!--<p id="prevepisode"><button onclick="xokittys1_trailer()" class="trailer-button">TRAILER</button></p>-->
+<p id="xokittys1_story"></p>
+</div>
+</div>
+    <p id=""></p>
+</body>
+    <script src="/js/webseries.js"></script>
+    <script src="/spark/search.js"></script>
+<script>
+    document.getElementById("xokittys1_main").innerHTML="<img class='poster' src='/images/xokittys1.png' />"; document.getElementById("xokittys1_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;Kitty Song-Covey moves to South Korea to attend the Korean Independent School of Seoul (KISS), her late mother's alma mater, and to reunite with her long-distance boyfriend, Dae....<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
+    function viewmore(){
+     document.getElementById("xokittys1_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;, Kitty Song-Covey moves to South Korea to attend the Korean Independent School of Seoul (KISS), her late mother's alma mater, and to reunite with her long-distance boyfriend, Dae. However, her romantic plans are immediately complicated when she discovers Dae is in a fake relationship with Yuri, the principal's daughter, to cover for Yuri’s own secret relationship with another girl, Juliana.  </div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
+     function viewless(){
+     document.getElementById("xokittys1_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;Kitty Song-Covey moves to South Korea to attend the Korean Independent School of Seoul (KISS), her late mother's alma mater, and to reunite with her long-distance boyfriend, Dae....<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
+    function xokittys1_trailer(){
+     document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='https://www.youtube.com/embed/GK8U1HSyASQ?rel=0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
+     
+     <!-- episodes -->
+
+function s1ep10(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep1()' class='watch-button'>WATCH EP1</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep9()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-10</p>";
+ }
+
+function s1ep9(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep10()' class='watch-button'>WATCH EP10</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep8()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-9</p>";
+ }
+
+function s1ep8(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep9()' class='watch-button'>WATCH EP9</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep7()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-8</p>";
+ }
+
+function s1ep7(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep8()' class='watch-button'>WATCH EP8</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep6()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-7</p>";
+ }
+
+function s1ep6(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep7()' class='watch-button'>WATCH EP7</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep5()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-6</p>";
+ }
+     function s1ep5(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep6()' class='watch-button'>WATCH EP6</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep4()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-5</p>";
+ }    
+     function s1ep4(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep5()' class='watch-button'>WATCH EP5</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep3()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-4</p>";
+ }
+         function s1ep1(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep2()' class='watch-button'>WATCH EP2</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep34()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-1</p>";
+ }
+ function s1ep2(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep3()' class='watch-button'>WATCH EP3</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep1()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-2</p>";
+ }
+ function s1ep3(){ 
+ document.getElementById("xokittys1_main").innerHTML="<iframe class='player' src='' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
+ document.getElementById("episode").innerHTML="<p id='episode'><button onclick='s1ep4()' class='watch-button'>WATCH EP4</button></p>"; 
+ document.getElementById("prevepisode").innerHTML="<p id='episode'><button onclick='s1ep2()' class='watch-button'>PREV EPISODE</button></p>";
+ document.getElementById("title").innerHTML="<p>CURRENT: S1 EP-3</p>";
+ }
+</script>
+</html>
