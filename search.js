@@ -37,6 +37,25 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
+function xokittys1(){
+location.assign("/spark/xokittys1.html");
+}
+	function xokittys2(){
+location.assign("/spark/xokittys2.html");
+}
+	function xokittys3(){
+location.assign("/spark/xokittys3.html");
+}
+
+function chiraiyas1(){
+location.assign("/spark/chiraiyas1.html");
+}
+	function srikanth(){
+location.assign("/spark/srikanth.html");
+}
+	function BHARTHAMAHASAYULAKUWIGNYAPTHI(){
+location.assign("/spark/BHARTHAMAHASAYULAKUWIGNYAPTHI.html");
+}
 	function madeinkorea(){
 location.assign("/spark/madeinkorea.html");
 }
