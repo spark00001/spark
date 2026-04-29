@@ -37,7 +37,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
-	function xokitty(){
+	function xokittyall(){
 location.assign("/spark/xokittyallseasons.html");
 }
 function xokittys1(){
