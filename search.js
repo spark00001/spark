@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
+	function xokitty(){
+location.assign("/spark/xokittyallseasons.html");
+}
 function xokittys1(){
 location.assign("/spark/xokittys1.html");
 }
