@@ -49,8 +49,10 @@ location.assign("/spark/xokittys2.html");
 	function xokittys3(){
 location.assign("/spark/xokittys3.html");
 }
-
 function chiraiyaall(){
+location.assign("/spark/chiraiyaall.html");
+}
+function chiraiyas1(){
 location.assign("/spark/chiraiyas1.html");
 }
 	function srikanth(){
