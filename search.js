@@ -50,7 +50,7 @@ location.assign("/spark/xokittys2.html");
 location.assign("/spark/xokittys3.html");
 }
 
-function chiraiyas1(){
+function chiraiyaall(){
 location.assign("/spark/chiraiyas1.html");
 }
 	function srikanth(){
