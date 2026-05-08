@@ -72,32 +72,10 @@
     </style>
 </head>
 <body>
-    <div class="shorts-container">
-        <div class="video-item">
-            <video class="video" controls>
-                <source src="/shorts/Unke Andaz e Karam Cover Muhammad Ahsan X Music Topperss (1920 X 1080).mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="overlay">
-                <button class="like-btn"></button>
-                <button class="comment-btn"></button>
-                <button class="share-btn"></button>
-            </div>
-        </div>
-        <div class="video-item">
-            <video class="video" controls>
-                <source src="/shorts/chupa bhi na sakenge kalank kalank arijitsingh sadstatus sadsong sadromanticsongs lyrics (1920 X 1080).mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="overlay">
-                <button class="like-btn"></button>
-                <button class="comment-btn"></button>
-                <button class="share-btn"></button>
-            </div>
-        </div>
+    <div id="svids"></div>
         <!-- Add more video-item divs as needed -->
     </div>
-    <script src="script.js"></script>
+    <script src="/js/svids.js"></script>
     <script>
         const container = document.querySelector('.shorts-container');
 const videos = document.querySelectorAll('.video');
