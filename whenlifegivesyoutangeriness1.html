@@ -120,17 +120,39 @@ background-color:black;
 color:gold;
 box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
+/* General Player Styling */
 .player {
-    width: 100%;           /* Takes full width of the container */
-    aspect-ratio: 16 / 9;  /* Maintains standard widescreen video shape */
-    max-width: 800px;      /* Matches your movie-container width */
-    border-radius: 8px;
-    border: 2px solid #333;
+    width: 100%;           /* Fills the width of the phone */
+    aspect-ratio: 16 / 9;  /* Forces the correct video shape */
+    border: 0;
     display: block;
-    margin: 0 auto;        /* Centers the player horizontally */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 10px auto;     /* Centers it and adds top/bottom spacing */
+    background-color: #000; /* Prevents white flashes while loading */
 }
 
+/* Mobile Specific Fixes */
+@media screen and (max-width: 600px) {
+    .movie-container {
+        padding: 10px;    /* Less wasted space on edges of phone */
+    }
+    
+    .button-container {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px;
+        padding: 20px 10px;
+    }
+
+    .watch-button, .trailer-button {
+        max-width: 100%;  /* Buttons take full width of phone for easier tapping */
+        font-size: 16px;  /* Better for mobile eyes */
+    }
+
+    .poster {
+        width: 120px;     /* Slightly smaller poster for small screens */
+        height: auto;
+    }
+}
 </style>
 </head>
 <body>
