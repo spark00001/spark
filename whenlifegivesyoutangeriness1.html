@@ -153,6 +153,14 @@ box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         height: auto;
     }
 }
+/* Target devices with a width of 768px or less (most mobiles and tablets) */
+@media only screen and (max-width: 768px) {
+    iframe {
+        /* Adjust the height to ensure controls aren't cut off */
+        height: 350px !important; 
+        width: 100%;
+    }
+}
 </style>
 </head>
 <body>
