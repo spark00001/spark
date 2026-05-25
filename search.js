@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
+function genzs1(){
+location.assign("/spark/genzs1.html");
+}
 function whenlifegivesyoutangeriness1(){
 location.assign("/spark/whenlifegivesyoutangeriness1.html");
 }
