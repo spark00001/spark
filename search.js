@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 <!-- url -->
+function hachi(){
+location.assign("/spark/hachi2009.html");
+}
 function genz(){
 location.assign("/spark/genz.html");
 }
