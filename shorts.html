@@ -19,6 +19,7 @@
             width: 100%;
             height: 100vh;
             background-color: black;
+            overflow: hidden;
         }
 
         .shorts-container {
@@ -110,9 +111,40 @@
             transform: scale(0.92);
         }
 
+        /* Info button specific icon styling */
+        .info-btn {
+            font-size: 16px !important;
+        }
+
         /* Download specific style matching theme layout */
         .download-btn {
             background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* ================= INFO TOAST BANNER ================= */
+        .info-toast {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            right: 80px; /* Leaves clear spacing for the right actions layout overlay */
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            z-index: 20;
+            pointer-events: none;
+            border-left: 3px solid #ef5350;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .info-toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ================= TIMELINE / STREAM LINE STYLES ================= */
@@ -145,7 +177,7 @@
         }
 
         /* Progress track color fill (Webkit browsers) */
-        .timeline::-webkit-slider-runnable-track {
+        .timeline::-webkit-slider-run runnable-track {
             width: 100%;
             height: 100%;
         }
@@ -291,7 +323,10 @@
 </head>
 <body>
 
-    <div class="app-wrapper" id="svids"></div>
+    <div class="app-wrapper">
+        <div id="svids"></div>
+        <div class="info-toast" id="infoToast"></div>
+    </div>
 
     <div class="modal-backdrop" id="episodeModal">
         <div class="modal-content">
@@ -304,13 +339,14 @@
     </div>
 
     <script>
-        // 1. Render Shorts Content dynamically (Added top episode badge container)
+        // 1. Render Shorts Content dynamically (Added Info button with Unicode 'ⓘ')
         document.getElementById("svids").innerHTML = `
             <div class='shorts-container'>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-1</div>
-                    <video class='video' playsinline><source src='https://spark00001.github.io/shorts/Kings Killer Comeback - EP1.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback - EP1.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -325,6 +361,7 @@
                     <div class='episode-badge'>EP-2</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback - EP2.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -339,6 +376,7 @@
                     <div class='episode-badge'>EP-3</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP3.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -353,6 +391,7 @@
                     <div class='episode-badge'>EP-4</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP4.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -367,6 +406,7 @@
                     <div class='episode-badge'>EP-5</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP5.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -381,6 +421,7 @@
                     <div class='episode-badge'>EP-6</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP6.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -395,6 +436,7 @@
                     <div class='episode-badge'>EP-7</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP7.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -409,6 +451,7 @@
                     <div class='episode-badge'>EP-8</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP8.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -423,6 +466,7 @@
                     <div class='episode-badge'>EP-9</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP9.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -437,6 +481,7 @@
                     <div class='episode-badge'>EP-10</div>
                     <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP10.mp4' type='video/mp4'></video>
                     <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
                         <button class='comment-btn'>Chat</button>
                         <button class='list-btn' onclick="openEpisodesPopup()">List</button>
@@ -459,19 +504,24 @@
         const modal = document.getElementById('episodeModal');
         const closeModalBtn = document.getElementById('closeModal');
         const episodeGrid = document.getElementById('episodeGrid');
+        const infoToast = document.getElementById('infoToast');
         
         let currentVideoIndex = 0;
-        let isScrubbing = false; // Prevents slider fight during manual track seek operations
+        let isScrubbing = false; 
+        let toastTimeout = null;
 
         // Function to control individual play/pause actions
         function handleVideoPlayback() {
+            // Automatically close info toast on video switch
+            infoToast.classList.remove('show'); 
+            
             videos.forEach((video, index) => {
                 if (index === currentVideoIndex) {
                     video.play().catch(err => console.log("Autoplay blocked until user interaction."));
                 } else {
                     video.pause();
-                    video.currentTime = 0; // Reset video position
-                    if (timelines[index]) timelines[index].value = 0; // Reset timeline line track
+                    video.currentTime = 0; 
+                    if (timelines[index]) timelines[index].value = 0; 
                 }
             });
             updateActiveEpisodeButton();
@@ -504,24 +554,18 @@
         videos.forEach((video, index) => {
             const timeline = timelines[index];
 
-            // Update range input tracker as the video naturally plays forward
             video.addEventListener('timeupdate', () => {
                 if (!isScrubbing && video.duration) {
                     const percentage = (video.currentTime / video.duration) * 100;
                     timeline.value = percentage;
-                    
-                    // Native CSS visual linear feedback trick for timeline fill tracks
                     timeline.style.background = `linear-gradient(to right, #ef5350 0%, #ef5350 ${percentage}%, rgba(255, 255, 255, 0.3) ${percentage}%, rgba(255, 255, 255, 0.3) 100%)`;
                 }
             });
 
-            // Handle scrubbing (Rewind and Forward)
             timeline.addEventListener('input', () => {
                 isScrubbing = true;
                 const seekTime = (timeline.value / 100) * video.duration;
                 video.currentTime = seekTime;
-                
-                // Keep background color fluid while sliding slider handle
                 timeline.style.background = `linear-gradient(to right, #ef5350 0%, #ef5350 ${timeline.value}%, rgba(255, 255, 255, 0.3) ${timeline.value}%, rgba(255, 255, 255, 0.3) 100%)`;
             });
 
@@ -529,37 +573,57 @@
                 isScrubbing = false;
             });
 
-            // Auto-move to next episode when current video finishes playing
             video.addEventListener('ended', () => {
                 if (currentVideoIndex < videos.length - 1) {
                     currentVideoIndex++;
-                    container.scrollTo({ 
-                        top: currentVideoIndex * window.innerHeight, 
-                        behavior: 'smooth' 
-                    });
+                    container.scrollTo({ top: currentVideoIndex * window.innerHeight, behavior: 'smooth' });
                     handleVideoPlayback();
                 } else {
-                    // Reset to the first video smoothly if it's the last episode
                     currentVideoIndex = 0;
-                    container.scrollTo({ 
-                        top: 0, 
-                        behavior: 'smooth' 
-                    });
+                    container.scrollTo({ top: 0, behavior: 'smooth' });
                     handleVideoPlayback();
                 }
             });
         });
+
+        // ================= VIDEO INFO CONTROLLER =================
+        function showVideoInfo() {
+            const currentVideo = videos[currentVideoIndex];
+            const videoSrc = currentVideo.querySelector('source').getAttribute('src');
+            
+            // Extract file name from string path (e.g., "Kings Killer Comeback - EP1.mp4")
+            let fileName = videoSrc.substring(videoSrc.lastIndexOf('/') + 1);
+            
+            // Trim the extension off (.mp4)
+            fileName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+            
+            // Sanitize string decoding for clean UI spaces
+            const videoTitle = decodeURIComponent(fileName);
+            
+            // Inject metadata context details and toggle track state
+            infoToast.innerHTML = `<strong>Playing File:</strong><br>${videoTitle}`;
+            infoToast.classList.add('show');
+            
+            // Clear any active running timers to avoid sudden flickering overlaps
+            if (toastTimeout) clearTimeout(toastTimeout);
+            
+            // Toast automatically vanishes beautifully after 4 seconds
+            toastTimeout = setTimeout(() => {
+                infoToast.classList.remove('show');
+            }, 4000);
+        }
 
         // ================= UI TOGGLE ENGINE ('F' KEY DETECTOR) =================
         window.addEventListener('keydown', (e) => {
             if (e.key === 'f' || e.key === 'F') {
                 const overlays = document.querySelectorAll('.overlay');
                 const timelineContainers = document.querySelectorAll('.timeline-container');
-                const badges = document.querySelectorAll('.episode-badge'); // Select top centers
+                const badges = document.querySelectorAll('.episode-badge');
                 
                 overlays.forEach(overlay => overlay.classList.toggle('hide-controls'));
                 timelineContainers.forEach(tc => tc.classList.toggle('hide-controls'));
-                badges.forEach(badge => badge.classList.toggle('hide-controls')); // Hide/Show top element
+                badges.forEach(badge => badge.classList.toggle('hide-controls'));
+                infoToast.classList.toggle('hide-controls'); // Hide the info toast window panel as well
             }
         });
 
@@ -568,11 +632,9 @@
             const currentVideo = videos[currentVideoIndex];
             const videoSrc = currentVideo.querySelector('source').src;
             
-            // Create hidden temporary download anchor anchor tag tracking link
             const tempAnchor = document.createElement('a');
             tempAnchor.href = videoSrc;
             
-            // Extracts video file name for pristine naming convention strings
             const fileName = videoSrc.substring(videoSrc.lastIndexOf('/') + 1);
             tempAnchor.setAttribute('download', decodeURIComponent(fileName));
             
@@ -593,7 +655,6 @@
             });
         }
 
-        // Keeps track of highlight positions inside the list
         function updateActiveEpisodeButton() {
             document.querySelectorAll('.ep-btn').forEach((btn, index) => {
                 if(index === currentVideoIndex) {
@@ -604,7 +665,6 @@
             });
         }
 
-        // Action when an episode element within popup is targeted
         function jumpToEpisode(index) {
             currentVideoIndex = index;
             container.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
@@ -612,9 +672,8 @@
             closeEpisodesPopup();
         }
 
-        // Modal Action Controllers
         function openEpisodesPopup() {
-            generateEpisodeButtons(); // Refreshes state indicator highlights
+            generateEpisodeButtons(); 
             modal.classList.add('open');
         }
 
@@ -624,7 +683,7 @@
 
         closeModalBtn.addEventListener('click', closeEpisodesPopup);
         modal.addEventListener('click', (e) => {
-            if(e.target === modal) closeEpisodesPopup(); // Close when backdrop empty space is tapped
+            if(e.target === modal) closeEpisodesPopup(); 
         });
 
         // Initial setup run
@@ -633,7 +692,6 @@
         // 3. Touch support adjustments for mobile devices
         let startY = 0;
         container.addEventListener('touchstart', (e) => { 
-            // Avoid conflict if touching timeline directly
             if(e.target.classList.contains('timeline')) return;
             startY = e.touches[0].clientY; 
         });
