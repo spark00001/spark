@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shorts</title>
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent page scroll */
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Strict viewport lock */
             background-color: black;
+            font-family: Arial, sans-serif;
         }
 
         /* Desktop Perspective Frame Wrapper */
@@ -18,6 +20,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for flawless mobile address bar handling */
             background-color: black;
             overflow: hidden;
         }
@@ -25,24 +28,30 @@
         .shorts-container {
             display: flex;
             flex-direction: column;
-            height: 100vh;
             width: 100%;
+            height: 100%;
             overflow-y: scroll;
-            scroll-snap-type: y mandatory; /* Snaps to each video */
+            scroll-snap-type: y mandatory; /* Snaps strictly to each video frame */
             scrollbar-width: none; /* Hide scrollbars for cleaner UI */
+            -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling for iOS mobile devices */
         }
+        
         .shorts-container::-webkit-scrollbar {
             display: none;
         }
 
         .video-item {
             position: relative;
-            height: 100vh;
             width: 100%;
+            height: 100vh;
+            height: 100dvh; /* Force child item to be exactly one screen height */
             scroll-snap-align: start;
+            scroll-snap-stop: always; /* Prevents skipping multiple videos during fast swipes */
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0; /* Prevents flex engine from crushing item heights */
+            box-sizing: border-box;
         }
 
         .video {
@@ -177,7 +186,7 @@
         }
 
         /* Progress track color fill (Webkit browsers) */
-        .timeline::-webkit-slider-run runnable-track {
+        .timeline::-webkit-slider-runnable-track {
             width: 100%;
             height: 100%;
         }
@@ -339,7 +348,7 @@
     </div>
 
     <script>
-        // 1. Render Shorts Content dynamically (Added Info button with Unicode 'ⓘ')
+        // 1. Render Shorts Content dynamically
         document.getElementById("svids").innerHTML = `
             <div class='shorts-container'>
                 <div class='video-item'>
@@ -510,9 +519,13 @@
         let isScrubbing = false; 
         let toastTimeout = null;
 
+        // Dynamic measurement function for tracking accurate responsive heights
+        function getViewportHeight() {
+            return window.innerHeight;
+        }
+
         // Function to control individual play/pause actions
         function handleVideoPlayback() {
-            // Automatically close info toast on video switch
             infoToast.classList.remove('show'); 
             
             videos.forEach((video, index) => {
@@ -541,10 +554,10 @@
         // Track standard scroll movements
         container.addEventListener('scroll', () => {
             const scrollTop = container.scrollTop;
-            const videoHeight = window.innerHeight;
+            const videoHeight = getViewportHeight();
             let targetIndex = Math.round(scrollTop / videoHeight);
             
-            if (targetIndex !== currentVideoIndex) {
+            if (targetIndex !== currentVideoIndex && targetIndex >= 0 && targetIndex < videos.length) {
                 currentVideoIndex = targetIndex;
                 handleVideoPlayback();
             }
@@ -576,7 +589,7 @@
             video.addEventListener('ended', () => {
                 if (currentVideoIndex < videos.length - 1) {
                     currentVideoIndex++;
-                    container.scrollTo({ top: currentVideoIndex * window.innerHeight, behavior: 'smooth' });
+                    container.scrollTo({ top: currentVideoIndex * getViewportHeight(), behavior: 'smooth' });
                     handleVideoPlayback();
                 } else {
                     currentVideoIndex = 0;
@@ -591,23 +604,15 @@
             const currentVideo = videos[currentVideoIndex];
             const videoSrc = currentVideo.querySelector('source').getAttribute('src');
             
-            // Extract file name from string path (e.g., "Kings Killer Comeback - EP1.mp4")
             let fileName = videoSrc.substring(videoSrc.lastIndexOf('/') + 1);
-            
-            // Trim the extension off (.mp4)
             fileName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
-            
-            // Sanitize string decoding for clean UI spaces
             const videoTitle = decodeURIComponent(fileName);
             
-            // Inject metadata context details and toggle track state
             infoToast.innerHTML = `<strong>Playing File:</strong><br>${videoTitle}`;
             infoToast.classList.add('show');
             
-            // Clear any active running timers to avoid sudden flickering overlaps
             if (toastTimeout) clearTimeout(toastTimeout);
             
-            // Toast automatically vanishes beautifully after 4 seconds
             toastTimeout = setTimeout(() => {
                 infoToast.classList.remove('show');
             }, 4000);
@@ -623,7 +628,7 @@
                 overlays.forEach(overlay => overlay.classList.toggle('hide-controls'));
                 timelineContainers.forEach(tc => tc.classList.toggle('hide-controls'));
                 badges.forEach(badge => badge.classList.toggle('hide-controls'));
-                infoToast.classList.toggle('hide-controls'); // Hide the info toast window panel as well
+                infoToast.classList.toggle('hide-controls'); 
             }
         });
 
@@ -667,7 +672,7 @@
 
         function jumpToEpisode(index) {
             currentVideoIndex = index;
-            container.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
+            container.scrollTo({ top: index * getViewportHeight(), behavior: 'smooth' });
             handleVideoPlayback();
             closeEpisodesPopup();
         }
@@ -686,6 +691,11 @@
             if(e.target === modal) closeEpisodesPopup(); 
         });
 
+        // Dynamic resize handler to ensure snappy alignment changes on structural window adjustments
+        window.addEventListener('resize', () => {
+            container.scrollTo({ top: currentVideoIndex * getViewportHeight(), behavior: 'auto' });
+        });
+
         // Initial setup run
         handleVideoPlayback();
 
@@ -694,7 +704,7 @@
         container.addEventListener('touchstart', (e) => { 
             if(e.target.classList.contains('timeline')) return;
             startY = e.touches[0].clientY; 
-        });
+        }, { passive: true });
         container.addEventListener('touchend', (e) => {
             if(e.target.classList.contains('timeline')) return;
             const endY = e.changedTouches[0].clientY;
@@ -705,7 +715,7 @@
                 } else if (diffY < 0 && currentVideoIndex > 0) {
                     currentVideoIndex--;
                 }
-                container.scrollTo({ top: currentVideoIndex * window.innerHeight, behavior: 'smooth' });
+                container.scrollTo({ top: currentVideoIndex * getViewportHeight(), behavior: 'smooth' });
                 handleVideoPlayback();
             }
         });
