@@ -18,6 +18,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
+            height: 100dvh; /* Use dynamic viewport height for mobile browsers */
             background-color: black;
             overflow: hidden;
         }
@@ -26,6 +27,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
+            height: 100dvh;
             width: 100%;
             overflow-y: scroll;
             scroll-snap-type: y mandatory; /* Snaps to each video */
@@ -38,17 +40,22 @@
         .video-item {
             position: relative;
             height: 100vh;
+            height: 100dvh;
             width: 100%;
             scroll-snap-align: start;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #000;
         }
 
         .video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures video fills container without distortion */
+            /* 'contain' ensures the entire video is visible on any phone screen size/model without cropping.
+               Change to 'cover' if you prefer the video stretching to completely fill the screen.
+            */
+            object-fit: contain; 
             cursor: pointer;   /* Indicates the video is clickable */
         }
 
@@ -339,12 +346,12 @@
     </div>
 
     <script>
-        // 1. Render Shorts Content dynamically (Added Info button with Unicode 'ⓘ')
+        // 1. Render Shorts Content dynamically (Added loop attribute directly to video elements)
         document.getElementById("svids").innerHTML = `
             <div class='shorts-container'>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-1</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback - EP1.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback - EP1.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -359,7 +366,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-2</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback - EP2.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback - EP2.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -374,7 +381,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-3</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP3.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP3.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -389,7 +396,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-4</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP4.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP4.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -404,7 +411,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-5</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP5.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP5.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -419,7 +426,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-6</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP6.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP6.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -434,7 +441,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-7</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP7.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP7.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -449,7 +456,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-8</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP8.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP8.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -464,7 +471,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-9</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP9.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP9.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -479,7 +486,7 @@
                 </div>
                 <div class='video-item'>
                     <div class='episode-badge'>EP-10</div>
-                    <video class='video' playsinline><source src='/shorts/Kings Killer Comeback -EP10.mp4' type='video/mp4'></video>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP10.mp4' type='video/mp4'></video>
                     <div class='overlay'>
                         <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
                         <button class='like-btn'>Like</button>
@@ -550,7 +557,7 @@
             }
         });
 
-        // ================= STREAM TIMELINE & AUTO-ADVANCE HANDLERS =================
+        // ================= STREAM TIMELINE HANDLERS =================
         videos.forEach((video, index) => {
             const timeline = timelines[index];
 
@@ -573,17 +580,9 @@
                 isScrubbing = false;
             });
 
-            video.addEventListener('ended', () => {
-                if (currentVideoIndex < videos.length - 1) {
-                    currentVideoIndex++;
-                    container.scrollTo({ top: currentVideoIndex * window.innerHeight, behavior: 'smooth' });
-                    handleVideoPlayback();
-                } else {
-                    currentVideoIndex = 0;
-                    container.scrollTo({ top: 0, behavior: 'smooth' });
-                    handleVideoPlayback();
-                }
-            });
+            /* REMOVED: The auto-advance feature 'video.addEventListener('ended', ...)' has been removed. 
+               The 'loop' attribute in the HTML handles restarting the video seamlessly.
+            */
         });
 
         // ================= VIDEO INFO CONTROLLER =================
