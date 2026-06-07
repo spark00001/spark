@@ -18,7 +18,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            height: 100dvh; /* Use dynamic viewport height for mobile browsers */
+            height: 100dvh; /* Dynamic viewport height fixes mobile browser bar scaling */
             background-color: black;
             overflow: hidden;
         }
@@ -32,6 +32,7 @@
             overflow-y: scroll;
             scroll-snap-type: y mandatory; /* Snaps to each video */
             scrollbar-width: none; /* Hide scrollbars for cleaner UI */
+            -webkit-overflow-scrolling: touch; /* Smooth physics scroll on iOS */
         }
         .shorts-container::-webkit-scrollbar {
             display: none;
@@ -42,7 +43,9 @@
             height: 100vh;
             height: 100dvh;
             width: 100%;
+            flex-shrink: 0; /* Prevents compression across phone dimensions */
             scroll-snap-align: start;
+            scroll-snap-stop: always;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -52,11 +55,10 @@
         .video {
             width: 100%;
             height: 100%;
-            /* 'contain' ensures the entire video is visible on any phone screen size/model without cropping.
-               Change to 'cover' if you prefer the video stretching to completely fill the screen.
-            */
+            /* 'contain' ensures the entire frame scales letterboxed on any narrow/wide aspect screen without crop distortion.
+               Change to 'cover' if you prefer stretching the clips to edge-fill screens completely. */
             object-fit: contain; 
-            cursor: pointer;   /* Indicates the video is clickable */
+            cursor: pointer;   
         }
 
         /* ================= EPISODE TOP BADGE STYLES ================= */
@@ -519,7 +521,6 @@
 
         // Function to control individual play/pause actions
         function handleVideoPlayback() {
-            // Automatically close info toast on video switch
             infoToast.classList.remove('show'); 
             
             videos.forEach((video, index) => {
@@ -545,13 +546,13 @@
             });
         });
 
-        // Track standard scroll movements
+        // Track standard scroll movements using the actual container layout step
         container.addEventListener('scroll', () => {
             const scrollTop = container.scrollTop;
-            const videoHeight = window.innerHeight;
+            const videoHeight = container.clientHeight; // Reads active precise container pixel metrics
             let targetIndex = Math.round(scrollTop / videoHeight);
             
-            if (targetIndex !== currentVideoIndex) {
+            if (targetIndex !== currentVideoIndex && targetIndex < videos.length) {
                 currentVideoIndex = targetIndex;
                 handleVideoPlayback();
             }
@@ -579,34 +580,20 @@
             timeline.addEventListener('change', () => {
                 isScrubbing = false;
             });
-
-            /* REMOVED: The auto-advance feature 'video.addEventListener('ended', ...)' has been removed. 
-               The 'loop' attribute in the HTML handles restarting the video seamlessly.
-            */
         });
 
         // ================= VIDEO INFO CONTROLLER =================
         function showVideoInfo() {
             const currentVideo = videos[currentVideoIndex];
             const videoSrc = currentVideo.querySelector('source').getAttribute('src');
-            
-            // Extract file name from string path (e.g., "Kings Killer Comeback - EP1.mp4")
             let fileName = videoSrc.substring(videoSrc.lastIndexOf('/') + 1);
-            
-            // Trim the extension off (.mp4)
             fileName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
-            
-            // Sanitize string decoding for clean UI spaces
             const videoTitle = decodeURIComponent(fileName);
             
-            // Inject metadata context details and toggle track state
             infoToast.innerHTML = `<strong>Playing File:</strong><br>${videoTitle}`;
             infoToast.classList.add('show');
             
-            // Clear any active running timers to avoid sudden flickering overlaps
             if (toastTimeout) clearTimeout(toastTimeout);
-            
-            // Toast automatically vanishes beautifully after 4 seconds
             toastTimeout = setTimeout(() => {
                 infoToast.classList.remove('show');
             }, 4000);
@@ -622,7 +609,7 @@
                 overlays.forEach(overlay => overlay.classList.toggle('hide-controls'));
                 timelineContainers.forEach(tc => tc.classList.toggle('hide-controls'));
                 badges.forEach(badge => badge.classList.toggle('hide-controls'));
-                infoToast.classList.toggle('hide-controls'); // Hide the info toast window panel as well
+                infoToast.classList.toggle('hide-controls');
             }
         });
 
@@ -666,7 +653,7 @@
 
         function jumpToEpisode(index) {
             currentVideoIndex = index;
-            container.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
+            container.scrollTo({ top: index * container.clientHeight, behavior: 'smooth' });
             handleVideoPlayback();
             closeEpisodesPopup();
         }
@@ -693,7 +680,8 @@
         container.addEventListener('touchstart', (e) => { 
             if(e.target.classList.contains('timeline')) return;
             startY = e.touches[0].clientY; 
-        });
+        }, { passive: true });
+        
         container.addEventListener('touchend', (e) => {
             if(e.target.classList.contains('timeline')) return;
             const endY = e.changedTouches[0].clientY;
@@ -704,7 +692,7 @@
                 } else if (diffY < 0 && currentVideoIndex > 0) {
                     currentVideoIndex--;
                 }
-                container.scrollTo({ top: currentVideoIndex * window.innerHeight, behavior: 'smooth' });
+                container.scrollTo({ top: currentVideoIndex * container.clientHeight, behavior: 'smooth' });
                 handleVideoPlayback();
             }
         });
