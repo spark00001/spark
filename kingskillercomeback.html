@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorts</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent page scroll */
+            background-color: black;
+        }
+
+        /* Desktop Perspective Frame Wrapper */
+        .app-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh; /* Dynamic viewport height fixes mobile browser bar scaling */
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .shorts-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+            width: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory; /* Snaps to each video */
+            scrollbar-width: none; /* Hide scrollbars for cleaner UI */
+            -webkit-overflow-scrolling: touch; /* Smooth physics scroll on iOS */
+        }
+        .shorts-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .video-item {
+            position: relative;
+            height: 100vh;
+            height: 100dvh;
+            width: 100%;
+            flex-shrink: 0; /* Prevents compression across phone dimensions */
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        .video {
+            width: 100%;
+            height: 100%;
+            /* 'contain' ensures the entire frame scales letterboxed on any narrow/wide aspect screen without crop distortion.
+               Change to 'cover' if you prefer stretching the clips to edge-fill screens completely. */
+            object-fit: contain; 
+            cursor: pointer;   
+        }
+
+        /* ================= EPISODE TOP BADGE STYLES ================= */
+        .episode-badge {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            z-index: 15;
+            pointer-events: none; /* Allows click-through to video play/pause */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: opacity 0.2s ease, pointer-events 0.2s ease;
+        }
+
+        /* YouTube Shorts-style Action Overlay Panel */
+        .overlay {
+            position: absolute;
+            bottom: 60px;      /* Raised slightly to clear the timeline progress bar */
+            right: 15px;       /* Fixed distance from the right edge of the video */
+            display: flex;
+            flex-direction: column;
+            gap: 14px;         /* Reduced gap slightly to fit the new button beautifully */
+            z-index: 10;
+            align-items: center;
+            transition: opacity 0.2s ease, pointer-events 0.2s ease;
+        }
+
+        /* Generic styling for overlay buttons */
+        .overlay button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            font-size: 10px;   /* Adjusted slightly for text fitting */
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .overlay button:hover {
+            background-color: rgba(239, 83, 80, 0.9); /* Theme accent color */
+        }
+
+        .overlay button:active {
+            transform: scale(0.92);
+        }
+
+        /* Info button specific icon styling */
+        .info-btn {
+            font-size: 16px !important;
+        }
+
+        /* Download specific style matching theme layout */
+        .download-btn {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* ================= INFO TOAST BANNER ================= */
+        .info-toast {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            right: 80px; /* Leaves clear spacing for the right actions layout overlay */
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            z-index: 20;
+            pointer-events: none;
+            border-left: 3px solid #ef5350;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .info-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= TIMELINE / STREAM LINE STYLES ================= */
+        .timeline-container {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.2s ease, pointer-events 0.2s ease;
+        }
+
+        .timeline {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            cursor: pointer;
+            transition: height 0.1s;
+        }
+
+        /* Make it slightly thicker on hover for easier desktop scrubbing */
+        .timeline-container:hover .timeline {
+            height: 6px;
+        }
+
+        /* Progress track color fill (Webkit browsers) */
+        .timeline::-webkit-slider-run runnable-track {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Timeline Thumb/Scrubber handle */
+        .timeline::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef5350; /* Red scrub head matching theme */
+            cursor: pointer;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef5350;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Utility Class to Hide UI Controls */
+        .hide-controls {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /* ================= POPUP MODAL STYLES ================= */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Mobile default: bottoms-up drawer */
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #1c1c1e;
+            width: 100%;
+            max-height: 70vh;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-backdrop.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #2c2c2e;
+            padding-bottom: 10px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Episode Grid Setup */
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 12px;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .ep-btn {
+            background: #2c2c2e;
+            border: 1px solid #3a3a3c;
+            color: white;
+            padding: 12px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .ep-btn:hover, .ep-btn.active {
+            background: #ef5350; /* Kuku-style red accent */
+            border-color: #ef5350;
+        }
+
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media (min-width: 769px) { /* Desktop mode adjustments */
+            .app-wrapper {
+                width: 450px; /* Constrain main player window width on Desktop */
+                margin: 0 auto;
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            }
+            .modal-backdrop {
+                align-items: center; /* Center popup on desktop */
+            }
+            .modal-content {
+                width: 400px;
+                max-height: 50vh;
+                border-radius: 12px;
+                transform: scale(0.9);
+            }
+            .modal-backdrop.open .modal-content {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <div id="svids"></div>
+        <div class="info-toast" id="infoToast"></div>
+    </div>
+
+    <div class="modal-backdrop" id="episodeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>All Episodes</h3>
+                <button class="close-modal-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="episode-grid" id="episodeGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Render Shorts Content dynamically (Added loop attribute directly to video elements)
+        document.getElementById("svids").innerHTML = `
+            <div class='shorts-container'>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-1</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback - EP1.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-2</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback - EP2.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-3</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP3.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-4</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP4.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-5</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP5.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-6</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP6.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-7</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP7.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-8</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP8.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-9</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP9.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class='video-item'>
+                    <div class='episode-badge'>EP-10</div>
+                    <video class='video' playsinline loop><source src='/shorts/Kings Killer Comeback -EP10.mp4' type='video/mp4'></video>
+                    <div class='overlay'>
+                        <button class='info-btn' onclick="showVideoInfo()">ⓘ</button>
+                        <button class='like-btn'>Like</button>
+                        <button class='comment-btn'>Chat</button>
+                        <button class='list-btn' onclick="openEpisodesPopup()">List</button>
+                        <button class='share-btn'>Share</button>
+                        <button class='download-btn' onclick="downloadCurrentVideo()">Down</button>
+                    </div>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline" value="0" min="0" max="100">
+                    </div>
+                </div>
+
+            </div>`;
+    </script>
+
+    <script>
+        // 2. Playback and Layout Engine Variables
+        const container = document.querySelector('.shorts-container');
+        const videos = document.querySelectorAll('.video');
+        const timelines = document.querySelectorAll('.timeline');
+        const modal = document.getElementById('episodeModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const episodeGrid = document.getElementById('episodeGrid');
+        const infoToast = document.getElementById('infoToast');
+        
+        let currentVideoIndex = 0;
+        let isScrubbing = false; 
+        let toastTimeout = null;
+
+        // Function to control individual play/pause actions
+        function handleVideoPlayback() {
+            infoToast.classList.remove('show'); 
+            
+            videos.forEach((video, index) => {
+                if (index === currentVideoIndex) {
+                    video.play().catch(err => console.log("Autoplay blocked until user interaction."));
+                } else {
+                    video.pause();
+                    video.currentTime = 0; 
+                    if (timelines[index]) timelines[index].value = 0; 
+                }
+            });
+            updateActiveEpisodeButton();
+        }
+
+        // Toggle Play/Pause on Video Click
+        videos.forEach((video) => {
+            video.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play().catch(err => console.log("Playback error:", err));
+                } else {
+                    video.pause();
+                }
+            });
+        });
+
+        // Track standard scroll movements using the actual container layout step
+        container.addEventListener('scroll', () => {
+            const scrollTop = container.scrollTop;
+            const videoHeight = container.clientHeight; // Reads active precise container pixel metrics
+            let targetIndex = Math.round(scrollTop / videoHeight);
+            
+            if (targetIndex !== currentVideoIndex && targetIndex < videos.length) {
+                currentVideoIndex = targetIndex;
+                handleVideoPlayback();
+            }
+        });
+
+        // ================= STREAM TIMELINE HANDLERS =================
+        videos.forEach((video, index) => {
+            const timeline = timelines[index];
+
+            video.addEventListener('timeupdate', () => {
+                if (!isScrubbing && video.duration) {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    timeline.value = percentage;
+                    timeline.style.background = `linear-gradient(to right, #ef5350 0%, #ef5350 ${percentage}%, rgba(255, 255, 255, 0.3) ${percentage}%, rgba(255, 255, 255, 0.3) 100%)`;
+                }
+            });
+
+            timeline.addEventListener('input', () => {
+                isScrubbing = true;
+                const seekTime = (timeline.value / 100) * video.duration;
+                video.currentTime = seekTime;
+                timeline.style.background = `linear-gradient(to right, #ef5350 0%, #ef5350 ${timeline.value}%, rgba(255, 255, 255, 0.3) ${timeline.value}%, rgba(255, 255, 255, 0.3) 100%)`;
+            });
+
+            timeline.addEventListener('change', () => {
+                isScrubbing = false;
+            });
+        });
+
+        // ================= VIDEO INFO CONTROLLER =================
+        function showVideoInfo() {
+            const currentVideo = videos[currentVideoIndex];
+            const videoSrc = currentVideo.querySelector('source').getAttribute('src');
+            let fileName = videoSrc.substring(videoSrc.lastIndexOf('/') + 1);
+            fileName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+            const videoTitle = decodeURIComponent(fileName);
+            
+            infoToast.innerHTML = `<strong>Playing File:</strong><br>${videoTitle}`;
+            infoToast.classList.add('show');
+            
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                infoToast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ================= UI TOGGLE ENGINE ('F' KEY DETECTOR) =================
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'f' || e.key === 'F') {
+                const overlays = document.querySelectorAll('.overlay');
+                const timelineContainers = document.querySelectorAll('.timeline-container');
+                const badges = document.querySelectorAll('.episode-badge');
+                
+                overlays.forEach(overlay => overlay.classList.toggle('hide-controls'));
+                timelineContainers.forEach(tc => tc.classList.toggle('hide-controls'));
+                badges.forEach(badge => badge.classList.toggle('hide-controls'));
+                infoToast.classList.toggle('hide-controls');
+            }
+        });
+
+        // ================= DOWNLOAD CONTROLLER HANDLER =================
+        function downloadCurrentVideo() {
+            const currentVideo = videos[currentVideoIndex];
+            const videoSrc = currentVideo.querySelector('source').src;
+            
+            const tempAnchor = document.createElement('a');
+            tempAnchor.href = videoSrc;
+            
+            const fileName = videoSrc.substring(videoSrc.lastIndexOf('/') + 1);
+            tempAnchor.setAttribute('download', decodeURIComponent(fileName));
+            
+            document.body.appendChild(tempAnchor);
+            tempAnchor.click();
+            document.body.removeChild(tempAnchor);
+        }
+
+        // Initialize episode numbers into the grid dynamically
+        function generateEpisodeButtons() {
+            episodeGrid.innerHTML = "";
+            videos.forEach((_, index) => {
+                const btn = document.createElement('button');
+                btn.className = `ep-btn ${index === currentVideoIndex ? 'active' : ''}`;
+                btn.innerText = `E${index + 1}`;
+                btn.onclick = () => jumpToEpisode(index);
+                episodeGrid.appendChild(btn);
+            });
+        }
+
+        function updateActiveEpisodeButton() {
+            document.querySelectorAll('.ep-btn').forEach((btn, index) => {
+                if(index === currentVideoIndex) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function jumpToEpisode(index) {
+            currentVideoIndex = index;
+            container.scrollTo({ top: index * container.clientHeight, behavior: 'smooth' });
+            handleVideoPlayback();
+            closeEpisodesPopup();
+        }
+
+        function openEpisodesPopup() {
+            generateEpisodeButtons(); 
+            modal.classList.add('open');
+        }
+
+        function closeEpisodesPopup() {
+            modal.classList.remove('open');
+        }
+
+        closeModalBtn.addEventListener('click', closeEpisodesPopup);
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closeEpisodesPopup(); 
+        });
+
+        // Initial setup run
+        handleVideoPlayback();
+
+        // 3. Touch support adjustments for mobile devices
+        let startY = 0;
+        container.addEventListener('touchstart', (e) => { 
+            if(e.target.classList.contains('timeline')) return;
+            startY = e.touches[0].clientY; 
+        }, { passive: true });
+        
+        container.addEventListener('touchend', (e) => {
+            if(e.target.classList.contains('timeline')) return;
+            const endY = e.changedTouches[0].clientY;
+            const diffY = startY - endY;
+            if (Math.abs(diffY) > 50) { 
+                if (diffY > 0 && currentVideoIndex < videos.length - 1) {
+                    currentVideoIndex++;
+                } else if (diffY < 0 && currentVideoIndex > 0) {
+                    currentVideoIndex--;
+                }
+                container.scrollTo({ top: currentVideoIndex * container.clientHeight, behavior: 'smooth' });
+                handleVideoPlayback();
+            }
+        });
+    </script>
+</body>
+</html>
