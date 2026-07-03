@@ -36,7 +36,10 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 
-<!-- url -->
+/* url -->*/
+function kingskillercomeback(){
+location.assign("/spark/kingskillercomeback.html");
+}
 function hachi(){
 location.assign("/spark/hachi2009.html");
 }
