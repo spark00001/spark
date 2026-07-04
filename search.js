@@ -73,8 +73,8 @@ location.assign("/spark/srikanth.html");
 	function BHARTHAMAHASAYULAKUWIGNYAPTHI(){
 location.assign("/spark/BHARTHAMAHASAYULAKUWIGNYAPTHI.html");
 }
-	function madeinkorea(){
-location.assign("/spark/madeinkorea.html");
+	function blast(){
+location.assign("/spark/blast.html");
 }
 	function honeymoonsehatya(){
 location.assign("/spark/honeymoonsehatya.html");
