@@ -40,6 +40,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 function blast(){
 location.assign("/spark/blast.html");
 }
+function madeinkorea(){
+location.assign("/spark/madeinkorea.html");
+}
 function kingskillercomeback(){
 location.assign("/spark/kingskillercomeback.html");
 }
