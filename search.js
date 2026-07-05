@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 /* url -->*/
+function blast(){
+location.assign("/spark/blast.html");
+}
 function kingskillercomeback(){
 location.assign("/spark/kingskillercomeback.html");
 }
