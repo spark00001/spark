@@ -1,6 +1,6 @@
  <html>
 <head>
-<title>blast</title>
+<title>madeinkorea</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link href="/css/flex.css" rel="stylesheet">
  <link rel="stylesheet" href="/css/player.css">
@@ -8,15 +8,15 @@
 </head>
 <body>
 <div class="movie-container">
-<p id="blast_main"></p>
+<p id="madeinkorea_main"></p>
 <div class="button-container">
-<button onclick="blast_watch()" 
+<button onclick="madeinkorea_watch()" 
  class="watch-button">WATCH</button>
-<button onclick="blast_trailer()" 
+<button onclick="madeinkorea_trailer()" 
  class="trailer-button">TRAILER</button>
-<p id="blast_story"></p>
+<p id="madeinkorea_story"></p>
 </div>
- <button onclick="blast_download()" 
+ <button onclick="madeinkorea_download()" 
  class="trailer-button">DOWNLOAD</button>
 </div>
 <br>
@@ -28,16 +28,16 @@
  <script src="/spark/search.js"></script>
 <script src="/js/south.js"></script>
 <script>
-    document.getElementById("blast_main").innerHTML="<img class='poster' src='/south/blast.png' />"; document.getElementById("blast_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp; Made in Korea (2026) is a Tamil-language comedy-drama on Netflix following...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
+    document.getElementById("madeinkorea_main").innerHTML="<img class='poster' src='/south/madeinkorea.png' />"; document.getElementById("madeinkorea_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp; Made in Korea (2026) is a Tamil-language comedy-drama on Netflix following...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; 
     function viewmore(){
-     document.getElementById("blast_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;Made in Korea (2026) is a Tamil-language comedy-drama on Netflix following Shenba (Priyanka Mohan), a young Indian woman who pursues her dream of visiting South Korea after facing betrayal in her personal life. She moves to Seoul, faces initial cultural challenges and loneliness, but builds a new life, forging an unexpected, heartwarming bond with an elderly Korean woman.</div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
+     document.getElementById("madeinkorea_story").innerHTML="<div class='story'><b class='story-title'><u>STORY:</u></b>&nbsp;Made in Korea (2026) is a Tamil-language comedy-drama on Netflix following Shenba (Priyanka Mohan), a young Indian woman who pursues her dream of visiting South Korea after facing betrayal in her personal life. She moves to Seoul, faces initial cultural challenges and loneliness, but builds a new life, forging an unexpected, heartwarming bond with an elderly Korean woman.</div><p id='viewmore' onclick='viewless()'>...READ LESS</p>"; }
      function viewless(){
-     document.getElementById("blast_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;Made in Korea (2026) is a Tamil-language comedy-drama on Netflix following...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
-    function blast_trailer(){
-     document.getElementById("blast_main").innerHTML="<iframe class='player' src='https://www.youtube.com/embed/RmLegZv1TZk?rel=0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope.picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
-     function blast_watch(){ 
- document.getElementById("blast_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/10vTSNxDkxM38iyMUhq9MO43ICFZ8yqSx/preview' title='SPARK player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
-function blast_download(){
+     document.getElementById("madeinkorea_story").innerHTML="<b class='story-title'><u>STORY:</u></b>&nbsp;Made in Korea (2026) is a Tamil-language comedy-drama on Netflix following...<p id='viewmore' onclick='viewmore()'>...READ MORE</p>"; } 
+    function madeinkorea_trailer(){
+     document.getElementById("madeinkorea_main").innerHTML="<iframe class='player' src='https://www.youtube.com/embed/RmLegZv1TZk?rel=0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-Growing up in the Amazon rainforest gave Autumn the rarest of friendships -- a lost jaguar cub she named Hope.picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
+     function madeinkorea_watch(){ 
+ document.getElementById("madeinkorea_main").innerHTML="<iframe class='player' src='https://drive.google.com/file/d/10vTSNxDkxM38iyMUhq9MO43ICFZ8yqSx/preview' title='SPARK player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"; }
+function madeinkorea_download(){
  location.assign("https://drive.google.com/uc?id=10vTSNxDkxM38iyMUhq9MO43ICFZ8yqSx");
 }
 southmovies();
