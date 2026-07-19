@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 /* url -->*/
+function starsports(){
+location.assign("/spark/starsports.html");
+}
 function blast(){
 location.assign("/spark/blast.html");
 }
