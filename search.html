@@ -3,407 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPARK SEARCH</title>
+    <title>Premium Search Bar</title>
+    <!-- Importing Lucide Icons for a clean, modern search icon -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-image: url("https://spark00001.github.io/images/hero-bg.jpg");
-            background-attachment: fixed;
-            background-size: cover;
-            color: gold;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Fixed Search Bar Header */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px 0;
-            z-index: 1000;
+        body {
+            background-color: #000000;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+            padding-top: 20px;
+            overflow: hidden;
         }
 
-        #searchInput {
-            width: 90%;
-            max-width: 600px;
-            padding: 12px 20px;
-            border: 2px solid gold;
-            border-radius: 25px;
-            background-color: white;
-            color: black;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 80px auto 20px auto; /* Margin top to clear fixed header */
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-        }
-
-        #itemList {
+        /* Search Container - Now Full Width with dynamic padding */
+        .search-container {
+            position: relative;
+            width: 100%;
+            padding: 0 40px; /* Adjust left & right edge distance as needed */
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            max-height: calc(100vh - 40px);
         }
 
-        .item {
+        /* Glassmorphism Wrapper with Premium Glow Effect */
+        .search-wrapper {
             display: flex;
             align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 99px;
+            padding: 6px 10px 6px 20px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            flex-shrink: 0;
+            max-width: 600px; /* Keeps search bar nicely proportioned */
+            width: 100%;
+            margin: 0 auto;  /* Centers search bar while container spans edge-to-edge */
+        }
+
+        /* Icon Styling */
+        .search-icon {
+            color: rgba(255, 255, 255, 0.4);
+            margin-right: 14px;
+            flex-shrink: 0;
+            transition: color 0.3s ease;
+        }
+
+        /* Input Field Styling */
+        .search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: -0.2px;
+            padding: 10px 0;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Search Button styling */
+        .search-button {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 99px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
         }
 
-        .item:hover {
-            background: rgba(255, 255, 255, 0.1);
+        /* Interactive Hover & Focus Effects */
+        .search-wrapper:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
-        .item img {
-            width: 80px;
-            height: 110px;
-            margin-right: 20px;
-            border-radius: 5px;
-            object-fit: cover;
-            border: 1px solid gold;
+        /* When the input inside the wrapper is focused */
+        .search-wrapper:focus-within {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 
+                        0 8px 40px rgba(255, 255, 255, 0.08);
         }
 
-        .item span {
-            font-size: 1.1rem;
-            line-height: 1.4;
-            font-weight: bold;
-            text-transform: uppercase;
+        .search-wrapper:focus-within .search-icon {
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        /* Class for hiding items via JS */
-        .hidden {
-            display: none !important;
+        .search-wrapper:focus-within .search-input::placeholder {
+            opacity: 0.5;
         }
 
-        #noResults {
-            text-align: center;
-            padding: 20px;
-            display: none;
+        .search-button:hover {
+            background: #e4e4e7;
+            transform: scale(1.02);
+        }
+
+        .search-button:active {
+            transform: scale(0.98);
+        }
+
+        #exportsearch {
             color: white;
+            width: 100%;
+        }
+
+        #notfound {
+            color: transparent;
+            -webkit-text-stroke: 1px gold;
+            text-shadow:
+                -1px -1px 0 #000,  
+                 1px -1px 0 #045,
+                -1px  1px 0 #086,
+                 1px  1px 0 #010;
+        }
+
+        /* Gallery/Results Container spans edge-to-edge */
+        .gallery {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 6px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Custom scrollbar */
+        .gallery::-webkit-scrollbar {
+            width: 6px;
+        }
+        .gallery::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        .gallery::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        .gallery::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
         }
     </style>
+<link rel="stylesheet" href="https://spark00001.github.io/css/flex.css"/>
 </head>
 <body>
 
-    <div class="header">
-        <input type="text" id="searchInput" placeholder="Search movies, shows, or live TV...">
+    <div class="search-container">
+        <div class="search-wrapper">
+            <!-- Icon element recognized by Lucide -->
+            <i data-lucide="search" class="search-icon" width="20" height="20"></i>
+            <input type="text" class="search-input" id="usrsearch" placeholder="Search anything...">
+            <button class="search-button" onclick="searchdb()">Search</button>
+        </div>
+        
+        <div id="gallery" class="gallery"> 
+            <div id="exportsearch"></div>
+        </div>
     </div>
 
-    <div class="container">
-        <div id="noResults">No results found for your search.</div>
-        <div id="itemList">
-			<div class="item" onclick="whenlifegivesyoutangeriness1();">
-                <img src="/korean/whenlifegivesyoutangerines.png" alt="" onclick="whenlifegivesyoutangeriness1();">
-                <span>WHEN LIFE<br>GIVES YOU<br>TANGERIES<BR>(2025)<br>KOREAN</span> 
-            </div>
-			<div class="item" onclick="xokittyall();">
-                <img src="/images/xokittys3.png" alt="" onclick="xokitty();">
-                <span>XO KITTY </BR>SEASON 1<BR>(2023)<br>KOREAN</span> 
-            </div>
-			<div class="item" onclick="chiraiyaall();">
-                <img src="/images/chiraiya.png" alt="" onclick="bharthamahasaulakuwignyapthi();">
-                <span>CHIRAIYA SEASON 1<BR>(2026)<br>WEBSERIES</span> 
-            </div>
-			<div class="item" onclick="bharthamahasaulakuwignyapthi();">
-                <img src="/south/bharthamahasaulakuwignyapthi.png" alt="BHARTHA MAHASAYULAKU WIGNYAPTHI (2026)" onclick="bharthamahasaulakuwignyapthi();">
-                <spanBHARTHA MAHASAYULAKU <br>WIGNYAPTHI <br>(2026)<br>SOUTH</span> 
-            </div>
-            <div class="item" onclick="srikanth();">
-                <img src="/bollywood-/srikanth.png" alt="srikanth" onclick="srikanth();">
-                <span>SRIKANTH<BR>(2024)<br>BOLLYWOOD</span> 
-            </div>
-			<div class="item" onclick="blast();">
-                <img src="/south/blast.png" alt="MADE IN KOREA" onclick="blast();">
-                <span>MADE IN<BR>KOREA<BR>(2026)<br>SOUTH</span> 
-            </div>
-            <div class="item" onclick="honeymoonsehatya();">
-                <img src="/images/honeymoonsehatya.png" alt="honeymoon se hatya" onclick="honeymoonsehatya();">
-                <span>HONEYMOONSE HATYA<BR>(2026)<br>WEBSERIES</span> 
-            </div>
-			<div class="item" onclick="boubutubhuta();">
-                <img src="/ollywood/boubutubhuta.png" alt="BOU BUTU BHUTA" onclick="boubutubhuta();">
-                <span>BOU BUTU<BR>BHUTA<BR>(2025)<br>OLLYWOOD</span> 
-            </div>
-            <div class="item" onclick="suryathesoldier();">
-                <img src="/south/suryathesoldier.png" alt="surya the soldier" onclick="suryathesoldier();">
-                <span>SURYA THE SOLDIER<BR>(2018)<br>SOUTH</span> 
-            </div>
-			<div class="item" onclick="geetagovinda();">
-                <img src="/south/geetagovinda.png" alt="geeta govinda" onclick="geetagovinda();">
-                <span>GEETA GOVINDA<BR>(2018)<br>SOUTH</span> 
-            </div>
-			<div class="item" onclick="kerek();">
-                <img src="/ollywood/kerek.png" alt="KEREK" onclick="kerek();">
-                <span>KAREK<BR>(2025)<br>OLLYWOOD</span> 
-            </div>
-			<div class="item" onclick="karma();">
-                <img src="/ollywood/karma.png" alt="KARMA" onclick="karma();">
-                <span>KARMA<BR>(2024)<br>OLLYWOOD</span> 
-            </div>
-			<div class="item" onclick="dhanak();">
-                <img src="/bollywood-/dhanak.png" alt="DHANAK" onclick="kabhimainkabhitum();">
-                <span>DHANAK<BR>(2015)<br>BOLLYWOOD</span> 
-            </div>
-			<div class="item" onclick="kabhimainkabhitum();">
-                <img src="/pakdrama/kabhimainkabhitum.png" alt="KABHI MAIN KABHI TUM" onclick="kabhimainkabhitum();">
-                <span>KABHI MAIN KABHI TUM<BR>SEASON 1(2024)<br> PAK DRAMA</span> 
-            </div>
-			<div class="item" onclick="autumntheblackjaguar();">
-                <img src="/images/autumntheblackjaguar.png" alt="AUTUMN THE BLACK JAGUAR" onclick="autumntheblackjaguar();">
-                <span>AUTUMN THE BLACK JAGUAR<BR>(2024)<br>HOLLYWOOD</span> 
-            </div>
-			<div class="item" onclick="thedaysoftafree();">
-                <img src="/bollywood-/thedaysoftafree.png" alt="THE DAYS OF TAFREE" onclick="thedaysoftafree();">
-                <span>THE DAYS OF TAFREE<BR>(2016)<br>SOUTH</span> 
-            </div>
-			<div class="item" onclick="vyarth();">
-                <img src="/shortfilms/vyarth.png" alt="vyarth" onclick="vyarth();">
-                <span>VYARTH<BR>(2025)<br>SHORT FILM</span> 
-            </div>
-			<div class="item" onclick="thebrokentable();">
-                <img src="/shortfilms/thebrokentable.png" alt="the broken teble" onclick="thebrokentable();">
-                <span>THE BROKEN TABLE<BR>(2023)<br>SHORT FILM</span> 
-            </div>
-			<div class="item" onclick="aaina();">
-                <img src="/shortfilms/aaina.png" alt="aaina" onclick="aaina();">
-                <span>AAINA<BR>(2024)<br>SHORT FILM</span> 
-            </div>
-			<div class="item" onclick="zora();">
-                <img src="/bollywood-/zora.png" alt="ZORA" onclick="zora();">
-                <span>ZORA<BR>(2025)<br>BOLLYWOOD</span> 
-            </div>
-		     <div class="item" onclick="head_over_heels();">
-                <img src="/images/head_over_heels.png" alt="HEAD OVER HEELS SEASON 1" onclick="head_over_heels();">
-                <span>HEAD OVER HEELS<br>SEASON 1<BR>(2025)<br>WEBSERIES(K DRAMA)</span> 
-            </div>
-		     <div class="item" onclick="good_boy();">
-                <img src="/images/good_boy.png" alt="GOOD BOY SEASON 1" onclick="good_boy();">
-                <span>GOOD BOY<br>SEASON 1<BR>(2025)<br>WEBSERIES(K DRAMA)</span> 
-            </div>
-		     <div class="item" onclick="live_telecast();">
-                <img src="/south/live_telecast.png" alt="LIVE TELECAST SEASON 1" onclick="live_telecast();">
-                <span>LIVE TELECAST<br>SEASON 1<BR>(2021)<br>WEBSERIES</span> 
-            </div>
-		     <div class="item" onclick="();">
-                <img src="/images/.png" alt="" onclick="();">
-                <span style="color:transparent;">empty<br><BR>()</span> 
-            </div>
-			     <div class="item" onclick="pechi();">
-                <img src="/south/pechi.png" alt="Pechi" onclick="pechi();">
-                <span>PECHI<br>(2025)</span> 
-            </div>
-		    <div class="item" onclick="campus_diaries();">
-                <img src="/images/campus_diaries.png" alt="CAMPUS DIARIES SEASON 1" onclick="campus_diaries();">
-                <span>CAMPUS DIARIES<br>SEASON 1<BR>(2022)</span> 
-            </div>
-		<div class="item" onclick="m_s1();">
-                <img src="/images/mirzapur.png" alt="MIRZAPUR SEASON 1" onclick="m_s1();">
-                <span>MIRZAPUR<br>SEASON 1<BR>(2018)</span> 
-            </div>
-		<div class="item" onclick="single();">
-                <img src="/south/single.png" alt="SINGLE" onclick="single();">
-                <span>SINGLE<br>L(2025)</span> 
-            </div>
-		<div class="item" onclick="kgf1();">
-                <img src="/south/kgf1.png" alt="KGF 1" onclick="kgf1();">
-                <span>KGF 1<br>L(2018)</span> 
-		</div>
-		<div class="item" onclick="kgf2();">
-                <img src="/south/kgf2.png" alt="KGF 2" onclick="kgf2();">
-                <span>KGF 2<br>L(2022)</span> 
-            </div>
-		<div class="item" onclick="abpganga();">
-                <img src="/channel/abpganga.png" alt="ABP GANGA" onclick="abpganga();">
-                <span>ABP GANGA<br>LIVE TV</span> 
-            </div>
-		<div class="item"onclick="ninexjhakaas();" >
-                <img src="/channel/9xjhakaas.png" alt="9X JHAKAAS" onclick="ninexjhakaas();">
-                <span>9X JHAKAAS <br>LIVE TV</span> 
-            </div>
-			
-		<div class="item" onclick="ninextashan();">
-                <img src="/channel/9xtashan.png" alt="9X TASHAN" onclick="ninextashan();">
-                <span>9X TASHAN<br>LIVE TV</span> 
-            </div>
-				    <div class="item"onclick="ninexm();" >
-                <img src="/channel/9xm.png" alt="9XM" onclick="ninexm();">
-                <span>9XM <br>LIVE TV</span> 
-            </div>    <div class="item" onclick="abpmajha();">
-                <img src="/channel/abpmajha.png" alt="ABP MAJHA" onclick="abpmajha();">
-                <span>ABP MAJHA<br>LIVE TV</span> 
-            </div>    <div class="item" onclick="animax();">
-                <img src="/channel/animax.png" alt="animax" onclick="animax();">
-                <span>ANIMAX <br>LIVE TV</span> 
-            </div>
-               <div class="item" onclick="anjan();">
-                <img src="/channel/anjan.png" alt="anjan" onclick="anjan();">
-                <span>ANJAN<br>LIVE TV</span> 
-            </div>
-	   <div class="item" onclick="annnews();">
-                <img src="/channel/annnews.png" alt="annnews" onclick="annnews();">
-                <span>ANN NEWS <br>LIVE TV</span> 
-            </div>
-		<div class="item" onclick="aajtak();">
-                <img src="/channel/aajtak.png" alt="aajtak" onclick="aajtak();">
-                <span>AAJTAK<br>LIVE TV</span> 
-            </div>
-	        <div class="item" onclick="aasthabhajan();">
-                <img src="/channel/aasthabhajan.png" alt="aasthabhajan" onclick="aasthabhajan();">
-                <span>AASTHA BHAJAN <br>LIVE TV</span> 
-            </div>    
-	        <div class="item" onclick="asianetnews();">
-                <img src="/channel/asianetnews.png" alt="asianetnews" onclick="asianetnews();">
-                <span>ASIANET NEWS <br>LIVE TV</span> 
-            </div>
-		<div class="item" onclick="lover();">
-                <img src="/punjabi/lover.png" alt="LOVER" onclick="lover();">
-                <span>LOVER<br>(2022)</span> 
-            </div>
-		<div class="item" onclick="illti();">
-                <img src="/punjabi/illti.png" alt="illti">
-                <span>ILLTI<br>(2025)</span> 
-            </div>
-		<div class="item" onclick="lekh();">
-                <img src="/punjabi/lekh.png" alt="lekh">
-                <span>LEKH<br>(2022)</span> 
-            </div>
-	
-		<div class="item" onclick="sufna();">
-                <img src="/punjabi/sufna.png" alt="sufna">
-                <span>SUFNA<br>(2020)</span> 
-            </div>
-		 
-		<div class="item" onclick="oye_makhna();">
-                <img src="/punjabi/oye_makhna.png" alt="oye makhna">
-                <span>OYE MAKHNA<br>(2022)</span> 
-            </div>
-	  
-		<div class="item" onclick="godday_godday_chaa();">
-                <img src="/punjabi/godday_godday_chaa.png" alt="godday godday chaa">
-                <span>GODDAY GODDAY<br>CHAA (2023)</span> 
-            </div>
-		
-		<div class="item" onclick="guddian_patole();">
-                <img src="/punjabi/guddian_patole.png" alt="guddiyan patole">
-                <span>GUDDIYAN PATOLE<br>(2019)</span> 
-            </div>
-		
-		<div class="item" onclick="mitran_da_nss_chalda();">
-                <img src="/punjabi/mitran_da_naa_chalda.png" alt="mitran da naa chalda">
-                <span>MITRAN DA<br>NAA CHALDA<<br>(2023)</span> 
-            </div>
-		
-		<div class="item" onclick="qismat();">
-                <img src="/punjabi/qismat.png" alt="qismat">
-                <span>QISMAT<br>(2018)</span> 
-            </div>
-	
-		<div class="item" onclick="qismattwo();">
-                <img src="/punjabi/qismat2.png" alt="qismat2">
-                <span>QISMAT 2<br>(2021)</span> 
-            </div>
-        
-		<div class="item" onclick="jaat();">
-                <img src="https://spark00001.github.io/images/jaat_poster.png" alt="JAAT(2025)">
-                <span>JAAT<br>(2025)</span> 
-            </div>
-		<div class="item" onclick="sikandar();">
-                <img src="https://spark00001.github.io/images/sikandar_poster.png" alt="SIKANDAR(2025)">
-                <span>SIKANDAR<br>(2025)</span> 
-            </div>
-		<div class="item" onclick="minecraft();">
-                <img src="https://spark00001.github.io/images/minecraft_poster.png" alt="MINECRAFT 2025">
-                <span>MINECRAFT<br>(2025)</span> 
-            </div>
-             <div class="item" onclick="mocn_knight();">
-                <img src="https://spark00001.github.io/images/series-1.png" alt="MOCN KNIGHT(2022)">
-                <span>MOCN KNIGHT<br>(2022)</span> 
-            </div>
-            <div class="item" onclick="halo();">
-                <img src="https://spark00001.github.io/images/series-2.png" alt="HALO(2022)">
-                <span>HALO<br>(2022)</span>
-            </div>
-            <div class="item" onclick="vikings_valhalla();">
-                <img src="https://spark00001.github.io/images/series-3.png" alt="VIKINGS VALHALLA(2022)">
-                <span>VIKINGS VALHALLA<br>(2022)</span>
-            </div>
-            
-            <div class="item" onclick="the_northman();">
-                <img src="https://spark00001.github.io/images/upcoming-1.png" alt="">
-                <span>THE NORTHMAN<br>(2022)</span>
-            </div>
-            <div class="item" onclick="doctor_strange();">
-                <img src="https://spark00001.github.io/images/upcoming-2.png" alt="Fig">
-                <span>DOCTOR STRANGE<br>(2022)</span>
-            </div>
-            <div class="item" onclick="memmory();">
-                <img src="https://spark00001.github.io/images/upcoming-3.png" alt="Grape">
-                <span>MEMMORY<br>(2022)</span>
-            </div>
-            <div class="item" onclick="the_unbearable_weight_of_massive_talent():">
-                <img src="https://spark00001.github.io/images/upcoming-4.png" alt="Honeydew">
-                <span>THE UNBEARABLE WEIGHT OF MASSIVE TALENT<br>(2022)</span>
-            </div>
-            
-            <div class="item" onclick="sonic_2();">
-                <img src="https://spark00001.github.io/images/movie-1.png" alt="">
-                <span>SONIC 2<br>(2022)
-</span>
-            </div>
-            <div class="item" onclick="morbius();">
-                <img src="https://spark00001.github.io/images/movie-2.png" alt="Banana">
-                <span> MORBIUS<br>(2022)</span>
-            </div>
-            <div class="item" onclick="adam_project();">
-                <img src="https://spark00001.github.io/images/movie-3.png" alt="Cherry">
-                <span>ADAM PROJECT<br>(2022)
-</span>
-            </div>
-           
-            <div class="item" onclick="batman();">
-                <img src="https://spark00001.github.io/images/movie-5.png" alt="Elderberry">
-                <span> BATMAN<br>(2022)
-</span>
-            </div>
-            <div class="item" onclick="uncharted();">
-                <img src="https://spark00001.github.io/images/movie-6.png" alt="Fig">
-                <span>UNCHARTED<br>(2022)
-</span>
-            </div>
-            <div class="item" onclick="death_on_the_nile();">
-                <img src="https://spark00001.github.io/images/movie-7.png" alt="Grape">
-                <span>DEATH ON THE NILE<br>(2022)
-</span>
-            </div>
-
-<div class="item"  onclick="kings_man();">
-                <img src="https://spark00001.github.io/images/movie-8.png" alt="Honeydew">
-                <span>KING'S MAN<br>(2021)</span>
-            </div>
-
-		<div class="item" onclick="money_heist_sfive();">
-                <img src="https://spark00001.github.io/images/series-4.png" alt="Date">
-                <span>MONEY HEIST(SEASON 5)<br>(2021)</span>
-            </div>
-       
- <div class="item" onclick="free_guy();">
-                <img src="https://spark00001.github.io/images/movie-4.png" alt="Date">
-                <span> FREE GUY <br>(2021)</span>
-            </div>
- <script src="/spark/search.js"></script>
-    <script src="/js/livetv.js"></script>	
+<script src="/search.js"></script>
+<script src="/adamproject.js"></script>
+<script src="/searchdatabase.js"></script>
+<script src="/spark/search.js"></script>
 </body>
 </html>
