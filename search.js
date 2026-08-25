@@ -11,22 +11,7 @@
         }
     });
 });*/
-    // Block pinch zoom on mobile
-    document.addEventListener('touchmove', function (event) {
-        if (event.scale !== 1) { event.preventDefault(); }
-    }, { passive: false });
-
-    // Block Ctrl + Wheel on desktop
-    document.addEventListener('wheel', function (event) {
-        if (event.ctrlKey) { event.preventDefault(); }
-    }, { passive: false });
-
-    // Block Ctrl + Plus / Minus keys on desktop
-    document.addEventListener('keydown', function (event) {
-        if (event.ctrlKey && (event.key === '=' || event.key === '-' || event.key === '+' || event.key === '_')) {
-            event.preventDefault();
-        }
-    });
+    
 document.getElementById('searchInput').addEventListener('input', function() {
             const filter = this.value.toLowerCase();
             const items = document.querySelectorAll('.item');
