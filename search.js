@@ -52,6 +52,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 /* url -->*/
+function chaalbazhacker(){
+location.assign("/spark/chaalbazhacker.html");
+}
 function starsports(){
 location.assign("/spark/starsports.html");
 }
