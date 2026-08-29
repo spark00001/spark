@@ -37,8 +37,11 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 /* url -->*/
+function writtenanddirectedbygod(){
+location.assign("/spark/.html");
+}
 function chaalbazhacker(){
-location.assign("/spark/chaalbazhacker.html");
+location.assign("/spark/writtenanddirectedbygod.html");
 }
 function starsports(){
 location.assign("/spark/starsports.html");
