@@ -58,10 +58,13 @@
 <script src="/js/livetv.js"></script>
 <script src="/js/indian.js"></script>
   <script>
- var h = "";
-    h = livetvview();
+    ltv();
+    var h = "";
+    function ltv(){
+    h = livetvview()
     document.getElementById("export").innerHTML=h;
-    </script>
+    } 
+  </script>
 <script src="/js/universalsearch.js"></script>
 <script src="/js/catview.js"></script>
 <script src="/js/maintenance.js"></script>
