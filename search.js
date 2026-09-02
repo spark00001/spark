@@ -37,6 +37,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 
 /* url -->*/
+function chernobyl(){
+location.assign("/spark/chernobyl.html");
+}
 function writtenanddirectedbygod(){
 location.assign("/spark/writtenanddirectedbygod.html");
 }
