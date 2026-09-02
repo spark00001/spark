@@ -1,622 +1,1010 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chernobyl</title>
-  <link rel="stylesheet" href="https://spark00001.github.io/css/spark_player.css">
-  <style>
-    /* Base Container Styling */
-    .video-container {
-      position: relative;
-      background: #000;
-      overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      user-select: none;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chernobyl</title>
+    <link rel="stylesheet" href="https://spark00001.github.io/css/spark_player.css" />
+    <style>
+      /* Base Container Styling */
+      .video-container {
+        position: relative;
+        background: #000;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        user-select: none;
+        max-width: 1000px;
+        margin: 20px auto;
+        aspect-ratio: 16 / 9;
+      }
 
-    /* Inactivity & Hide Rules */
-    .video-container.hide-controls {
-      cursor: none;
-    }
+      video {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
 
-    .video-container.hide-controls .controls-overlay,
-    .video-container.hide-controls .lock-btn {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
+      /* Persistent Poster Overlay */
+      .poster-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 5;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
 
-    .controls-overlay,
-    .lock-btn {
-      transition: opacity 0.25s ease;
-    }
+      .poster-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-    /* Locked state control visibility */
-    .controls-overlay.locked {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
+      /* Big Center Play Button on Poster */
+      .poster-play-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px;
+        height: 64px;
+        background: rgba(229, 9, 20, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
 
-    /* Episodes Drawer */
-    .episodes-drawer {
-      position: absolute;
-      top: 0;
-      right: -340px;
-      width: 320px;
-      height: 100%;
-      background: rgba(18, 18, 18, 0.95);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      transition: right 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
-      color: #fff;
-    }
+      .poster-overlay:hover .poster-play-btn {
+        transform: translate(-50%, -50%) scale(1.1);
+        background: #e50914;
+      }
 
-    .episodes-drawer.open {
-      right: 0;
-    }
+      .poster-play-btn svg {
+        width: 32px;
+        height: 32px;
+        fill: #fff;
+        margin-left: 3px;
+      }
 
-    .drawer-header {
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+      /* Inactivity & Hide Rules */
+      .video-container.hide-controls {
+        cursor: none;
+      }
 
-    .drawer-header h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
+      .video-container.hide-controls .controls-overlay,
+      .video-container.hide-controls .lock-btn {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
 
-    .close-drawer-btn {
-      background: none;
-      border: none;
-      color: #aaa;
-      cursor: pointer;
-      font-size: 1.4rem;
-      line-height: 1;
-    }
+      .controls-overlay,
+      .lock-btn {
+        transition: opacity 0.25s ease;
+      }
 
-    .close-drawer-btn:hover {
-      color: #fff;
-    }
+      /* Locked state control visibility */
+      .controls-overlay.locked {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
 
-    /* Season Selector */
-    .season-selector-wrapper {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
+      /* Timeline & Buffering */
+      .timeline-container {
+        position: relative;
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: height 0.15s ease;
+      }
 
-    .season-select {
-      width: 100%;
-      padding: 8px 12px;
-      background: #2a2a2a;
-      border: 1px solid #444;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 0.9rem;
-      outline: none;
-    }
+      .timeline-container:hover {
+        height: 10px;
+      }
 
-    /* Episode List */
-    .episode-list {
-      flex: 1;
-      overflow-y: auto;
-      list-style: none;
-      margin: 0;
-      padding: 8px 0;
-    }
+      .timeline-buffer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.4);
+        width: 0%;
+        pointer-events: none;
+        transition: width 0.2s ease;
+      }
 
-    .episode-item {
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-left: 3px solid transparent;
-      transition: background 0.2s;
-    }
+      .timeline-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: #e50914;
+        width: 0%;
+        pointer-events: none;
+        z-index: 1;
+      }
 
-    .episode-item:hover {
-      background: rgba(255, 255, 255, 0.07);
-    }
+      /* Loading Spinner */
+      .loading-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top-color: #e50914;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        display: none;
+        z-index: 50;
+        pointer-events: none;
+      }
 
-    .episode-item.active {
-      background: rgba(255, 255, 255, 0.12);
-      border-left-color: #e50914;
-    }
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
 
-    .episode-info {
-      flex: 1;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      margin-right: 8px;
-    }
+      /* Stats for Nerds Panel */
+      .stats-overlay {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(10, 10, 10, 0.88);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 12px 16px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 0.78rem;
+        color: #00ff66;
+        z-index: 120;
+        display: none;
+        line-height: 1.5;
+        min-width: 260px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
 
-    .episode-title {
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
+      .stats-header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 4px;
+        margin-bottom: 6px;
+        color: #fff;
+        font-weight: bold;
+      }
 
-    .episode-meta {
-      font-size: 0.75rem;
-      color: #888;
-    }
+      .stats-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
 
-    /* Item & Control Buttons */
-    .ep-download-btn {
-      background: transparent;
-      border: none;
-      color: #aaa;
-      cursor: pointer;
-      padding: 6px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s, background 0.2s;
-    }
+      .stats-label {
+        color: #aaa;
+      }
 
-    .ep-download-btn:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.15);
-    }
+      /* Episodes Drawer */
+      .episodes-drawer {
+        position: absolute;
+        top: 0;
+        right: -360px;
+        width: 340px;
+        height: 100%;
+        background: rgba(18, 18, 18, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        transition: right 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
+        color: #fff;
+      }
 
-    .control-btn svg,
-    .ep-download-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-  </style>
-</head>
-<body>
+      .episodes-drawer.open {
+        right: 0;
+      }
 
-  <div class="video-container" id="videoContainer">
-    <!-- Lock Controls Button -->
-    <button class="lock-btn" id="lockBtn" title="Lock Screen UI (L)">
-      <svg id="unlockedIcon" viewBox="0 0 24 24"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg>
-      <svg id="lockedIcon" viewBox="0 0 24 24" style="display:none;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-    </button>
+      .drawer-header {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
 
-    <!-- HTML5 Video Player with nodownload restriction -->
-    <video id="videoPlayer" preload="metadata" playsinline controlsList="nodownload"></video>
+      .drawer-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
 
-    <!-- Episodes / Seasons Drawer -->
-    <aside class="episodes-drawer" id="episodesDrawer">
-      <div class="drawer-header">
-        <h3 id="seriesTitle">Episodes</h3>
-        <button class="close-drawer-btn" id="closeDrawerBtn">&times;</button>
+      .close-drawer-btn {
+        background: none;
+        border: none;
+        color: #aaa;
+        cursor: pointer;
+        font-size: 1.4rem;
+        line-height: 1;
+      }
+
+      .close-drawer-btn:hover {
+        color: #fff;
+      }
+
+      .drawer-actions {
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .dynamic-input-btn {
+        width: 100%;
+        padding: 6px;
+        background: #2a2a2a;
+        border: 1px dashed #666;
+        border-radius: 4px;
+        color: #ccc;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+
+      .dynamic-input-btn:hover {
+        background: #333;
+        color: #fff;
+        border-color: #999;
+      }
+
+      .season-selector-wrapper {
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .season-select {
+        width: 100%;
+        padding: 8px 12px;
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 0.9rem;
+        outline: none;
+      }
+
+      /* Episode List & Thumbnails */
+      .episode-list {
+        flex: 1;
+        overflow-y: auto;
+        list-style: none;
+        margin: 0;
+        padding: 8px 0;
+      }
+
+      .episode-item {
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-left: 3px solid transparent;
+        transition: background 0.2s;
+        cursor: pointer;
+      }
+
+      .episode-item:hover {
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .episode-item.active {
+        background: rgba(255, 255, 255, 0.12);
+        border-left-color: #e50914;
+      }
+
+      .episode-thumb-wrap {
+        width: 68px;
+        height: 42px;
+        border-radius: 4px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: #222;
+      }
+
+      .episode-thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .episode-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        overflow: hidden;
+      }
+
+      .episode-title {
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .episode-meta {
+        font-size: 0.72rem;
+        color: #888;
+      }
+
+      .ep-download-btn {
+        background: transparent;
+        border: none;
+        color: #aaa;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s, background 0.2s;
+        flex-shrink: 0;
+      }
+
+      .ep-download-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .control-btn svg,
+      .ep-download-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-container" id="videoContainer">
+      <!-- Dedicated Poster Backdrop with Center Play Button -->
+      <div class="poster-overlay" id="posterOverlay">
+        <div class="poster-play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+        </div>
       </div>
-      <div class="season-selector-wrapper">
-        <select class="season-select" id="seasonSelect"></select>
-      </div>
-      <ul class="episode-list" id="episodeList"></ul>
-    </aside>
 
-    <!-- Custom Controls UI -->
-    <div class="controls-overlay" id="controlsOverlay">
-      <!-- Progress Bar -->
-      <div class="timeline-container" id="timelineContainer">
-        <div class="timeline-progress" id="timelineProgress"></div>
+      <!-- Buffer / Stall Indicator -->
+      <div class="loading-spinner" id="loadingSpinner"></div>
+
+      <!-- Stats for Nerds Panel -->
+      <div class="stats-overlay" id="statsOverlay">
+        <div class="stats-header">
+          <span>Player Diagnostics</span>
+          <span style="cursor: pointer;" id="closeStatsBtn">&times;</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Resolution:</span>
+          <span id="statRes">-</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Buffer Health:</span>
+          <span id="statBufferHealth">0s (0%)</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Current / Total:</span>
+          <span id="statTime">-</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Dropped Frames:</span>
+          <span id="statDroppedFrames">0</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Network State:</span>
+          <span id="statNetwork">-</span>
+        </div>
       </div>
 
-      <!-- Button Controls -->
-      <div class="controls-row">
-        <div class="controls-left">
-          <!-- Play / Pause -->
-          <button class="control-btn" id="playBtn" title="Play/Pause (Space / K)">
-            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <!-- Lock Controls Button -->
+      <button class="lock-btn" id="lockBtn" title="Lock Screen UI (L)">
+        <svg id="unlockedIcon" viewBox="0 0 24 24">
+          <path
+            d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"
+          />
+        </svg>
+        <svg id="lockedIcon" viewBox="0 0 24 24" style="display: none;">
+          <path
+            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+          />
+        </svg>
+      </button>
+
+      <!-- HTML5 Video Player -->
+      <video id="videoPlayer" preload="auto" playsinline controlsList="nodownload"></video>
+
+      <!-- Episodes Drawer -->
+      <aside class="episodes-drawer" id="episodesDrawer">
+        <div class="drawer-header">
+          <h3 id="seriesTitle">Episodes</h3>
+          <button class="close-drawer-btn" id="closeDrawerBtn">&times;</button>
+        </div>
+        <div class="drawer-actions">
+          <button class="dynamic-input-btn" id="loadCustomStreamBtn">
+            + Load Dynamic Stream / Episode
           </button>
+        </div>
+        <div class="season-selector-wrapper">
+          <select class="season-select" id="seasonSelect"></select>
+        </div>
+        <ul class="episode-list" id="episodeList"></ul>
+      </aside>
 
-          <!-- Volume / Mute -->
-          <div class="volume-group">
-            <button class="control-btn" id="muteBtn" title="Mute (M)">
-              <svg id="volHighIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-              <svg id="volMuteIcon" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            </button>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1">
-          </div>
-
-          <!-- Time Display -->
-          <div class="time-display">
-            <span id="currentTime">00:00:00</span> / <span id="duration">00:00:00</span>
-          </div>
+      <!-- Custom Controls UI -->
+      <div class="controls-overlay" id="controlsOverlay">
+        <div class="timeline-container" id="timelineContainer">
+          <div class="timeline-buffer" id="timelineBuffer"></div>
+          <div class="timeline-progress" id="timelineProgress"></div>
         </div>
 
-        <div class="controls-right">
-          <!-- Current Episode Download Button -->
-          <button class="control-btn" id="currentDownloadBtn" title="Download Current Episode">
-            <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-          </button>
+        <div class="controls-row">
+          <div class="controls-left">
+            <button class="control-btn" id="playBtn" title="Play/Pause (Space / K)">
+              <svg id="playIcon" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            </button>
 
-          <!-- Playlist / Episodes Drawer Toggle -->
-          <button class="control-btn" id="drawerToggleBtn" title="Episodes & Seasons">
-            <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9l6 3.5L10 16z"/></svg>
-          </button>
+            <div class="volume-group">
+              <button class="control-btn" id="muteBtn" title="Mute (M)">
+                <svg id="volHighIcon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+                  />
+                </svg>
+                <svg id="volMuteIcon" viewBox="0 0 24 24" style="display: none;">
+                  <path
+                    d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"
+                  />
+                </svg>
+              </button>
+              <input
+                type="range"
+                class="volume-slider"
+                id="volumeSlider"
+                min="0"
+                max="1"
+                step="0.05"
+                value="1"
+              />
+            </div>
 
-          <!-- Fullscreen Toggle -->
-          <button class="control-btn" id="fullscreenBtn" title="Fullscreen (F)">
-            <svg id="enterFullscreenIcon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-            <svg id="exitFullscreenIcon" viewBox="0 0 24 24" style="display:none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
-          </button>
+            <div class="time-display">
+              <span id="currentTime">00:00:00</span> /
+              <span id="duration">00:00:00</span>
+              <span
+                id="bufferPercentBadge"
+                style="font-size: 0.75rem; color: #aaa; margin-left: 6px;"
+              >
+                (Buffer: 0%)
+              </span>
+            </div>
+          </div>
+
+          <div class="controls-right">
+            <button class="control-btn" id="statsToggleBtn" title="Statistics / Diagnostics">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"
+                />
+              </svg>
+            </button>
+
+            <button class="control-btn" id="currentDownloadBtn" title="Download Current Episode">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"
+                />
+              </svg>
+            </button>
+
+            <button class="control-btn" id="drawerToggleBtn" title="Episodes & Seasons">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9l6 3.5L10 16z"
+                />
+              </svg>
+            </button>
+
+            <button class="control-btn" id="fullscreenBtn" title="Fullscreen (F)">
+              <svg id="enterFullscreenIcon" viewBox="0 0 24 24">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+              </svg>
+              <svg id="exitFullscreenIcon" viewBox="0 0 24 24" style="display: none;">
+                <path
+                  d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    const seriesData = {
-      title: "Chernobyl",
-      seasons: [
-        {
-          seasonNumber: 1,
-          seasonName: "Season 1",
-          episodes: [
-            {
-              id: "s1e1",
-              title: "Episode 1: 1:23:45",
-              duration: "1:23:45",
-              src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e1.mkv",
-              downloadFileName: "Chernobyl.s1e1.mkv",
-              poster: "/images/chernobyl_thumbnail.png"
-            },
-            {
-              id: "s1e2",
-              title: "Episode 2: Please Remain Calm",
-              duration: "65m",
-              src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e2.mkv",
-              downloadFileName: "Chernobyl.s1e2.mkv",
-              poster: "/images/chernobyl_thumbnail.png"
-            },
-            {
-              id: "s1e3",
-              title: "Episode 3: Open Wide, O Earth",
-              duration: "61m",
-              src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e3.mkv",
-              downloadFileName: "Chernobyl.s1e3.mkv",
-              poster: "/images/chernobyl_thumbnail.png"
-            },
-            {
-              id: "s1e4",
-              title: "Episode 4: The Happiness of All Mankind",
-              duration: "70m",
-              src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e4.mkv",
-              downloadFileName: "Chernobyl.s1e4.mkv",
-              poster: "/images/chernobyl_thumbnail.png"
-            },
-            {
-              id: "s1e5",
-              title: "Episode 5: Vichnaya Pamyat",
-              duration: "71m",
-              src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e5.mkv",
-              downloadFileName: "Chernobyl.s1e5.mkv",
-              poster: "/images/chernobyl_thumbnail.png"
-            }
-          ]
-        }
-      ]
-    };
+    <script>
+      // Fallback poster generator if local paths are unavailable
+      const defaultPoster ="/images/chernobyl_thumbnail.png";
 
-    let currentSeasonIndex = 0;
-    let currentEpisodeIndex = 0;
-    let isLocked = false;
-    let hideControlsTimeout = null;
-
-    // Elements
-    const video = document.getElementById("videoPlayer");
-    const container = document.getElementById("videoContainer");
-    const playBtn = document.getElementById("playBtn");
-    const playIcon = document.getElementById("playIcon");
-    const pauseIcon = document.getElementById("pauseIcon");
-    const muteBtn = document.getElementById("muteBtn");
-    const volHighIcon = document.getElementById("volHighIcon");
-    const volMuteIcon = document.getElementById("volMuteIcon");
-    const volumeSlider = document.getElementById("volumeSlider");
-    const currentTimeEl = document.getElementById("currentTime");
-    const durationEl = document.getElementById("duration");
-    const timelineContainer = document.getElementById("timelineContainer");
-    const timelineProgress = document.getElementById("timelineProgress");
-    const fullscreenBtn = document.getElementById("fullscreenBtn");
-    const enterFullscreenIcon = document.getElementById("enterFullscreenIcon");
-    const exitFullscreenIcon = document.getElementById("exitFullscreenIcon");
-    const lockBtn = document.getElementById("lockBtn");
-    const unlockedIcon = document.getElementById("unlockedIcon");
-    const lockedIcon = document.getElementById("lockedIcon");
-    const controlsOverlay = document.getElementById("controlsOverlay");
-
-    // Drawer Elements
-    const seasonSelect = document.getElementById("seasonSelect");
-    const episodeList = document.getElementById("episodeList");
-    const episodesDrawer = document.getElementById("episodesDrawer");
-    const drawerToggleBtn = document.getElementById("drawerToggleBtn");
-    const closeDrawerBtn = document.getElementById("closeDrawerBtn");
-    const currentDownloadBtn = document.getElementById("currentDownloadBtn");
-
-    // Prevent context menu
-    container.addEventListener("contextmenu", (e) => e.preventDefault());
-
-    // --- IDLE CURSOR & CONTROLS AUTO-HIDE ---
-    function showControls() {
-      container.classList.remove("hide-controls");
-      clearTimeout(hideControlsTimeout);
-
-      // Hide only while video is actively playing or when locked
-      if (!video.paused || isLocked) {
-        hideControlsTimeout = setTimeout(() => {
-          if (!episodesDrawer.classList.contains("open")) {
-            container.classList.add("hide-controls");
+      const seriesData = {
+        title: "Chernobyl",
+        seasons: [
+          {
+            seasonNumber: 1,
+            seasonName: "Season 1",
+            episodes: [
+              {
+                id: "s1e1",
+                title: "Episode 1: 1:23:45",
+                duration: "1:23:45",
+                src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e1.mkv",
+                downloadFileName: "Chernobyl.s1e1.mkv",
+                poster: defaultPoster
+              },
+              {
+                id: "s1e2",
+                title: "Episode 2: Please Remain Calm",
+                duration: "65m",
+                src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e2.mkv",
+                downloadFileName: "Chernobyl.s1e2.mkv",
+                poster: defaultPoster
+              },
+              {
+                id: "s1e3",
+                title: "Episode 3: Open Wide, O Earth",
+                duration: "61m",
+                src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e3.mkv",
+                downloadFileName: "Chernobyl.s1e3.mkv",
+                poster: defaultPoster
+              },
+              {
+                id: "s1e4",
+                title: "Episode 4: The Happiness of All Mankind",
+                duration: "70m",
+                src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e4.mkv",
+                downloadFileName: "Chernobyl.s1e4.mkv",
+                poster: defaultPoster
+              },
+              {
+                id: "s1e5",
+                title: "Episode 5: Vichnaya Pamyat",
+                duration: "71m",
+                src: "https://github.com/spark00001/movie/raw/refs/heads/main/chernobyl.s1e5.mkv",
+                downloadFileName: "Chernobyl.s1e5.mkv",
+                poster: defaultPoster
+              }
+            ]
           }
-        }, 3000);
-      }
-    }
+        ]
+      };
 
-    container.addEventListener("mousemove", showControls);
-    container.addEventListener("mousedown", showControls);
-    container.addEventListener("touchstart", showControls, { passive: true });
-    container.addEventListener("mouseleave", () => {
-      if (!video.paused || isLocked) {
-        container.classList.add("hide-controls");
-      }
-    });
+      let currentSeasonIndex = 0;
+      let currentEpisodeIndex = 0;
+      let isLocked = false;
+      let hideControlsTimeout = null;
 
-    // --- PLAY / PAUSE LOGIC ---
-    function togglePlay() {
-      if (isLocked) return;
-      if (video.paused) {
+      // Elements
+      const video = document.getElementById("videoPlayer");
+      const container = document.getElementById("videoContainer");
+      const posterOverlay = document.getElementById("posterOverlay");
+      const playBtn = document.getElementById("playBtn");
+      const playIcon = document.getElementById("playIcon");
+      const pauseIcon = document.getElementById("pauseIcon");
+      const muteBtn = document.getElementById("muteBtn");
+      const volHighIcon = document.getElementById("volHighIcon");
+      const volMuteIcon = document.getElementById("volMuteIcon");
+      const volumeSlider = document.getElementById("volumeSlider");
+      const currentTimeEl = document.getElementById("currentTime");
+      const durationEl = document.getElementById("duration");
+      const timelineContainer = document.getElementById("timelineContainer");
+      const timelineProgress = document.getElementById("timelineProgress");
+      const timelineBuffer = document.getElementById("timelineBuffer");
+      const bufferPercentBadge = document.getElementById("bufferPercentBadge");
+      const loadingSpinner = document.getElementById("loadingSpinner");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const enterFullscreenIcon = document.getElementById("enterFullscreenIcon");
+      const exitFullscreenIcon = document.getElementById("exitFullscreenIcon");
+      const lockBtn = document.getElementById("lockBtn");
+      const unlockedIcon = document.getElementById("unlockedIcon");
+      const lockedIcon = document.getElementById("lockedIcon");
+      const controlsOverlay = document.getElementById("controlsOverlay");
+
+      // Drawer
+      const seasonSelect = document.getElementById("seasonSelect");
+      const episodeList = document.getElementById("episodeList");
+      const episodesDrawer = document.getElementById("episodesDrawer");
+      const drawerToggleBtn = document.getElementById("drawerToggleBtn");
+      const closeDrawerBtn = document.getElementById("closeDrawerBtn");
+      const currentDownloadBtn = document.getElementById("currentDownloadBtn");
+      const loadCustomStreamBtn = document.getElementById("loadCustomStreamBtn");
+
+      // Diagnostics
+      const statsOverlay = document.getElementById("statsOverlay");
+      const statsToggleBtn = document.getElementById("statsToggleBtn");
+      const closeStatsBtn = document.getElementById("closeStatsBtn");
+      const statRes = document.getElementById("statRes");
+      const statBufferHealth = document.getElementById("statBufferHealth");
+      const statTime = document.getElementById("statTime");
+      const statDroppedFrames = document.getElementById("statDroppedFrames");
+      const statNetwork = document.getElementById("statNetwork");
+
+      container.addEventListener("contextmenu", (e) => e.preventDefault());
+
+      // Auto-hide controls on mouse idle
+      function showControls() {
+        container.classList.remove("hide-controls");
+        clearTimeout(hideControlsTimeout);
+        if (!video.paused || isLocked) {
+          hideControlsTimeout = setTimeout(() => {
+            if (!episodesDrawer.classList.contains("open")) {
+              container.classList.add("hide-controls");
+            }
+          }, 3000);
+        }
+      }
+
+      container.addEventListener("mousemove", showControls);
+      container.addEventListener("mousedown", showControls);
+      container.addEventListener("touchstart", showControls, { passive: true });
+      container.addEventListener("mouseleave", () => {
+        if (!video.paused || isLocked) container.classList.add("hide-controls");
+      });
+
+      function togglePlay() {
+        if (isLocked) return;
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+
+      posterOverlay.addEventListener("click", () => {
+        if (isLocked) return;
         video.play();
-      } else {
-        video.pause();
-      }
-    }
-
-    playBtn.addEventListener("click", togglePlay);
-    video.addEventListener("click", togglePlay);
-
-    video.addEventListener("play", () => {
-      playIcon.style.display = "none";
-      pauseIcon.style.display = "block";
-      showControls();
-    });
-
-    video.addEventListener("pause", () => {
-      playIcon.style.display = "block";
-      pauseIcon.style.display = "none";
-      showControls();
-    });
-
-    // --- VOLUME CONTROL ---
-    muteBtn.addEventListener("click", () => {
-      if (isLocked) return;
-      video.muted = !video.muted;
-      updateVolumeUI();
-      showControls();
-    });
-
-    volumeSlider.addEventListener("input", (e) => {
-      if (isLocked) return;
-      video.volume = e.target.value;
-      video.muted = video.volume === 0;
-      updateVolumeUI();
-      showControls();
-    });
-
-    function updateVolumeUI() {
-      if (video.muted || video.volume === 0) {
-        volHighIcon.style.display = "none";
-        volMuteIcon.style.display = "block";
-        volumeSlider.value = 0;
-      } else {
-        volHighIcon.style.display = "block";
-        volMuteIcon.style.display = "none";
-        volumeSlider.value = video.volume;
-      }
-    }
-
-    // --- TIMELINE & TIME FORMATTING ---
-    function formatTime(seconds) {
-      const h = Math.floor(seconds / 3600);
-      const m = Math.floor((seconds % 3600) / 60);
-      const s = Math.floor(seconds % 60);
-      if (h > 0) {
-        return `${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-      }
-      return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-    }
-
-    video.addEventListener("timeupdate", () => {
-      if (!video.duration) return;
-      const pct = (video.currentTime / video.duration) * 100;
-      timelineProgress.style.width = `${pct}%`;
-      currentTimeEl.textContent = formatTime(video.currentTime);
-    });
-
-    video.addEventListener("loadedmetadata", () => {
-      durationEl.textContent = formatTime(video.duration);
-    });
-
-    timelineContainer.addEventListener("click", (e) => {
-      if (isLocked) return;
-      const rect = timelineContainer.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      video.currentTime = pos * video.duration;
-      showControls();
-    });
-
-    // --- FULLSCREEN ---
-    fullscreenBtn.addEventListener("click", () => {
-      if (isLocked) return;
-      if (!document.fullscreenElement) {
-        container.requestFullscreen().catch((err) => console.log(err));
-      } else {
-        document.exitFullscreen();
-      }
-      showControls();
-    });
-
-    document.addEventListener("fullscreenchange", () => {
-      if (document.fullscreenElement) {
-        enterFullscreenIcon.style.display = "none";
-        exitFullscreenIcon.style.display = "block";
-      } else {
-        enterFullscreenIcon.style.display = "block";
-        exitFullscreenIcon.style.display = "none";
-      }
-    });
-
-    // --- LOCK SCREEN FEATURE ---
-    lockBtn.addEventListener("click", () => {
-      isLocked = !isLocked;
-      if (isLocked) {
-        unlockedIcon.style.display = "none";
-        lockedIcon.style.display = "block";
-        controlsOverlay.classList.add("locked");
-        episodesDrawer.classList.remove("open");
-      } else {
-        unlockedIcon.style.display = "block";
-        lockedIcon.style.display = "none";
-        controlsOverlay.classList.remove("locked");
-      }
-      showControls();
-    });
-
-    // --- KEYBOARD SHORTCUTS ---
-    document.addEventListener("keydown", (e) => {
-      if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
-      if (e.key === "l" || e.key === "L") {
-        lockBtn.click();
-        return;
-      }
-      if (isLocked) return;
-
-      if (e.key === " " || e.key === "k" || e.key === "K") {
-        e.preventDefault();
-        togglePlay();
-      } else if (e.key === "f" || e.key === "F") {
-        fullscreenBtn.click();
-      } else if (e.key === "m" || e.key === "M") {
-        muteBtn.click();
-      } else if (e.key === "ArrowRight") {
-        video.currentTime = Math.min(video.duration, video.currentTime + 5);
-      } else if (e.key === "ArrowLeft") {
-        video.currentTime = Math.max(0, video.currentTime - 5);
-      }
-      showControls();
-    });
-
-    // --- DRAWER & DOWNLOAD ---
-    function triggerDownload(url, filename) {
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.setAttribute("download", filename || "episode-video");
-      anchor.target = "_blank";
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-    }
-
-    function initSeries() {
-      document.getElementById("seriesTitle").textContent = seriesData.title;
-
-      seasonSelect.innerHTML = "";
-      seriesData.seasons.forEach((season, index) => {
-        const opt = document.createElement("option");
-        opt.value = index;
-        opt.textContent = season.seasonName;
-        seasonSelect.appendChild(opt);
       });
 
-      seasonSelect.addEventListener("change", (e) => {
-        currentSeasonIndex = parseInt(e.target.value, 10);
+      playBtn.addEventListener("click", togglePlay);
+      video.addEventListener("click", togglePlay);
+
+      video.addEventListener("play", () => {
+        posterOverlay.classList.add("hidden");
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "block";
+        showControls();
+      });
+
+      video.addEventListener("pause", () => {
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+        showControls();
+      });
+
+      muteBtn.addEventListener("click", () => {
+        if (isLocked) return;
+        video.muted = !video.muted;
+        updateVolumeUI();
+        showControls();
+      });
+
+      volumeSlider.addEventListener("input", (e) => {
+        if (isLocked) return;
+        video.volume = e.target.value;
+        video.muted = video.volume === 0;
+        updateVolumeUI();
+        showControls();
+      });
+
+      function updateVolumeUI() {
+        if (video.muted || video.volume === 0) {
+          volHighIcon.style.display = "none";
+          volMuteIcon.style.display = "block";
+          volumeSlider.value = 0;
+        } else {
+          volHighIcon.style.display = "block";
+          volMuteIcon.style.display = "none";
+          volumeSlider.value = video.volume;
+        }
+      }
+
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return "00:00:00";
+        const h = Math.floor(seconds / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
+        const s = Math.floor(seconds % 60);
+        return `${h > 0 ? h + ":" : ""}${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
+      }
+
+      // Buffering & Progress calculations
+      function updateBuffer() {
+        if (!video.duration) return;
+        let currentBufferedEnd = 0;
+        for (let i = 0; i < video.buffered.length; i++) {
+          if (video.buffered.start(i) <= video.currentTime && video.currentTime <= video.buffered.end(i)) {
+            currentBufferedEnd = video.buffered.end(i);
+            break;
+          }
+        }
+        if (!currentBufferedEnd && video.buffered.length > 0) {
+          currentBufferedEnd = video.buffered.end(video.buffered.length - 1);
+        }
+        const bufferPct = Math.min(100, (currentBufferedEnd / video.duration) * 100);
+        timelineBuffer.style.width = `${bufferPct}%`;
+        bufferPercentBadge.textContent = `(Buffer: ${Math.round(bufferPct)}%)`;
+
+        if (statsOverlay.style.display === "block") updateStats(currentBufferedEnd);
+      }
+
+      video.addEventListener("progress", updateBuffer);
+      video.addEventListener("timeupdate", () => {
+        if (!video.duration) return;
+        const pct = (video.currentTime / video.duration) * 100;
+        timelineProgress.style.width = `${pct}%`;
+        currentTimeEl.textContent = formatTime(video.currentTime);
+        updateBuffer();
+      });
+
+      video.addEventListener("loadedmetadata", () => {
+        durationEl.textContent = formatTime(video.duration);
+        updateBuffer();
+      });
+
+      video.addEventListener("waiting", () => {
+        loadingSpinner.style.display = "block";
+      });
+      video.addEventListener("canplay", () => {
+        loadingSpinner.style.display = "none";
+      });
+      video.addEventListener("playing", () => {
+        loadingSpinner.style.display = "none";
+      });
+
+      timelineContainer.addEventListener("click", (e) => {
+        if (isLocked) return;
+        const rect = timelineContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        video.currentTime = pos * video.duration;
+        showControls();
+      });
+
+      fullscreenBtn.addEventListener("click", () => {
+        if (isLocked) return;
+        !document.fullscreenElement ? container.requestFullscreen().catch(() => {}) : document.exitFullscreen();
+      });
+
+      document.addEventListener("fullscreenchange", () => {
+        const isFull = !!document.fullscreenElement;
+        enterFullscreenIcon.style.display = isFull ? "none" : "block";
+        exitFullscreenIcon.style.display = isFull ? "block" : "none";
+      });
+
+      lockBtn.addEventListener("click", () => {
+        isLocked = !isLocked;
+        unlockedIcon.style.display = isLocked ? "none" : "block";
+        lockedIcon.style.display = isLocked ? "block" : "none";
+        controlsOverlay.classList.toggle("locked", isLocked);
+        if (isLocked) episodesDrawer.classList.remove("open");
+        showControls();
+      });
+
+      function updateStats(bufferedEnd) {
+        statRes.textContent = `${video.videoWidth || 0}x${video.videoHeight || 0}`;
+        const health = Math.max(0, bufferedEnd - video.currentTime);
+        const healthPct = video.duration ? Math.round((bufferedEnd / video.duration) * 100) : 0;
+        statBufferHealth.textContent = `${health.toFixed(1)}s (${healthPct}%)`;
+        statTime.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+        statDroppedFrames.textContent = video.getVideoPlaybackQuality
+          ? video.getVideoPlaybackQuality().droppedVideoFrames
+          : "N/A";
+
+        const states = ["EMPTY", "IDLE", "LOADING", "NO_SOURCE"];
+        statNetwork.textContent = states[video.networkState] || "UNKNOWN";
+      }
+
+      statsToggleBtn.addEventListener("click", () => {
+        const isOpen = statsOverlay.style.display === "block";
+        statsOverlay.style.display = isOpen ? "none" : "block";
+        if (!isOpen) updateBuffer();
+      });
+      closeStatsBtn.addEventListener("click", () => (statsOverlay.style.display = "none"));
+
+      // Keyboard Controls
+      document.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
+        if (e.key === "l" || e.key === "L") {
+          lockBtn.click();
+          return;
+        }
+        if (isLocked) return;
+
+        if (e.key === " " || e.key === "k" || e.key === "K") {
+          e.preventDefault();
+          togglePlay();
+        } else if (e.key === "f" || e.key === "F") {
+          fullscreenBtn.click();
+        } else if (e.key === "m" || e.key === "M") {
+          muteBtn.click();
+        } else if (e.key === "ArrowRight") {
+          video.currentTime = Math.min(video.duration, video.currentTime + 5);
+        } else if (e.key === "ArrowLeft") {
+          video.currentTime = Math.max(0, video.currentTime - 5);
+        }
+        showControls();
+      });
+
+      function triggerDownload(url, filename) {
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.setAttribute("download", filename || "episode-video");
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+      }
+
+      loadCustomStreamBtn.addEventListener("click", () => {
+        const customUrl = prompt("Enter Direct Video Stream URL (.mp4, .mkv, .webm):");
+        if (!customUrl) return;
+        const customTitle = prompt("Enter Title for this stream:", "Custom Dynamic Episode") || "Custom Video";
+        const customPoster = prompt("Enter Poster / Thumbnail Image URL (optional):") || defaultPoster;
+
+        const currentSeason = seriesData.seasons[currentSeasonIndex];
+        const newEp = {
+          id: "dynamic_" + Date.now(),
+          title: customTitle,
+          duration: "Live/Stream",
+          src: customUrl,
+          downloadFileName: "custom_stream.mp4",
+          poster: customPoster
+        };
+        currentSeason.episodes.push(newEp);
         renderEpisodeList();
+        loadEpisode(currentSeasonIndex, currentSeason.episodes.length - 1, true);
       });
 
-      renderEpisodeList();
-      loadEpisode(0, 0, false);
-    }
+      function initSeries() {
+        document.getElementById("seriesTitle").textContent = seriesData.title;
 
-    function renderEpisodeList() {
-      episodeList.innerHTML = "";
-      const episodes = seriesData.seasons[currentSeasonIndex].episodes;
-
-      episodes.forEach((ep, index) => {
-        const li = document.createElement("li");
-        li.className = `episode-item ${index === currentEpisodeIndex ? "active" : ""}`;
-
-        const infoDiv = document.createElement("div");
-        infoDiv.className = "episode-info";
-        infoDiv.innerHTML = `
-          <div class="episode-title">${ep.title}</div>
-          <div class="episode-meta">Duration: ${ep.duration}</div>
-        `;
-        infoDiv.addEventListener("click", () => {
-          loadEpisode(currentSeasonIndex, index, true);
+        seasonSelect.innerHTML = "";
+        seriesData.seasons.forEach((season, index) => {
+          const opt = document.createElement("option");
+          opt.value = index;
+          opt.textContent = season.seasonName;
+          seasonSelect.appendChild(opt);
         });
 
-        const dlBtn = document.createElement("button");
-        dlBtn.className = "ep-download-btn";
-        dlBtn.title = `Download ${ep.title}`;
-        dlBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>`;
-        dlBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          triggerDownload(ep.src, ep.downloadFileName);
+        seasonSelect.addEventListener("change", (e) => {
+          currentSeasonIndex = parseInt(e.target.value, 10);
+          renderEpisodeList();
         });
 
-        li.appendChild(infoDiv);
-        li.appendChild(dlBtn);
-        episodeList.appendChild(li);
+        renderEpisodeList();
+        loadEpisode(0, 0, false);
+      }
+
+      function renderEpisodeList() {
+        episodeList.innerHTML = "";
+        const episodes = seriesData.seasons[currentSeasonIndex].episodes;
+
+        episodes.forEach((ep, index) => {
+          const li = document.createElement("li");
+          li.className = `episode-item ${index === currentEpisodeIndex ? "active" : ""}`;
+
+          // Thumbnail Box
+          const thumbWrap = document.createElement("div");
+          thumbWrap.className = "episode-thumb-wrap";
+          const thumbImg = document.createElement("img");
+          thumbImg.src = ep.poster || defaultPoster;
+          thumbImg.alt = ep.title;
+          thumbImg.onerror = () => {
+            thumbImg.src = defaultPoster;
+          };
+          thumbWrap.appendChild(thumbImg);
+
+          // Info Box
+          const infoDiv = document.createElement("div");
+          infoDiv.className = "episode-info";
+          infoDiv.innerHTML = `
+            <div class="episode-title">${ep.title}</div>
+            <div class="episode-meta">Duration: ${ep.duration}</div>
+          `;
+
+          const dlBtn = document.createElement("button");
+          dlBtn.className = "ep-download-btn";
+          dlBtn.title = `Download ${ep.title}`;
+          dlBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>`;
+          dlBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            triggerDownload(ep.src, ep.downloadFileName);
+          });
+
+          li.appendChild(thumbWrap);
+          li.appendChild(infoDiv);
+          li.appendChild(dlBtn);
+
+          li.addEventListener("click", () => {
+            loadEpisode(currentSeasonIndex, index, true);
+          });
+
+          episodeList.appendChild(li);
+        });
+      }
+
+      function loadEpisode(seasonIdx, epIdx, autoplay = true) {
+        currentSeasonIndex = seasonIdx;
+        currentEpisodeIndex = epIdx;
+        seasonSelect.value = seasonIdx;
+
+        const ep = seriesData.seasons[seasonIdx].episodes[epIdx];
+        const posterSrc = ep.poster || defaultPoster;
+
+        // Reset timeline buffer and assign native video poster
+        timelineBuffer.style.width = "0%";
+        bufferPercentBadge.textContent = "(Buffer: 0%)";
+
+        video.src = ep.src;
+        video.poster = posterSrc;
+        video.load();
+
+        // Update persistent poster overlay
+        posterOverlay.style.backgroundImage = `url("${posterSrc}")`;
+
+        if (autoplay) {
+          posterOverlay.classList.add("hidden");
+          video.play().catch(() => {});
+        } else {
+          posterOverlay.classList.remove("hidden");
+        }
+
+        renderEpisodeList();
+        showControls();
+      }
+
+      currentDownloadBtn.addEventListener("click", () => {
+        const currentEp = seriesData.seasons[currentSeasonIndex].episodes[currentEpisodeIndex];
+        if (currentEp) triggerDownload(currentEp.src, currentEp.downloadFileName);
       });
-    }
 
-    function loadEpisode(seasonIdx, epIdx, autoplay = true) {
-      currentSeasonIndex = seasonIdx;
-      currentEpisodeIndex = epIdx;
-      seasonSelect.value = seasonIdx;
+      drawerToggleBtn.addEventListener("click", () => {
+        episodesDrawer.classList.toggle("open");
+        showControls();
+      });
 
-      const ep = seriesData.seasons[seasonIdx].episodes[epIdx];
-      video.src = ep.src;
-      video.load();
+      closeDrawerBtn.addEventListener("click", () => {
+        episodesDrawer.classList.remove("open");
+        showControls();
+      });
 
-      if (autoplay) {
-        video.play().catch(() => {});
-      }
+      video.addEventListener("ended", () => {
+        const currentSeason = seriesData.seasons[currentSeasonIndex];
+        if (currentEpisodeIndex + 1 < currentSeason.episodes.length) {
+          loadEpisode(currentSeasonIndex, currentEpisodeIndex + 1, true);
+        }
+      });
 
-      renderEpisodeList();
-      showControls();
-    }
-
-    currentDownloadBtn.addEventListener("click", () => {
-      const currentEp = seriesData.seasons[currentSeasonIndex].episodes[currentEpisodeIndex];
-      if (currentEp) {
-        triggerDownload(currentEp.src, currentEp.downloadFileName);
-      }
-    });
-
-    drawerToggleBtn.addEventListener("click", () => {
-      episodesDrawer.classList.toggle("open");
-      showControls();
-    });
-
-    closeDrawerBtn.addEventListener("click", () => {
-      episodesDrawer.classList.remove("open");
-      showControls();
-    });
-
-    video.addEventListener("ended", () => {
-      const currentSeason = seriesData.seasons[currentSeasonIndex];
-      if (currentEpisodeIndex + 1 < currentSeason.episodes.length) {
-        loadEpisode(currentSeasonIndex, currentEpisodeIndex + 1, true);
-      }
-    });
-
-    initSeries();
-  </script>
-</body>
+      initSeries();
+    </script>
+  </body>
 </html>
