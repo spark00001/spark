@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Chernobyl</title>
     <link rel="stylesheet" href="https://spark00001.github.io/css/spark_player.css" />
     <style>
@@ -198,20 +198,36 @@
         color: #aaa;
       }
 
-      /* Episodes Drawer */
+      /* Drawer Backdrop Overlay */
+      .drawer-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 95;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .drawer-backdrop.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Responsive Desktop & Mobile Episodes Drawer */
       .episodes-drawer {
         position: absolute;
         top: 0;
-        right: -360px;
-        width: 340px;
+        right: -380px;
+        width: 360px;
         height: 100%;
-        background: rgba(18, 18, 18, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(18, 18, 18, 0.98);
+        backdrop-filter: blur(14px);
         z-index: 100;
-        transition: right 0.3s ease;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), right 0.35s ease;
         display: flex;
         flex-direction: column;
-        box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
+        box-shadow: -6px 0 25px rgba(0, 0, 0, 0.8);
         color: #fff;
       }
 
@@ -220,105 +236,114 @@
       }
 
       .drawer-header {
-        padding: 16px;
+        padding: 16px 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .drawer-header h3 {
         margin: 0;
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
       }
 
       .close-drawer-btn {
-        background: none;
+        background: rgba(255, 255, 255, 0.1);
         border: none;
-        color: #aaa;
+        color: #eee;
         cursor: pointer;
-        font-size: 1.4rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
         line-height: 1;
+        transition: background 0.2s;
       }
 
-      .close-drawer-btn:hover {
-        color: #fff;
+      .close-drawer-btn:active {
+        background: rgba(255, 255, 255, 0.25);
       }
 
-      .drawer-actions {
+      /* Mobile-Friendly Season Pills Horizontal Bar */
+      .season-pills-bar {
+        display: flex;
+        gap: 8px;
         padding: 10px 16px;
+        overflow-x: auto;
+        white-space: nowrap;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
-      .dynamic-input-btn {
-        width: 100%;
-        padding: 6px;
-        background: #2a2a2a;
-        border: 1px dashed #666;
-        border-radius: 4px;
-        color: #ccc;
-        font-size: 0.8rem;
+      .season-pills-bar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .season-pill {
+        background: #252525;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
         cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
       }
 
-      .dynamic-input-btn:hover {
-        background: #333;
+      .season-pill.active {
+        background: #e50914;
         color: #fff;
-        border-color: #999;
+        border-color: #e50914;
+        box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4);
       }
 
-      .season-selector-wrapper {
-        padding: 12px 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .season-select {
-        width: 100%;
-        padding: 8px 12px;
-        background: #2a2a2a;
-        border: 1px solid #444;
-        border-radius: 6px;
-        color: #fff;
-        font-size: 0.9rem;
-        outline: none;
-      }
-
-      /* Episode List & Thumbnails */
+      /* Episode List Items */
       .episode-list {
         flex: 1;
         overflow-y: auto;
         list-style: none;
         margin: 0;
         padding: 8px 0;
+        -webkit-overflow-scrolling: touch;
       }
 
       .episode-item {
-        padding: 8px 14px;
+        padding: 12px 18px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        border-left: 3px solid transparent;
+        gap: 14px;
+        border-left: 4px solid transparent;
         transition: background 0.2s;
         cursor: pointer;
+        position: relative;
       }
 
-      .episode-item:hover {
-        background: rgba(255, 255, 255, 0.07);
+      .episode-item:active {
+        background: rgba(255, 255, 255, 0.14);
       }
 
       .episode-item.active {
-        background: rgba(255, 255, 255, 0.12);
+        background: rgba(229, 9, 20, 0.12);
         border-left-color: #e50914;
       }
 
       .episode-thumb-wrap {
-        width: 68px;
-        height: 42px;
-        border-radius: 4px;
+        width: 86px;
+        height: 52px;
+        border-radius: 6px;
         overflow: hidden;
         flex-shrink: 0;
         background: #222;
+        position: relative;
       }
 
       .episode-thumb-wrap img {
@@ -328,33 +353,57 @@
         display: block;
       }
 
+      .playing-indicator-badge {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .playing-indicator-badge svg {
+        width: 22px;
+        height: 22px;
+        fill: #e50914;
+      }
+
+      .episode-item.active .playing-indicator-badge {
+        display: flex;
+      }
+
       .episode-info {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 3px;
-        overflow: hidden;
+        gap: 4px;
+        min-width: 0;
       }
 
       .episode-title {
-        font-size: 0.85rem;
-        font-weight: 500;
+        font-size: 0.92rem;
+        font-weight: 600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        color: #f1f1f1;
+      }
+
+      .episode-item.active .episode-title {
+        color: #ff3b47;
       }
 
       .episode-meta {
-        font-size: 0.72rem;
-        color: #888;
+        font-size: 0.78rem;
+        color: #999;
       }
 
       .ep-download-btn {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.05);
         border: none;
-        color: #aaa;
+        color: #bbb;
         cursor: pointer;
-        padding: 6px;
+        padding: 10px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -363,9 +412,9 @@
         flex-shrink: 0;
       }
 
-      .ep-download-btn:hover {
+      .ep-download-btn:active {
         color: #fff;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.2);
       }
 
       .control-btn svg,
@@ -374,10 +423,49 @@
         height: 20px;
         fill: currentColor;
       }
+
+      /* Mobile Drawer Behavior (Bottom Sheet Modal) */
+      @media (max-width: 768px) {
+        .video-container {
+          margin: 0;
+          max-width: 100%;
+          border-radius: 0;
+        }
+
+        .episodes-drawer {
+          top: auto;
+          bottom: -100%;
+          right: 0;
+          left: 0;
+          width: 100%;
+          height: 75%;
+          max-height: 520px;
+          border-top-left-radius: 18px;
+          border-top-right-radius: 18px;
+          transition: bottom 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+
+        .episodes-drawer.open {
+          bottom: 0;
+          right: 0;
+        }
+
+        /* Pull-down drag bar indicator for mobile */
+        .drawer-drag-pill {
+          width: 38px;
+          height: 5px;
+          background: rgba(255, 255, 255, 0.25);
+          border-radius: 3px;
+          margin: 8px auto 0 auto;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="video-container" id="videoContainer">
+      <!-- Backdrop Dimmer for Episodes -->
+      <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
       <!-- Dedicated Poster Backdrop with Center Play Button -->
       <div class="poster-overlay" id="posterOverlay">
         <div class="poster-play-btn">
@@ -433,20 +521,15 @@
       <!-- HTML5 Video Player -->
       <video id="videoPlayer" preload="auto" playsinline controlsList="nodownload"></video>
 
-      <!-- Episodes Drawer -->
+      <!-- Easy Mobile-Friendly Episodes Drawer / Bottom Sheet -->
       <aside class="episodes-drawer" id="episodesDrawer">
+        <div class="drawer-drag-pill"></div>
         <div class="drawer-header">
           <h3 id="seriesTitle">Episodes</h3>
-          <button class="close-drawer-btn" id="closeDrawerBtn">&times;</button>
+          <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Close">&times;</button>
         </div>
-        <div class="drawer-actions">
-          <button class="dynamic-input-btn" id="loadCustomStreamBtn">
-            + Load Dynamic Stream / Episode
-          </button>
-        </div>
-        <div class="season-selector-wrapper">
-          <select class="season-select" id="seasonSelect"></select>
-        </div>
+        <!-- Horizontal Season Switcher Pills -->
+        <div class="season-pills-bar" id="seasonPillsBar"></div>
         <ul class="episode-list" id="episodeList"></ul>
       </aside>
 
@@ -545,8 +628,7 @@
     </div>
 
     <script>
-      // Fallback poster generator if local paths are unavailable
-      const defaultPoster ="/images/chernobyl_thumbnail.png";
+      const defaultPoster = "/images/chernobyl_thumbnail.png";
 
       const seriesData = {
         title: "Chernobyl",
@@ -631,14 +713,14 @@
       const lockedIcon = document.getElementById("lockedIcon");
       const controlsOverlay = document.getElementById("controlsOverlay");
 
-      // Drawer
-      const seasonSelect = document.getElementById("seasonSelect");
+      // Mobile Drawer & Overlay Elements
+      const seasonPillsBar = document.getElementById("seasonPillsBar");
       const episodeList = document.getElementById("episodeList");
       const episodesDrawer = document.getElementById("episodesDrawer");
       const drawerToggleBtn = document.getElementById("drawerToggleBtn");
       const closeDrawerBtn = document.getElementById("closeDrawerBtn");
+      const drawerBackdrop = document.getElementById("drawerBackdrop");
       const currentDownloadBtn = document.getElementById("currentDownloadBtn");
-      const loadCustomStreamBtn = document.getElementById("loadCustomStreamBtn");
 
       // Diagnostics
       const statsOverlay = document.getElementById("statsOverlay");
@@ -652,7 +734,6 @@
 
       container.addEventListener("contextmenu", (e) => e.preventDefault());
 
-      // Auto-hide controls on mouse idle
       function showControls() {
         container.classList.remove("hide-controls");
         clearTimeout(hideControlsTimeout);
@@ -661,7 +742,7 @@
             if (!episodesDrawer.classList.contains("open")) {
               container.classList.add("hide-controls");
             }
-          }, 3000);
+          }, 3500);
         }
       }
 
@@ -737,7 +818,6 @@
         return `${h > 0 ? h + ":" : ""}${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
       }
 
-      // Buffering & Progress calculations
       function updateBuffer() {
         if (!video.duration) return;
         let currentBufferedEnd = 0;
@@ -805,7 +885,7 @@
         unlockedIcon.style.display = isLocked ? "none" : "block";
         lockedIcon.style.display = isLocked ? "block" : "none";
         controlsOverlay.classList.toggle("locked", isLocked);
-        if (isLocked) episodesDrawer.classList.remove("open");
+        if (isLocked) closeDrawer();
         showControls();
       });
 
@@ -830,30 +910,6 @@
       });
       closeStatsBtn.addEventListener("click", () => (statsOverlay.style.display = "none"));
 
-      // Keyboard Controls
-      document.addEventListener("keydown", (e) => {
-        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
-        if (e.key === "l" || e.key === "L") {
-          lockBtn.click();
-          return;
-        }
-        if (isLocked) return;
-
-        if (e.key === " " || e.key === "k" || e.key === "K") {
-          e.preventDefault();
-          togglePlay();
-        } else if (e.key === "f" || e.key === "F") {
-          fullscreenBtn.click();
-        } else if (e.key === "m" || e.key === "M") {
-          muteBtn.click();
-        } else if (e.key === "ArrowRight") {
-          video.currentTime = Math.min(video.duration, video.currentTime + 5);
-        } else if (e.key === "ArrowLeft") {
-          video.currentTime = Math.max(0, video.currentTime - 5);
-        }
-        showControls();
-      });
-
       function triggerDownload(url, filename) {
         const anchor = document.createElement("a");
         anchor.href = url;
@@ -864,44 +920,45 @@
         document.body.removeChild(anchor);
       }
 
-      loadCustomStreamBtn.addEventListener("click", () => {
-        const customUrl = prompt("Enter Direct Video Stream URL (.mp4, .mkv, .webm):");
-        if (!customUrl) return;
-        const customTitle = prompt("Enter Title for this stream:", "Custom Dynamic Episode") || "Custom Video";
-        const customPoster = prompt("Enter Poster / Thumbnail Image URL (optional):") || defaultPoster;
+      // Drawer Open / Close Handlers
+      function openDrawer() {
+        episodesDrawer.classList.add("open");
+        drawerBackdrop.classList.add("active");
+        showControls();
 
-        const currentSeason = seriesData.seasons[currentSeasonIndex];
-        const newEp = {
-          id: "dynamic_" + Date.now(),
-          title: customTitle,
-          duration: "Live/Stream",
-          src: customUrl,
-          downloadFileName: "custom_stream.mp4",
-          poster: customPoster
-        };
-        currentSeason.episodes.push(newEp);
-        renderEpisodeList();
-        loadEpisode(currentSeasonIndex, currentSeason.episodes.length - 1, true);
-      });
+        // Auto scroll to currently playing episode
+        setTimeout(() => {
+          const activeEl = episodeList.querySelector(".episode-item.active");
+          if (activeEl) {
+            activeEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        }, 150);
+      }
 
-      function initSeries() {
-        document.getElementById("seriesTitle").textContent = seriesData.title;
+      function closeDrawer() {
+        episodesDrawer.classList.remove("open");
+        drawerBackdrop.classList.remove("active");
+        showControls();
+      }
 
-        seasonSelect.innerHTML = "";
+      drawerToggleBtn.addEventListener("click", openDrawer);
+      closeDrawerBtn.addEventListener("click", closeDrawer);
+      drawerBackdrop.addEventListener("click", closeDrawer);
+
+      // Render Thumb-Friendly Horizontal Season Pills
+      function renderSeasonPills() {
+        seasonPillsBar.innerHTML = "";
         seriesData.seasons.forEach((season, index) => {
-          const opt = document.createElement("option");
-          opt.value = index;
-          opt.textContent = season.seasonName;
-          seasonSelect.appendChild(opt);
+          const pill = document.createElement("button");
+          pill.className = `season-pill ${index === currentSeasonIndex ? "active" : ""}`;
+          pill.textContent = season.seasonName;
+          pill.addEventListener("click", () => {
+            currentSeasonIndex = index;
+            renderSeasonPills();
+            renderEpisodeList();
+          });
+          seasonPillsBar.appendChild(pill);
         });
-
-        seasonSelect.addEventListener("change", (e) => {
-          currentSeasonIndex = parseInt(e.target.value, 10);
-          renderEpisodeList();
-        });
-
-        renderEpisodeList();
-        loadEpisode(0, 0, false);
       }
 
       function renderEpisodeList() {
@@ -910,9 +967,10 @@
 
         episodes.forEach((ep, index) => {
           const li = document.createElement("li");
-          li.className = `episode-item ${index === currentEpisodeIndex ? "active" : ""}`;
+          const isActive = index === currentEpisodeIndex;
+          li.className = `episode-item ${isActive ? "active" : ""}`;
 
-          // Thumbnail Box
+          // Thumbnail with overlay play icon for active state
           const thumbWrap = document.createElement("div");
           thumbWrap.className = "episode-thumb-wrap";
           const thumbImg = document.createElement("img");
@@ -921,16 +979,23 @@
           thumbImg.onerror = () => {
             thumbImg.src = defaultPoster;
           };
+
+          const playingBadge = document.createElement("div");
+          playingBadge.className = "playing-indicator-badge";
+          playingBadge.innerHTML = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+
           thumbWrap.appendChild(thumbImg);
+          thumbWrap.appendChild(playingBadge);
 
           // Info Box
           const infoDiv = document.createElement("div");
           infoDiv.className = "episode-info";
           infoDiv.innerHTML = `
             <div class="episode-title">${ep.title}</div>
-            <div class="episode-meta">Duration: ${ep.duration}</div>
+            <div class="episode-meta">${ep.duration}</div>
           `;
 
+          // Download Action
           const dlBtn = document.createElement("button");
           dlBtn.className = "ep-download-btn";
           dlBtn.title = `Download ${ep.title}`;
@@ -946,6 +1011,10 @@
 
           li.addEventListener("click", () => {
             loadEpisode(currentSeasonIndex, index, true);
+            // On mobile, close drawer automatically once an episode is picked
+            if (window.innerWidth <= 768) {
+              closeDrawer();
+            }
           });
 
           episodeList.appendChild(li);
@@ -955,12 +1024,10 @@
       function loadEpisode(seasonIdx, epIdx, autoplay = true) {
         currentSeasonIndex = seasonIdx;
         currentEpisodeIndex = epIdx;
-        seasonSelect.value = seasonIdx;
 
         const ep = seriesData.seasons[seasonIdx].episodes[epIdx];
         const posterSrc = ep.poster || defaultPoster;
 
-        // Reset timeline buffer and assign native video poster
         timelineBuffer.style.width = "0%";
         bufferPercentBadge.textContent = "(Buffer: 0%)";
 
@@ -968,7 +1035,6 @@
         video.poster = posterSrc;
         video.load();
 
-        // Update persistent poster overlay
         posterOverlay.style.backgroundImage = `url("${posterSrc}")`;
 
         if (autoplay) {
@@ -978,23 +1044,21 @@
           posterOverlay.classList.remove("hidden");
         }
 
+        renderSeasonPills();
         renderEpisodeList();
         showControls();
+      }
+
+      function initSeries() {
+        document.getElementById("seriesTitle").textContent = seriesData.title;
+        renderSeasonPills();
+        renderEpisodeList();
+        loadEpisode(0, 0, false);
       }
 
       currentDownloadBtn.addEventListener("click", () => {
         const currentEp = seriesData.seasons[currentSeasonIndex].episodes[currentEpisodeIndex];
         if (currentEp) triggerDownload(currentEp.src, currentEp.downloadFileName);
-      });
-
-      drawerToggleBtn.addEventListener("click", () => {
-        episodesDrawer.classList.toggle("open");
-        showControls();
-      });
-
-      closeDrawerBtn.addEventListener("click", () => {
-        episodesDrawer.classList.remove("open");
-        showControls();
       });
 
       video.addEventListener("ended", () => {
