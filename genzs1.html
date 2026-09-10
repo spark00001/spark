@@ -1,3 +1,815 @@
-<script>
-  location.assign("https://www.mxplayer.in/show/watch-gen-z/season-1/gen-z-ep-1-online-584ff3745eba1b08dd0c11db3e34ee96");
-</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Gen Z Player</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        overflow: hidden;
+        user-select: none;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      /* Inactivity Auto-Hide */
+      .video-container.hide-controls {
+        cursor: none;
+      }
+
+      .video-container.hide-controls .controls-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .video-container.hide-controls .lock-toggle-btn {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Big Play Overlay */
+      .poster-overlay {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .poster-overlay.hidden {
+        display: none;
+      }
+
+      .poster-play-btn {
+        width: 68px;
+        height: 68px;
+        background: #e50914;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+      }
+
+      .poster-play-btn svg {
+        width: 34px;
+        height: 34px;
+        fill: #fff;
+        margin-left: 4px;
+      }
+
+      /* Dedicated Floating Lock Button */
+      .lock-toggle-btn {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 45;
+        background: rgba(20, 20, 20, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: opacity 0.3s ease, background 0.2s ease;
+      }
+
+      .lock-toggle-btn:hover {
+        background: rgba(229, 9, 20, 0.9);
+      }
+
+      .lock-toggle-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: #fff;
+      }
+
+      /* Bottom Controls Overlay */
+      .controls-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        padding: 10px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Locked State */
+      .controls-overlay.locked-mode {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* Progress Bar */
+      .timeline-container {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+        position: relative;
+        border-radius: 3px;
+      }
+
+      .timeline-progress {
+        height: 100%;
+        background: #e50914;
+        width: 0%;
+        border-radius: 3px;
+      }
+
+      .controls-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .controls-left,
+      .controls-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .control-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .control-btn svg {
+        width: 22px;
+        height: 22px;
+        fill: #fff;
+      }
+
+      .time-display {
+        color: #eee;
+        font-size: 0.85rem;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Audio Selection Popup */
+      .audio-menu-wrapper {
+        position: relative;
+      }
+
+      .audio-menu-popup {
+        position: absolute;
+        bottom: 40px;
+        right: 0;
+        background: rgba(20, 20, 20, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        padding: 6px 0;
+        min-width: 180px;
+        display: none;
+        z-index: 60;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+      }
+
+      .audio-menu-popup.open {
+        display: block;
+      }
+
+      .audio-menu-item {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        color: #ddd;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .audio-menu-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .audio-menu-item.active {
+        color: #e50914;
+        font-weight: bold;
+      }
+
+      /* Drawer */
+      .episodes-drawer {
+        position: absolute;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100%;
+        background: rgba(20, 20, 20, 0.98);
+        z-index: 50;
+        transition: right 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+      }
+
+      .episodes-drawer.open {
+        right: 0;
+      }
+
+      .drawer-header {
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .episode-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+      }
+
+      .episode-item {
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+      }
+
+      .episode-item.active {
+        background: rgba(229, 9, 20, 0.2);
+        color: #e50914;
+      }
+
+      /* Visual Status Toast (Lock/Volume/Seek Alerts) */
+      .player-toast {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 15, 15, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 8px 18px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+        z-index: 100;
+        display: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+      }
+
+      .error-toast {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(229, 9, 20, 0.95);
+        color: #fff;
+        padding: 8px 16px;
+        font-size: 0.82rem;
+        border-radius: 4px;
+        z-index: 101;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-container" id="videoContainer" tabindex="0">
+      <div class="error-toast" id="errorToast"></div>
+      <div class="player-toast" id="playerToast"></div>
+
+      <!-- Dedicated Lock Toggle Button -->
+      <button class="lock-toggle-btn" id="lockToggleBtn" title="Lock Player (L)">
+        <svg id="unlockedIcon" viewBox="0 0 24 24">
+          <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/>
+        </svg>
+        <svg id="lockedIcon" viewBox="0 0 24 24" style="display: none;">
+          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+        </svg>
+      </button>
+
+      <!-- Poster & Big Play Button -->
+      <div class="poster-overlay" id="posterOverlay">
+        <div class="poster-play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+
+      <!-- Media Elements -->
+      <video id="videoPlayer" playsinline preload="metadata"></video>
+      <audio id="audioPlayer" preload="metadata"></audio>
+
+      <!-- Episode Drawer -->
+      <aside class="episodes-drawer" id="episodesDrawer">
+        <div class="drawer-header">
+          <span>Select Episode</span>
+          <button class="control-btn" id="closeDrawerBtn">&times;</button>
+        </div>
+        <ul class="episode-list" id="episodeList"></ul>
+      </aside>
+
+      <!-- Bottom Controls -->
+      <div class="controls-overlay" id="controlsOverlay">
+        <div class="timeline-container" id="timelineContainer">
+          <div class="timeline-progress" id="timelineProgress"></div>
+        </div>
+
+        <div class="controls-row">
+          <div class="controls-left">
+            <button class="control-btn" id="playBtn" title="Play/Pause (Space/K)">
+              <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+
+            <button class="control-btn" id="muteBtn" title="Mute/Unmute (M)">
+              <svg id="volIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+            </button>
+
+            <div class="time-display">
+              <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+            </div>
+          </div>
+
+          <div class="controls-right">
+            <!-- Audio Track Selector Button -->
+            <div class="audio-menu-wrapper">
+              <button class="control-btn" id="audioTrackBtn" title="Audio Track">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3v9.28a4.39 4.39 0 0 0-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+              </button>
+              <div class="audio-menu-popup" id="audioMenuPopup"></div>
+            </div>
+
+            <button class="control-btn" id="drawerToggleBtn" title="Episodes">
+              <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9l6 3.5L10 16z"/></svg>
+            </button>
+            <button class="control-btn" id="fullscreenBtn" title="Fullscreen (F)">
+              <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const defaultPoster = "/images/genz_thumbnail.png";
+
+      // Dynamically generates episodes 1 to 40 using the exact URL naming scheme
+      const series = Array.from({ length: 40 }, (_, i) => {
+        const epNum = i + 1;
+        const padEp = String(epNum).padStart(2, "0");
+        return {
+          title: `Episode ${epNum}`,
+          src: `https://github.com/spark00001/movie/raw/refs/heads/main/Gen.Z.2024.S01E${padEp}.mp4`,
+          poster: defaultPoster,
+          audioTracks: [
+            {
+              id: "hi",
+              label: "Hindi (Default)",
+              src: `https://github.com/spark00001/movie/raw/refs/heads/main/genz_ep_${padEp}_audio_hi.m4a`
+            },
+            {
+              id: "en",
+              label: "English",
+              src: `https://github.com/spark00001/movie/raw/refs/heads/main/genz_ep_${padEp}_audio_en.m4a`
+            },
+            {
+              id: "zh",
+              label: "Chinese (中文)",
+              src: `https://github.com/spark00001/movie/raw/refs/heads/main/genz_ep_${padEp}_audio_zh.m4a`
+            },
+            {
+              id: "orig",
+              label: "Original Video Audio",
+              src: ""
+            }
+          ]
+        };
+      });
+
+      let currentIndex = 0;
+      let currentAudioIndex = 0;
+      let isLocked = false;
+      let hideTimeout = null;
+      let toastTimeout = null;
+
+      const video = document.getElementById("videoPlayer");
+      const audio = document.getElementById("audioPlayer");
+      const container = document.getElementById("videoContainer");
+      const poster = document.getElementById("posterOverlay");
+      const playBtn = document.getElementById("playBtn");
+      const playIcon = document.getElementById("playIcon");
+      const pauseIcon = document.getElementById("pauseIcon");
+      const muteBtn = document.getElementById("muteBtn");
+      const currentTimeEl = document.getElementById("currentTime");
+      const durationEl = document.getElementById("duration");
+      const timelineProgress = document.getElementById("timelineProgress");
+      const timelineContainer = document.getElementById("timelineContainer");
+      const controlsOverlay = document.getElementById("controlsOverlay");
+      const lockToggleBtn = document.getElementById("lockToggleBtn");
+      const unlockedIcon = document.getElementById("unlockedIcon");
+      const lockedIcon = document.getElementById("lockedIcon");
+      const drawer = document.getElementById("episodesDrawer");
+      const drawerToggle = document.getElementById("drawerToggleBtn");
+      const closeDrawer = document.getElementById("closeDrawerBtn");
+      const episodeList = document.getElementById("episodeList");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const errorToast = document.getElementById("errorToast");
+      const playerToast = document.getElementById("playerToast");
+      const audioTrackBtn = document.getElementById("audioTrackBtn");
+      const audioMenuPopup = document.getElementById("audioMenuPopup");
+
+      function showToast(msg) {
+        playerToast.textContent = msg;
+        playerToast.style.display = "block";
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          playerToast.style.display = "none";
+        }, 1800);
+      }
+
+      function showError(msg) {
+        errorToast.textContent = msg;
+        errorToast.style.display = "block";
+        setTimeout(() => {
+          errorToast.style.display = "none";
+        }, 5000);
+      }
+
+      function formatTime(s) {
+        if (isNaN(s)) return "00:00";
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return `${m < 10 ? "0" : ""}${m}:${sec < 10 ? "0" : ""}${sec}`;
+      }
+
+      /* Inactivity Auto-Hide (Controls & Cursor) */
+      function resetInactivityTimer() {
+        container.classList.remove("hide-controls");
+        clearTimeout(hideTimeout);
+
+        // Hide controls after 2.5 seconds of mouse stillness when playing or locked
+        if (!video.paused || isLocked) {
+          hideTimeout = setTimeout(() => {
+            if (
+              !drawer.classList.contains("open") &&
+              !audioMenuPopup.classList.contains("open")
+            ) {
+              container.classList.add("hide-controls");
+            }
+          }, 2500);
+        }
+      }
+
+      container.addEventListener("mousemove", resetInactivityTimer);
+      container.addEventListener("mousedown", resetInactivityTimer);
+      container.addEventListener("touchstart", resetInactivityTimer, { passive: true });
+      container.addEventListener("mouseleave", () => {
+        if (!video.paused || isLocked) {
+          container.classList.add("hide-controls");
+        }
+      });
+
+      /* Screen Lock Mechanism */
+      function toggleLock() {
+        isLocked = !isLocked;
+        unlockedIcon.style.display = isLocked ? "none" : "block";
+        lockedIcon.style.display = isLocked ? "block" : "none";
+        controlsOverlay.classList.toggle("locked-mode", isLocked);
+
+        if (isLocked) {
+          drawer.classList.remove("open");
+          audioMenuPopup.classList.remove("open");
+          showToast("Player Locked");
+        } else {
+          showToast("Player Unlocked");
+        }
+        resetInactivityTimer();
+      }
+
+      lockToggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleLock();
+      });
+
+      function switchAudioTrack(trackIdx) {
+        currentAudioIndex = trackIdx;
+        const currentEp = series[currentIndex];
+        const track = currentEp.audioTracks[trackIdx];
+
+        if (track && track.src) {
+          video.muted = true;
+          audio.src = track.src;
+          audio.currentTime = video.currentTime;
+          audio.volume = 1;
+          audio.muted = video.muted && !video.muted;
+          if (!video.paused) {
+            audio.play().catch(() => {
+              video.muted = false;
+            });
+          }
+        } else {
+          audio.pause();
+          audio.removeAttribute("src");
+          video.muted = false;
+        }
+        renderAudioMenu();
+      }
+
+      function renderAudioMenu() {
+        audioMenuPopup.innerHTML = "";
+        const currentEp = series[currentIndex];
+        if (!currentEp.audioTracks) return;
+
+        currentEp.audioTracks.forEach((track, idx) => {
+          const item = document.createElement("div");
+          item.className = `audio-menu-item ${idx === currentAudioIndex ? "active" : ""}`;
+          item.textContent = track.label;
+          item.addEventListener("click", (e) => {
+            e.stopPropagation();
+            switchAudioTrack(idx);
+            audioMenuPopup.classList.remove("open");
+            showToast("Audio: " + track.label);
+          });
+          audioMenuPopup.appendChild(item);
+        });
+      }
+
+      function loadTrack(idx, playImmediately = false) {
+        currentIndex = idx;
+        const item = series[idx];
+        video.src = item.src;
+        poster.style.backgroundImage = `url('${item.poster}')`;
+        poster.classList.remove("hidden");
+        updateDrawerUI();
+
+        // Enforce Hindi Default by explicit identifier
+        const hindiIndex = item.audioTracks.findIndex((t) => t.id === "hi");
+        switchAudioTrack(hindiIndex !== -1 ? hindiIndex : 0);
+
+        if (playImmediately) {
+          playMedia();
+        }
+      }
+
+      function playMedia() {
+        if (isLocked) return;
+        video.play().then(() => {
+          poster.classList.add("hidden");
+          playIcon.style.display = "none";
+          pauseIcon.style.display = "block";
+          if (audio.getAttribute("src")) {
+            audio.currentTime = video.currentTime;
+            audio.play().catch(() => {
+              video.muted = false;
+            });
+          }
+          resetInactivityTimer();
+        }).catch((err) => {
+          showError("Playback blocked or source error: " + err.message);
+        });
+      }
+
+      function pauseMedia() {
+        if (isLocked) return;
+        video.pause();
+        if (audio.getAttribute("src")) {
+          audio.pause();
+        }
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+        resetInactivityTimer();
+      }
+
+      function togglePlay() {
+        if (isLocked) return;
+        video.paused ? playMedia() : pauseMedia();
+      }
+
+      function toggleMute() {
+        if (isLocked) return;
+        const isMuted = !video.muted;
+        video.muted = isMuted;
+        if (audio.getAttribute("src")) {
+          audio.muted = isMuted;
+        }
+        muteBtn.style.opacity = isMuted ? "0.5" : "1";
+        showToast(isMuted ? "Muted" : "Unmuted");
+      }
+
+      function seekRelative(seconds) {
+        if (isLocked || !video.duration) return;
+        video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + seconds));
+        if (audio.getAttribute("src")) {
+          audio.currentTime = video.currentTime;
+        }
+        showToast((seconds > 0 ? "+ " : "- ") + Math.abs(seconds) + "s");
+        resetInactivityTimer();
+      }
+
+      function adjustVolume(delta) {
+        if (isLocked) return;
+        let nextVol = Math.max(0, Math.min(1, video.volume + delta));
+        video.volume = nextVol;
+        if (audio.getAttribute("src")) {
+          audio.volume = nextVol;
+        }
+        if (nextVol > 0 && video.muted) {
+          video.muted = false;
+          if (audio.getAttribute("src")) audio.muted = false;
+          muteBtn.style.opacity = "1";
+        }
+        showToast("Volume: " + Math.round(nextVol * 100) + "%");
+        resetInactivityTimer();
+      }
+
+      function toggleFullscreen() {
+        if (isLocked) return;
+        if (!document.fullscreenElement) {
+          container.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+
+      /* Keyboard Shortcuts */
+      window.addEventListener("keydown", (e) => {
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) return;
+
+        const key = e.key.toLowerCase();
+
+        if (key === "l") {
+          e.preventDefault();
+          toggleLock();
+          return;
+        }
+
+        if (isLocked) return;
+
+        switch (e.code) {
+          case "Space":
+          case "KeyK":
+            e.preventDefault();
+            togglePlay();
+            break;
+          case "ArrowLeft":
+          case "KeyJ":
+            e.preventDefault();
+            seekRelative(-5);
+            break;
+          case "ArrowRight":
+            seekRelative(5);
+            e.preventDefault();
+            break;
+          case "ArrowUp":
+            e.preventDefault();
+            adjustVolume(0.05);
+            break;
+          case "ArrowDown":
+            e.preventDefault();
+            adjustVolume(-0.05);
+            break;
+          case "KeyM":
+            e.preventDefault();
+            toggleMute();
+            break;
+          case "KeyF":
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+        }
+      });
+
+      /* UI & Touch Listeners */
+      poster.addEventListener("click", playMedia);
+      video.addEventListener("click", togglePlay);
+      playBtn.addEventListener("click", togglePlay);
+      muteBtn.addEventListener("click", toggleMute);
+      fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+      // Strict Audio-Video Sync Handler
+      video.addEventListener("timeupdate", () => {
+        if (!video.duration) return;
+        const pct = (video.currentTime / video.duration) * 100;
+        timelineProgress.style.width = pct + "%";
+        currentTimeEl.textContent = formatTime(video.currentTime);
+
+        if (audio.getAttribute("src") && !audio.paused) {
+          if (Math.abs(audio.currentTime - video.currentTime) > 0.2) {
+            audio.currentTime = video.currentTime;
+          }
+        }
+      });
+
+      video.addEventListener("seeking", () => {
+        if (audio.getAttribute("src")) audio.currentTime = video.currentTime;
+      });
+
+      video.addEventListener("seeked", () => {
+        if (audio.getAttribute("src")) audio.currentTime = video.currentTime;
+      });
+
+      video.addEventListener("ratechange", () => {
+        if (audio.getAttribute("src")) audio.playbackRate = video.playbackRate;
+      });
+
+      video.addEventListener("loadedmetadata", () => {
+        durationEl.textContent = formatTime(video.duration);
+      });
+
+      video.addEventListener("error", () => {
+        showError("The video file failed to decode or cannot be reached.");
+      });
+
+      timelineContainer.addEventListener("click", (e) => {
+        if (isLocked || !video.duration) return;
+        const rect = timelineContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        video.currentTime = pos * video.duration;
+        if (audio.getAttribute("src")) audio.currentTime = video.currentTime;
+        resetInactivityTimer();
+      });
+
+      audioTrackBtn.addEventListener("click", (e) => {
+        if (isLocked) return;
+        e.stopPropagation();
+        audioMenuPopup.classList.toggle("open");
+        resetInactivityTimer();
+      });
+
+      document.addEventListener("click", () => {
+        audioMenuPopup.classList.remove("open");
+      });
+
+      drawerToggle.addEventListener("click", () => {
+        if (isLocked) return;
+        drawer.classList.toggle("open");
+        resetInactivityTimer();
+      });
+
+      closeDrawer.addEventListener("click", () => {
+        drawer.classList.remove("open");
+        resetInactivityTimer();
+      });
+
+      function updateDrawerUI() {
+        episodeList.innerHTML = "";
+        series.forEach((ep, idx) => {
+          const li = document.createElement("li");
+          li.className = `episode-item ${idx === currentIndex ? "active" : ""}`;
+          li.textContent = ep.title;
+          li.addEventListener("click", () => {
+            if (isLocked) return;
+            loadTrack(idx, true);
+            drawer.classList.remove("open");
+          });
+          episodeList.appendChild(li);
+        });
+      }
+
+      loadTrack(0, false);
+    </script>
+  </body>
+</html>
